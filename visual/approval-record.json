@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "approved_hash": "sha256:06e0d5f564114a438910332ad18e78f3732aadea8c99bd1feedfd8b79fcfbbb5",
+  "proof_hash": "sha256:9622c7db4144cdfbde2bf65e2a7fca936aeeb3fc1875d4b5909782d3c2d91f27",
+  "renderer_version": "summit-visual-proof/2",
+  "proof_spec": {
+    "schema_version": 1,
+    "status": "proposed",
+    "summary": [
+      "A clean local shop, not a motorsport brand: primer-white pages, graphite bands and deep blued-steel scrims behind the words",
+      "Amber is reserved for the call and quote pills on the real site, with dark text; this specimen draws buttons in the steel primary",
+      "Big condensed headings (Barlow Condensed) set straight onto images of blasted steel, cured surfaces and shop light",
+      "Openings run full-bleed behind a floating header; a sticky mobile bar keeps Call and Quote one tap away",
+      "Real CMB work photos replace generated material images once the owner authorises them; no generated parts, people or shop interiors",
+      "No numerals, no divider lines, no reviews or ratings until the owner authorises them"
+    ],
+    "palette": {
+      "surface": "#F1EFEA",
+      "on-surface": "#16181A",
+      "primary": "#2B3E4C",
+      "on-primary": "#F1EFEA",
+      "accent": "#E2A11B",
+      "muted": "#5F646A"
+    },
+    "typography": {
+      "display": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+      "body": "'Barlow', system-ui, sans-serif",
+      "scale": 1.3,
+      "stylesheet": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400;500&display=swap"
+    },
+    "shape": {
+      "radius": "10px",
+      "button_style": "solid"
+    },
+    "density": "comfortable",
+    "surface_treatment": "layered",
+    "style": "service",
+    "visual_medium": "photography",
+    "hero": {
+      "layout": "editorial",
+      "headline": "A placeholder headline set large in the condensed display face",
+      "subhead": "Placeholder supporting sentence for the specimen. It states no client fact.",
+      "cta": "Primary action"
+    },
+    "section": {
+      "kind": "cards",
+      "title": "Placeholder section with two image cards",
+      "items": [
+        {
+          "title": "First item",
+          "body": "Placeholder body text for the specimen."
+        },
+        {
+          "title": "Second item",
+          "body": "Placeholder body text for the specimen."
+        }
+      ]
+    }
+  },
+  "approved_by": "Samuel",
+  "approved_at": "2026-10-05",
+  "decision_origin": {
+    "schema_version": 1,
+    "actor_type": "human",
+    "decision_kind": "visual-approval",
+    "decision": "approved",
+    "decided_by": "Samuel",
+    "operator_statement": "approve",
+    "source": "operator-conversation",
+    "recorded_by": "active-agent",
+    "recorded_by_actor_type": "agent",
+    "recorded_at": "2026-10-05T22:55:49.968Z"
+  }
+}

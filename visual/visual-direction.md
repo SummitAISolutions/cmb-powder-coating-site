@@ -5,10 +5,10 @@
 # being approved. Any later edit to the direction (outside this approval
 # metadata and the "## Approval" section) invalidates the approval:
 # `npm run design:export` and `npm run build` refuse until it is re-approved.
-status: in-review
-approved_by: ""
-approved_at: ""
-approved_hash: ""
+status: approved
+approved_by: "Samuel"
+approved_at: "2026-10-05"
+approved_hash: "sha256:06e0d5f564114a438910332ad18e78f3732aadea8c99bd1feedfd8b79fcfbbb5"
 ---
 
 # Visual Direction
@@ -182,9 +182,9 @@ Client-specific risks:
 
 ## Approval
 
-- Reviewer: [FILL: name]
-- Decision: [FILL: approved / changes requested]
-- Notes: [FILL: what changed after review]
+- Reviewer: Samuel
+- Decision: approved (rendered desktop and mobile proof)
+- Notes: approve
 
 Approval is recorded in the front matter (`status: approved`, `approved_by`,
 `approved_at: YYYY-MM-DD`, `approved_hash` from `npm run visual:hash`). This
