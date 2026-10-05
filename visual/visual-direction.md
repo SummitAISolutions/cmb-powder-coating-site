@@ -76,10 +76,10 @@ All from `facts.md`:
 | --- | --- | --- |
 | surface | Primer `#F1EFEA` | Page and light panels |
 | on-surface | Graphite `#16181A` | Text |
-| primary | Cured amber `#E2A11B` | **Only the actions**: call and quote pills (header, openings, closers, mobile bar) |
-| on-primary | Graphite `#16181A` | Text on amber (≈8:1) |
-| accent | Blued steel `#33495A` | Scrims over imagery, eyebrows, the steel-tint band |
-| muted | Slate `#5F646A` | Secondary text |
+| primary | Blued steel `#2B3E4C` | Scrims over imagery, the steel band, the contact panel, outlined secondary actions |
+| on-primary | Primer `#F1EFEA` | Words on imagery and steel (≈9.6:1) |
+| accent | Cured amber `#E2A11B` | **Only the actions**: the call and quote pills (header, openings, closers, mobile bar), always with graphite text (≈8:1) |
+| muted | Slate `#5F646A` | Secondary text, eyebrows on light |
 
 The amber comes from the gold on CMB's current site and logo, deepened and only
 ever used as a fill under dark text (the old gold-on-light text failed
@@ -94,7 +94,7 @@ adjacent sections match.
   amber call pill on wide screens. Phones: the menu opens a floating panel; a
   sticky bottom bar carries Call and Quote.
 - **Openings run full-bleed behind the header**: generated material image,
-  steel scrim from the left, words directly on it — eyebrow, very large
+  blued-steel scrim from the left, words directly on it — eyebrow, very large
   heading, one lede, amber call pill + outlined quote action. No framed image
   over the hero; no crowded hero.
 - **Under the home opening**: the proof strip slot (Google rating) — a visible

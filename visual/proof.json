@@ -2,19 +2,19 @@
   "schema_version": 1,
   "status": "proposed",
   "summary": [
-    "A clean local shop, not a motorsport brand: primer-white pages, graphite bands and blued-steel scrims",
-    "One amber action — the call and quote buttons — taken from the gold on CMB's current site and logo, always under dark text",
+    "A clean local shop, not a motorsport brand: primer-white pages, graphite bands and deep blued-steel scrims behind the words",
+    "Amber is the action colour on the real site: the call and quote pills (header, openings, closers, mobile bar), always with dark text; this specimen draws buttons in steel because it colours buttons with the primary role",
     "Big condensed headings (Barlow Condensed) set straight onto images of blasted steel, cured surfaces and shop light",
     "Openings run full-bleed behind a floating header; a sticky mobile bar keeps Call and Quote one tap away",
-    "Real CMB work photos replace generated material images as soon as the owner authorises them; no generated parts, people or shop interiors",
+    "Real CMB work photos replace generated material images once the owner authorises them; no generated parts, people or shop interiors",
     "No numerals, no divider lines, no reviews or ratings until the owner authorises them"
   ],
   "palette": {
     "surface": "#F1EFEA",
     "on-surface": "#16181A",
-    "primary": "#E2A11B",
-    "on-primary": "#16181A",
-    "accent": "#33495A",
+    "primary": "#2B3E4C",
+    "on-primary": "#F1EFEA",
+    "accent": "#E2A11B",
     "muted": "#5F646A"
   },
   "typography": {
@@ -23,7 +23,10 @@
     "scale": 1.3,
     "stylesheet": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400;500&display=swap"
   },
-  "shape": { "radius": "10px", "button_style": "solid" },
+  "shape": {
+    "radius": "10px",
+    "button_style": "solid"
+  },
   "density": "comfortable",
   "surface_treatment": "layered",
   "style": "service",
@@ -35,12 +38,17 @@
     "cta": "Primary action"
   },
   "section": {
-    "kind": "process",
-    "title": "Placeholder process section",
+    "kind": "cards",
+    "title": "Placeholder section with two image cards",
     "items": [
-      { "title": "First step", "body": "Placeholder body text for the specimen." },
-      { "title": "Second step", "body": "Placeholder body text for the specimen." },
-      { "title": "Third step", "body": "Placeholder body text for the specimen." }
+      {
+        "title": "First item",
+        "body": "Placeholder body text for the specimen."
+      },
+      {
+        "title": "Second item",
+        "body": "Placeholder body text for the specimen."
+      }
     ]
   }
 }
