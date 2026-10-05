@@ -1,0 +1,35 @@
+---
+/**
+ * Stack — vertical flow with one consistent gap between children.
+ *
+ * space: a spacing role from DESIGN.md ("stack", "gutter", "section") or any
+ * CSS length. Use different spaces in different places; uniform rhythm is a
+ * prohibited default.
+ */
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  space?: 'stack' | 'gutter' | 'section' | (string & {});
+  align?: 'stretch' | 'start' | 'center' | 'end';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { as: Tag = 'div', space = 'stack', align = 'stretch', class: className, ...rest } = Astro.props;
+const roles = ['stack', 'gutter', 'section'];
+const gap = roles.includes(space) ? `var(--spacing-${space})` : space;
+---
+
+<Tag class:list={['stack-primitive', className]} style={`--stack-space: ${gap}; --stack-align: ${align};`} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .stack-primitive {
+    display: flex;
+    flex-direction: column;
+    align-items: var(--stack-align);
+    gap: var(--stack-space);
+  }
+</style>

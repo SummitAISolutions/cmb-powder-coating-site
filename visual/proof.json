@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "status": "template",
+  "summary": [
+    "TEMPLATE — the visual director replaces every value here with a real proposal",
+    "Each line names one design choice a person should weigh, in plain words",
+    "Three to six lines; the operator reads these, not visual-direction.md"
+  ],
+  "palette": {
+    "surface": "#ffffff",
+    "on-surface": "#1a1a1a",
+    "primary": "#1a1a1a",
+    "on-primary": "#ffffff",
+    "accent": "#555555",
+    "muted": "#999999"
+  },
+  "typography": {
+    "display": "system-ui, sans-serif",
+    "body": "system-ui, sans-serif",
+    "scale": 1.25
+  },
+  "shape": { "radius": "8px", "button_style": "solid" },
+  "density": "comfortable",
+  "surface_treatment": "flat",
+  "style": "minimal",
+  "visual_medium": "typographic",
+  "hero": {
+    "layout": "stacked",
+    "headline": "Placeholder headline for the design specimen",
+    "subhead": "Placeholder supporting sentence. The proof never states a client fact.",
+    "cta": "Primary action"
+  },
+  "section": {
+    "kind": "cards",
+    "title": "Placeholder section",
+    "items": [
+      { "title": "First item", "body": "Placeholder body text." },
+      { "title": "Second item", "body": "Placeholder body text." }
+    ]
+  }
+}

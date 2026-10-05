@@ -1,0 +1,42 @@
+{
+  "name": "summit-website-starter",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Summit Visual System v1 technical starter: Astro + Tailwind CSS v4 primitives driven by visual/DESIGN.md. Technical capability only, no visual identity.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "astro dev",
+    "design:check": "node scripts/visual/design-md.mjs check",
+    "design:export": "node scripts/visual/design-md.mjs export",
+    "visual:status": "node scripts/visual/design-md.mjs status",
+    "visual:hash": "node scripts/visual/design-md.mjs hash",
+    "search:check": "node scripts/local-search/check.mjs source",
+    "search:verify": "node scripts/local-search/check.mjs dist",
+    "search:status": "node scripts/local-search/check.mjs status",
+    "truth:project": "node scripts/truth/truth.mjs project",
+    "truth:check": "node scripts/truth/truth.mjs check",
+    "truth:status": "node scripts/truth/truth.mjs status",
+    "typecheck": "astro check",
+    "validate": "node scripts/visual/design-md.mjs check && node scripts/local-search/check.mjs source",
+    "build": "node scripts/visual/design-md.mjs check && node scripts/local-search/check.mjs source && astro build && node scripts/local-search/check.mjs dist",
+    "preview": "astro preview",
+    "local": "npm run build && node scripts/leads/local-server.mjs",
+    "leads:local": "node scripts/leads/local-server.mjs",
+    "screenshots": "node scripts/visual/screenshots.mjs"
+  },
+  "dependencies": {
+    "@tailwindcss/vite": "4.3.3",
+    "astro": "7.3.2",
+    "tailwindcss": "4.3.3"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.10",
+    "@google/design.md": "0.4.0",
+    "playwright": "1.63.0",
+    "typescript": "6.0.3",
+    "yaml": "2.9.1"
+  }
+}

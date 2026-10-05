@@ -1,0 +1,49 @@
+---
+/**
+ * Quote — a quotation with attribution, as <figure>/<blockquote>/<figcaption>.
+ *
+ * `attribution` and `source` are required. `source` must point into facts.md,
+ * where the quotation is recorded verbatim and authorised for display. The
+ * build fails otherwise: an untraceable testimonial is a fabricated one.
+ * Reproduce the recorded wording exactly.
+ */
+
+interface Props {
+  attribution: string;
+  /** e.g. "facts.md#testimonials-and-reviews" */
+  source: string;
+  context?: string;
+  cite?: string;
+  class?: string;
+}
+
+const { attribution, source, context, cite, class: className } = Astro.props;
+
+if (!attribution || !attribution.trim()) {
+  throw new Error('Quote needs an attribution recorded in facts.md.');
+}
+if (typeof source !== 'string' || !/facts\.md/.test(source)) {
+  throw new Error(`Quote attributed to "${attribution}" has no facts.md source. Quotations must trace to facts.md.`);
+}
+---
+
+<figure class:list={['quote-primitive', className]} data-source={source}>
+  <blockquote cite={cite}>
+    <slot />
+  </blockquote>
+  <figcaption class="type-label">
+    <span class="quote-attribution">{attribution}</span>
+    {context && <span class="text-muted">, {context}</span>}
+  </figcaption>
+</figure>
+
+<style>
+  .quote-primitive {
+    margin: 0;
+    display: grid;
+    gap: var(--spacing-stack);
+  }
+  blockquote {
+    margin: 0;
+  }
+</style>

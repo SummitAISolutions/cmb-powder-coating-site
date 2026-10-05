@@ -1,0 +1,12 @@
+/*
+ * Stylesheet entry point. Tailwind CSS v4, CSS-first: there is no
+ * tailwind.config.js. Order matters:
+ *
+ *   1. Tailwind (preflight, default theme, utilities)
+ *   2. theme.generated.css — clears Tailwind's default palette and font stacks,
+ *      then declares the client's tokens. GENERATED from visual/DESIGN.md.
+ *   3. base.css — Summit mechanics that read those tokens by role.
+ */
+@import "tailwindcss";
+@import "./theme.generated.css";
+@import "./base.css";

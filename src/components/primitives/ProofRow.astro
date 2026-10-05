@@ -1,0 +1,68 @@
+---
+/**
+ * ProofRow — a row of substantiated facts (e.g. a licence number, a service
+ * area, hours). Structure only: a description list, laid out as a cluster.
+ *
+ * Every item MUST carry `source`: where in facts.md it comes from. The build
+ * fails otherwise. Proof that cannot be traced is fabrication, and a visible
+ * gap is always better than a plausible number.
+ */
+
+interface ProofItem {
+  value: string;
+  label: string;
+  /** e.g. "facts.md#credentials-and-claims" */
+  source: string;
+}
+
+interface Props {
+  items: ProofItem[];
+  label?: string;
+  class?: string;
+}
+
+const { items, label, class: className } = Astro.props;
+
+if (!Array.isArray(items) || items.length === 0) {
+  throw new Error('ProofRow needs at least one item. Omit the row rather than filling it.');
+}
+for (const item of items) {
+  if (!item || typeof item.source !== 'string' || !/facts\.md/.test(item.source)) {
+    throw new Error(
+      `ProofRow item "${item?.label ?? '(unnamed)'}" has no facts.md source. ` +
+        'Every proof point must trace to facts.md.'
+    );
+  }
+}
+---
+
+<dl class:list={['proof-row', className]} aria-label={label}>
+  {
+    items.map((item) => (
+      <div class="proof-item" data-source={item.source}>
+        <dt class="type-label text-muted">{item.label}</dt>
+        <dd class="proof-value">{item.value}</dd>
+      </div>
+    ))
+  }
+</dl>
+
+<style>
+  .proof-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--spacing-gutter);
+    margin: 0;
+  }
+  .proof-item {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: calc(var(--spacing-stack) / 4);
+  }
+  .proof-value {
+    margin: 0;
+    font-family: var(--font-heading), ui-sans-serif, system-ui, sans-serif;
+    font-size: var(--text-heading);
+    line-height: var(--text-heading--line-height, 1.2);
+  }
+</style>

@@ -1,0 +1,59 @@
+---
+/**
+ * Breadcrumbs — the visible trail for a route, from the `parent` chain in
+ * search/site.json. It matches the BreadcrumbList JSON-LD BaseLayout emits,
+ * so the structured data never describes a trail the page does not show.
+ *
+ * Renders nothing on the home page. Structure only: an ordered list inside a
+ * labelled <nav data-nav="breadcrumb">; the current page is aria-current.
+ */
+import { routeContext } from '../../lib/local-search/site-context';
+import { breadcrumbTrail } from '../../lib/local-search/site.mjs';
+
+interface Props {
+  routeId: string;
+  class?: string;
+}
+
+const { routeId, class: className } = Astro.props;
+const { site } = routeContext(routeId);
+const trail = breadcrumbTrail(site, routeId);
+---
+
+{
+  trail.length > 1 && (
+    <nav aria-label="Breadcrumb" data-nav="breadcrumb" class:list={['breadcrumbs', 'type-label', className]}>
+      <ol role="list">
+        {trail.map((item, index) => (
+          <li>{index === trail.length - 1 ? <span aria-current="page">{item.name}</span> : <a href={item.path}>{item.name}</a>}</li>
+        ))}
+      </ol>
+    </nav>
+  )
+}
+
+<style>
+  ol {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: calc(var(--spacing-stack) / 2);
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  li {
+    display: inline-flex;
+    align-items: center;
+  }
+  li + li::before {
+    content: '/';
+    margin-inline-end: calc(var(--spacing-stack) / 2);
+    color: var(--color-on-surface-muted);
+  }
+  a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap-target);
+  }
+</style>

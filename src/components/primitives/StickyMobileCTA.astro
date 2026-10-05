@@ -1,0 +1,53 @@
+---
+/**
+ * StickyMobileCTA — a single persistent action pinned to the bottom of small
+ * screens (below 48rem), hidden on wider layouts. Respects the device safe
+ * area and reserves its own height so it never covers the page end.
+ *
+ * Use at most one per page, and only for the primary conversion path recorded
+ * in the source package (e.g. a phone number that exists in facts.md).
+ */
+import Button from './Button.astro';
+
+interface Props {
+  href: string;
+  label: string;
+  variant?: 'primary' | 'secondary';
+  /** Stable conversion id (data-cta). The sticky copy of a CTA uses the same id as the in-page one. */
+  cta?: string;
+}
+
+const { href, label, variant = 'primary', cta } = Astro.props;
+---
+
+<div class="sticky-cta-spacer" aria-hidden="true"></div>
+<div class="sticky-cta">
+  <Button href={href} variant={variant} cta={cta} class="sticky-cta-button">{label}</Button>
+</div>
+
+<style>
+  .sticky-cta,
+  .sticky-cta-spacer {
+    display: none;
+  }
+  @media (max-width: 47.99rem) {
+    .sticky-cta-spacer {
+      display: block;
+      block-size: calc(var(--tap-target) + var(--spacing-stack) + env(safe-area-inset-bottom, 0px));
+    }
+    .sticky-cta {
+      display: block;
+      position: fixed;
+      inset-inline: 0;
+      inset-block-end: 0;
+      z-index: 40;
+      padding-inline: var(--spacing-gutter);
+      padding-block: calc(var(--spacing-stack) / 2) calc(var(--spacing-stack) / 2 + env(safe-area-inset-bottom, 0px));
+      background-color: var(--color-surface);
+      border-block-start: 1px solid color-mix(in srgb, var(--color-on-surface) 15%, transparent);
+    }
+    .sticky-cta :global(.sticky-cta-button) {
+      inline-size: 100%;
+    }
+  }
+</style>

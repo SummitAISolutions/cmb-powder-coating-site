@@ -1,0 +1,113 @@
+---
+/**
+ * SiteHeader — navigation scaffolding. Structure and accessibility only; the
+ * header's composition belongs to the client design.
+ *
+ * - `brand` is the display name from facts.md; the "brand" slot replaces it
+ *   with a real logo from RESOURCES.md.
+ * - Navigation collapses into a <details> disclosure on small screens: no
+ *   JavaScript required.
+ * - The current page gets aria-current="page".
+ * - QA markers: the <nav> is data-nav="primary" and the collapsed-menu toggle
+ *   is data-nav-toggle, so a site QA config can name them without guessing
+ *   (navigation.selector '[data-nav="primary"]', mobile_toggle '[data-nav-toggle]').
+ */
+import Container from './Container.astro';
+
+interface NavLink {
+  href: string;
+  label: string;
+}
+
+interface Props {
+  brand: string;
+  homeHref?: string;
+  links?: NavLink[];
+  class?: string;
+}
+
+const { brand, homeHref = '/', links = [], class: className } = Astro.props;
+const current = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isCurrent = (href: string) => (href.replace(/\/+$/, '') || '/') === current;
+---
+
+<header class:list={['site-header', className]}>
+  <Container width="wide" class="site-header-inner">
+    <a href={homeHref} class="site-header-brand">
+      {Astro.slots.has('brand') ? <slot name="brand" /> : <span class="type-label">{brand}</span>}
+    </a>
+    {
+      links.length > 0 && (
+        <nav aria-label="Primary" data-nav="primary">
+          <ul class="nav-inline" role="list">
+            {links.map((link) => (
+              <li>
+                <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                  {link.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+          <details class="nav-disclosure">
+            <summary class="type-label" data-nav-toggle>Menu</summary>
+            <ul role="list">
+              {links.map((link) => (
+                <li>
+                  <a href={link.href} aria-current={isCurrent(link.href) ? 'page' : undefined}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        </nav>
+      )
+    }
+    <slot name="actions" />
+  </Container>
+</header>
+
+<style>
+  .site-header :global(.site-header-inner) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--spacing-gutter);
+    min-block-size: calc(var(--tap-target) * 1.6);
+  }
+  .site-header-brand {
+    text-decoration: none;
+  }
+  ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .nav-inline {
+    display: none;
+    gap: var(--spacing-gutter);
+  }
+  .nav-inline a,
+  .nav-disclosure a {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap-target);
+  }
+  [aria-current='page'] {
+    text-decoration-thickness: 2px;
+  }
+  .nav-disclosure summary {
+    cursor: pointer;
+    min-block-size: var(--tap-target);
+    display: inline-flex;
+    align-items: center;
+  }
+  @media (min-width: 48rem) {
+    .nav-inline {
+      display: flex;
+    }
+    .nav-disclosure {
+      display: none;
+    }
+  }
+</style>

@@ -1,0 +1,99 @@
+---
+/**
+ * SplitLayout — two regions side by side, stacking below a container width.
+ *
+ * Slots: "start" and "end". DOM order is always start then end (reading and
+ * focus order); `reverse` swaps only the visual placement on wide layouts.
+ *
+ * ratio: grid track sizes, e.g. "1fr 1fr", "3fr 2fr", "minmax(0,5fr) 7fr".
+ * Asymmetric ratios are usually the point — pick one per composition.
+ * collapseBelow: container width at which the regions stack.
+ */
+
+interface Props {
+  ratio?: string;
+  reverse?: boolean;
+  collapseBelow?: string;
+  gap?: 'stack' | 'gutter' | 'section' | (string & {});
+  align?: 'start' | 'center' | 'end' | 'stretch';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  ratio = '1fr 1fr',
+  reverse = false,
+  collapseBelow = '48rem',
+  gap = 'gutter',
+  align = 'start',
+  class: className,
+  ...rest
+} = Astro.props;
+const roles = ['stack', 'gutter', 'section'];
+const space = roles.includes(gap) ? `var(--spacing-${gap})` : gap;
+// Container queries cannot read custom properties, so the breakpoint is set
+// per instance through a data attribute matched below.
+const breakpoints = ['36rem', '48rem', '60rem', '72rem'];
+if (!breakpoints.includes(collapseBelow)) {
+  throw new Error(`SplitLayout collapseBelow must be one of ${breakpoints.join(', ')} (got "${collapseBelow}")`);
+}
+---
+
+<div class:list={['split-shell', className]} {...rest}>
+  <div
+    class:list={['split-primitive', { 'is-reversed': reverse }]}
+    data-collapse={collapseBelow}
+    style={`--split-ratio: ${ratio}; --split-gap: ${space}; --split-align: ${align};`}
+  >
+    <div class="split-start"><slot name="start" /></div>
+    <div class="split-end"><slot name="end" /></div>
+  </div>
+</div>
+
+<style>
+  .split-shell {
+    container-type: inline-size;
+  }
+  .split-primitive {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--split-gap);
+    align-items: var(--split-align);
+  }
+  @container (min-width: 36rem) {
+    .split-primitive[data-collapse='36rem'] {
+      grid-template-columns: var(--split-ratio);
+    }
+  }
+  @container (min-width: 48rem) {
+    .split-primitive[data-collapse='48rem'] {
+      grid-template-columns: var(--split-ratio);
+    }
+  }
+  @container (min-width: 60rem) {
+    .split-primitive[data-collapse='60rem'] {
+      grid-template-columns: var(--split-ratio);
+    }
+  }
+  @container (min-width: 72rem) {
+    .split-primitive[data-collapse='72rem'] {
+      grid-template-columns: var(--split-ratio);
+    }
+  }
+  @container (min-width: 36rem) {
+    .split-primitive.is-reversed[data-collapse='36rem'] > .split-start { order: 2; }
+  }
+  @container (min-width: 48rem) {
+    .split-primitive.is-reversed[data-collapse='48rem'] > .split-start { order: 2; }
+  }
+  @container (min-width: 60rem) {
+    .split-primitive.is-reversed[data-collapse='60rem'] > .split-start { order: 2; }
+  }
+  @container (min-width: 72rem) {
+    .split-primitive.is-reversed[data-collapse='72rem'] > .split-start { order: 2; }
+  }
+  .split-start,
+  .split-end {
+    min-inline-size: 0;
+  }
+</style>

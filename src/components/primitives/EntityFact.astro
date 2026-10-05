@@ -1,0 +1,87 @@
+---
+/**
+ * EntityFact — one business fact, rendered from search/business-entity.json.
+ *
+ * The only way a name, phone, email, address, hours or service-area list
+ * should reach a page: the value is never typed into the page, so it cannot
+ * drift from the entity, and the element carries data-entity="<field>" so the
+ * build check and Stage 4 compare exactly what was rendered.
+ *
+ * - A fact the entity does not record fails the build. Leave a visible
+ *   [NEEDS FACT: ...] gap in the page instead of rendering nothing silently.
+ * - A hidden address (address.public false) can never be rendered.
+ * - Phone and email render as tel:/mailto: links unless link={false}; `cta`
+ *   adds the data-cta QA marker to that link (e.g. cta="call").
+ * - A phone shows its human form — "(208) 880-9362" for a North American
+ *   number, the canonical value otherwise — while tel: always dials the
+ *   canonical E.164 value (src/lib/format/phone.mjs). The canonical value is
+ *   never rewritten for display.
+ */
+import { searchContext } from '../../lib/local-search/site-context';
+import { addressLine, hoursText, publicAddress, serviceAreaNames } from '../../lib/local-search/entity.mjs';
+import { displayPhone, telHref } from '../../lib/format/phone.mjs';
+
+type Field = 'publicName' | 'primaryPhone' | 'email' | 'address' | 'hours' | 'serviceAreas';
+
+interface Props {
+  field: Field;
+  /** Which email, when the entity records more than one. */
+  index?: number;
+  link?: boolean;
+  cta?: string;
+  class?: string;
+}
+
+const { field, index = 0, link = true, cta, class: className } = Astro.props;
+const { entity } = searchContext();
+const missing = (what: string) =>
+  new Error(`EntityFact "${field}": ${what} Record it in facts.md and business-entity.json, or leave a visible [NEEDS FACT] gap.`);
+
+let text: string | null = null;
+let href: string | null = null;
+let lines: string[] = [];
+
+switch (field) {
+  case 'publicName':
+    text = entity.publicName;
+    break;
+  case 'primaryPhone':
+    text = entity.primaryPhone ? displayPhone(entity.primaryPhone) : null;
+    if (text && link) href = telHref(entity.primaryPhone) || `tel:${String(entity.primaryPhone).replace(/[^\d+]/g, '')}`;
+    break;
+  case 'email':
+    text = (entity.emails || [])[index] || null;
+    if (text && link) href = `mailto:${text}`;
+    break;
+  case 'address': {
+    if (entity.address && entity.address.public !== true && entity.address.value) {
+      throw new Error('EntityFact "address": this address is hidden (address.public is false) and is never rendered. Show service areas instead.');
+    }
+    const address = publicAddress(entity);
+    if (address) {
+      lines = [address.streetAddress, addressLine({ ...address, streetAddress: null })].filter(Boolean);
+      text = addressLine(address);
+    }
+    break;
+  }
+  case 'hours':
+    text = hoursText(entity);
+    break;
+  case 'serviceAreas':
+    text = serviceAreaNames(entity).join(', ') || null;
+    break;
+}
+if (!text) throw missing('the entity records no value.');
+---
+
+{
+  field === 'address' ? (
+    <address data-entity="address" class={className}>
+      {lines.map((line, i) => (i === 0 ? line : <><br />{line}</>))}
+    </address>
+  ) : href ? (
+    <a data-entity={field} data-cta={cta} href={href} class={className}>{text}</a>
+  ) : (
+    <span data-entity={field} class={className}>{text}</span>
+  )
+}

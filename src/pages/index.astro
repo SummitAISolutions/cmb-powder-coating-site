@@ -1,0 +1,78 @@
+---
+/**
+ * [STARTER PLACEHOLDER] — not a client page and not a section design.
+ *
+ * This page exists so the starter builds, so the screenshot harness has
+ * something to capture, and so each primitive is exercised once. It contains
+ * no client facts. Replace it entirely: real pages are composed per client
+ * from the primitives, following the approved visual direction and DESIGN.md.
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/primitives/Button.astro';
+import Cluster from '../components/primitives/Cluster.astro';
+import Container from '../components/primitives/Container.astro';
+import FormField from '../components/primitives/FormField.astro';
+import MediaFrame from '../components/primitives/MediaFrame.astro';
+import SiteFooter from '../components/primitives/SiteFooter.astro';
+import SiteHeader from '../components/primitives/SiteHeader.astro';
+import SplitLayout from '../components/primitives/SplitLayout.astro';
+import Stack from '../components/primitives/Stack.astro';
+import StickyMobileCTA from '../components/primitives/StickyMobileCTA.astro';
+---
+
+<BaseLayout routeId="home">
+  <SiteHeader slot="header" brand="[STARTER PLACEHOLDER]" links={[{ href: '/', label: 'Placeholder link' }]} />
+
+  <Container as="section" class="section-space" aria-labelledby="placeholder-title">
+    <SplitLayout ratio="7fr 5fr" align="center">
+      <Stack slot="start" space="gutter">
+        <p class="type-label text-muted">Summit Visual System v1 — technical starter</p>
+        <h1 id="placeholder-title" class="type-display">[STARTER PLACEHOLDER]</h1>
+        <p class="type-body measure">
+          This page only proves that the primitives build and render with tokens from
+          visual/DESIGN.md. It is not a design. Replace it with pages composed from the approved
+          visual direction.
+        </p>
+        <Cluster>
+          <Button href="#placeholder-form" cta="placeholder-primary">Primary placeholder</Button>
+          <Button href="#placeholder-form" variant="secondary">Secondary placeholder</Button>
+        </Cluster>
+      </Stack>
+      <MediaFrame slot="end" ratio="4:5" mobileRatio="4:3" slotId="starter-placeholder">
+        <div class="image-gap" role="img" aria-label="Image slot placeholder: no real asset yet">
+          <span class="type-label">Image slot — needs a real asset</span>
+        </div>
+      </MediaFrame>
+    </SplitLayout>
+  </Container>
+
+  <Container as="section" width="measure" class="section-space-half" aria-labelledby="placeholder-form-title">
+    <form id="placeholder-form" data-form="placeholder" action="#" method="post">
+      <Stack space="stack">
+        <h2 id="placeholder-form-title" class="type-heading">Form primitive placeholder</h2>
+        <FormField label="Placeholder field" name="placeholder" hint="Hint text is linked with aria-describedby." required />
+        <FormField label="Placeholder message" name="message" type="textarea" rows={3} />
+        <div><Button type="submit">Submit placeholder</Button></div>
+      </Stack>
+    </form>
+  </Container>
+
+  <SiteFooter slot="footer">
+    <p class="type-label text-muted">[STARTER PLACEHOLDER] footer — no client facts.</p>
+  </SiteFooter>
+
+  <StickyMobileCTA slot="after" href="#placeholder-form" label="Sticky CTA placeholder" cta="placeholder-primary" />
+</BaseLayout>
+
+<style>
+  .image-gap {
+    display: grid;
+    place-items: center;
+    inline-size: 100%;
+    block-size: 100%;
+    color: var(--color-on-surface-muted);
+    background-color: color-mix(in srgb, var(--color-on-surface) 6%, var(--color-surface));
+    outline: 1px dashed var(--color-on-surface-muted);
+    outline-offset: -1px;
+  }
+</style>

@@ -1,0 +1,22 @@
+{
+  "schemaVersion": 1,
+  "status": "template",
+  "source": { "facts": "facts.md", "factsSha256": null },
+  "publicName": null,
+  "legalName": null,
+  "businessModel": null,
+  "schemaType": null,
+  "primaryPhone": null,
+  "emails": [],
+  "address": { "value": null, "public": false },
+  "serviceAreas": [],
+  "hours": null,
+  "url": null,
+  "bookingUrl": null,
+  "contactUrl": null,
+  "services": [],
+  "gbpCategories": { "primary": null, "secondary": [] },
+  "sameAs": [],
+  "qualifications": [],
+  "provenance": {}
+}

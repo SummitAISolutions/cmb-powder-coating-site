@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "status": "template",
+  "sources": [
+    {
+      "id": "repo-facts",
+      "type": "repository-artifact",
+      "ref": "facts.md",
+      "role": "repository-truth",
+      "contains": [
+        "business-truth"
+      ],
+      "access": "read-write",
+      "verified_at": null
+    }
+  ],
+  "exclusions": [],
+  "research": {
+    "permitted": false
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "intentContract": 2,
+  "routes": [
+    {
+      "id": "home",
+      "path": "/",
+      "kind": "home",
+      "title": "[STARTER PLACEHOLDER] Summit website starter",
+      "description": "Placeholder page. Not a client site.",
+      "heading": "[STARTER PLACEHOLDER]",
+      "necessity": {
+        "reason": "entry",
+        "userIntent": "[STARTER PLACEHOLDER] the visitor problem the home page answers",
+        "searchIntent": null,
+        "conversionRole": "[STARTER PLACEHOLDER] the one action the home page asks for",
+        "contentPurpose": "[STARTER PLACEHOLDER] what only the home page contains"
+      }
+    },
+    {
+      "id": "not-found",
+      "path": "/404",
+      "kind": "error",
+      "title": "[STARTER PLACEHOLDER] Page not found",
+      "heading": "Page not found"
+    }
+  ],
+  "indexing": { "production": "index" },
+  "crawlers": { "registry": "summit-crawlers-2026-09", "search": "allow", "training": "unset", "agents": {} },
+  "icons": { "favicon": null, "appleTouchIcon": null },
+  "defaultOgImage": null,
+  "logo": null,
+  "integrations": { "searchConsole": null, "bingWebmaster": null, "indexNow": null, "aiSearchMonitoring": null }
+}

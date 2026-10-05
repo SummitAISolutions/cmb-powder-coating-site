@@ -1,0 +1,51 @@
+/*
+ * GENERATED from visual/DESIGN.md by scripts/visual/design-md.mjs — do not edit.
+ * Change visual/DESIGN.md, then run `npm run design:export`.
+ * mode: placeholder
+ * source sha256: b4a0c9214a4597942ccd8726aa25f69542867d40266ac5f3bc7f3e08c48631f7
+ * exporter: @google/design.md@0.4.0 (css-tailwind)
+ */
+
+/* Clear Tailwind's default palette and font stacks: every colour and
+   typeface on the site must come from DESIGN.md. */
+@theme {
+  --color-*: initial;
+  --font-*: initial;
+}
+
+@theme {
+  --color-surface: #fafafa;
+  --color-on-surface: #1f1f1f;
+  --color-on-surface-muted: #595959;
+  --color-primary: #262626;
+  --color-on-primary: #ffffff;
+  --color-accent: #404040;
+  --font-display: "PLACEHOLDER-SANS";
+  --font-heading: "PLACEHOLDER-SANS";
+  --font-body: "PLACEHOLDER-SANS";
+  --font-label: "PLACEHOLDER-SANS";
+  --text-display: 4.5rem;
+  --text-heading: 2.25rem;
+  --text-body: 1.0625rem;
+  --text-label: 0.8125rem;
+  --tracking-display: -0.02em;
+  --tracking-label: 0.04em;
+  --font-weight-display: 600;
+  --font-weight-heading: 600;
+  --font-weight-body: 400;
+  --font-weight-label: 600;
+  --radius-control: 0px;
+  --radius-media: 0px;
+  --spacing-gutter: 1.5rem;
+  --spacing-stack: 1.25rem;
+  --spacing-section: 7rem;
+}
+
+/* Summit supplements: values defined in DESIGN.md that the pinned exporter
+   does not emit. Derived from the same file. */
+@theme {
+  --text-body--line-height: 1.6;
+  --text-display--line-height: 1.05;
+  --text-heading--line-height: 1.15;
+  --text-label--line-height: 1.3;
+}

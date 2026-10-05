@@ -1,0 +1,87 @@
+---
+/**
+ * ResponsiveImage — the one way images enter a page.
+ *
+ * - `alt` is required. Pass alt="" only for a genuinely decorative image, and
+ *   say so with `decorative`.
+ * - Imported images (ImageMetadata) are optimised by astro:assets into
+ *   responsive widths. String sources (e.g. /public files) need explicit
+ *   width and height so layout never shifts.
+ * - `priority` marks the one above-the-fold image: eager, high fetch priority.
+ *   Everything else loads lazily.
+ * - Placeholder alt text ("image", "photo", "placeholder", …) is refused: it
+ *   tells a screen-reader user nothing.
+ * - A /public path that does not exist fails the build's dist check
+ *   (search-image-missing) instead of shipping a broken image.
+ *
+ * Imagery precedence is a content rule, not a component rule: real client
+ * imagery first. See visual/image-plan.md.
+ */
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+interface Props {
+  src: ImageMetadata | string;
+  alt: string;
+  decorative?: boolean;
+  width?: number;
+  height?: number;
+  widths?: number[];
+  sizes?: string;
+  priority?: boolean;
+  class?: string;
+}
+
+const {
+  src,
+  alt,
+  decorative = false,
+  width,
+  height,
+  widths = [480, 768, 1080, 1440, 2048],
+  sizes = '100vw',
+  priority = false,
+  class: className,
+} = Astro.props;
+
+if (typeof alt !== 'string') {
+  throw new Error('ResponsiveImage requires an alt attribute.');
+}
+if (alt.trim() === '' && !decorative) {
+  throw new Error('ResponsiveImage: empty alt is only allowed with `decorative` set — describe the image otherwise.');
+}
+if (/^(image|photo|picture|placeholder|todo|alt|img|graphic|untitled)\s*\d*$/i.test(alt.trim())) {
+  throw new Error(`ResponsiveImage: alt="${alt}" is a placeholder — describe what the image shows.`);
+}
+if (typeof src === 'string' && (!width || !height)) {
+  throw new Error(`ResponsiveImage: string source "${src}" needs explicit width and height.`);
+}
+
+const loading = priority ? 'eager' : 'lazy';
+const fetchpriority = priority ? 'high' : 'auto';
+---
+
+{
+  typeof src === 'string' ? (
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      decoding="async"
+      fetchpriority={fetchpriority}
+      class={className}
+    />
+  ) : (
+    <Image
+      src={src}
+      alt={alt}
+      widths={widths.filter((w) => w <= src.width)}
+      sizes={sizes}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      class={className}
+    />
+  )
+}

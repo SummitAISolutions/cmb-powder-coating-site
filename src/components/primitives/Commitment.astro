@@ -1,0 +1,34 @@
+---
+/**
+ * Commitment — one confirmed, public business commitment, rendered from
+ * facts.md (through truth/truth.json).
+ *
+ * The only way a promise, policy, offer term or guarantee should reach a
+ * page. The text is the recorded statement — or, for a public-constrained
+ * commitment, exactly its permitted wording — and the element carries
+ * data-truth="<id>", so the build check traces every rendered commitment to
+ * its source and refuses any edit to its wording.
+ *
+ * - A commitment that is not confirmed and public fails the build.
+ * - An internal-only or evidence-only item can never be rendered here.
+ */
+import truthJson from '../../../truth/truth.json';
+
+interface Props {
+  id: string;
+  as?: 'span' | 'p' | 'li' | 'strong';
+  class?: string;
+}
+
+const { id, as: Tag = 'span', class: className } = Astro.props;
+const truth: any = truthJson;
+const item = (truth.commitments || []).find((entry: any) => entry.id === id);
+if (!item) throw new Error(`Commitment "${id}": facts.md records no commitment with that ID.`);
+if (item.status !== 'confirmed' || !['public', 'public-constrained'].includes(item.visibility) || item.support === 'interpreted') {
+  throw new Error(`Commitment "${id}" is ${item.visibility}, ${item.status} (${item.support}); only a confirmed public commitment is published.`);
+}
+const text = item.visibility === 'public-constrained' ? item.wording : item.statement;
+if (!text) throw new Error(`Commitment "${id}": no publishable wording is recorded.`);
+---
+
+<Tag data-truth={id} class={className}>{text}</Tag>

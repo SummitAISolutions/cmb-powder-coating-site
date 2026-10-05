@@ -1,0 +1,25 @@
+---
+/**
+ * SiteFooter — footer scaffolding: a contentinfo landmark inside a container.
+ * Everything inside comes from slots and facts.md; nothing is pre-filled.
+ */
+import Container from './Container.astro';
+
+interface Props {
+  class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<footer class:list={['site-footer', className]}>
+  <Container width="wide">
+    <slot />
+  </Container>
+</footer>
+
+<style>
+  .site-footer {
+    padding-block: calc(var(--spacing-section) / 2);
+  }
+</style>

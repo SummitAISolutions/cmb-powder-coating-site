@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "factsContract": 2,
+  "status": "template",
+  "source": {
+    "facts": "facts.md",
+    "factsSha256": "sha256:9c053a6a7648b9c81e19c1b495ce679e13b2bcb38757c869c28e510f79acbeb8"
+  },
+  "identity": {
+    "legalName": null,
+    "displayName": null,
+    "tagline": null,
+    "description": null,
+    "website": null
+  },
+  "contact": {
+    "primaryPhone": null,
+    "primaryEmail": null,
+    "mailingAddress": null,
+    "hours": null,
+    "preferredContact": null
+  },
+  "geography": {
+    "operatingBase": null,
+    "publicAddress": {
+      "state": "unknown",
+      "value": null
+    },
+    "serviceGeography": [],
+    "excludedAreas": [],
+    "deliveryModel": null,
+    "localPresence": null
+  },
+  "services": [],
+  "commitments": [],
+  "prohibitedClaims": [],
+  "internalNotes": [],
+  "claims": {
+    "yearsInBusiness": null,
+    "licenses": null,
+    "insurance": null,
+    "certifications": null,
+    "affiliations": null,
+    "awards": null,
+    "guarantees": null,
+    "pricingModel": null,
+    "publishablePrices": null,
+    "nonPublishablePrices": null,
+    "testimonials": null,
+    "reviewLinks": null,
+    "ratings": null
+  },
+  "openQuestions": []
+}

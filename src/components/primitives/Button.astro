@@ -1,0 +1,88 @@
+---
+/**
+ * Button — an accessible action. Renders <a> when given `href`, otherwise
+ * <button>. Visual treatment comes entirely from token roles (primary,
+ * on-primary, on-surface, accent, label type, control radius); how a client's
+ * buttons should FEEL is decided in DESIGN.md, not here.
+ *
+ * variant: "primary" (the one main action in a view), "secondary", "quiet".
+ * cta: a stable conversion id (e.g. "call", "book") rendered as data-cta, the
+ * marker a site QA config selects with a[data-cta="call"]. Use it for the
+ * conversion actions QA must verify; not every button needs one.
+ */
+import type { HTMLAttributes } from 'astro/types';
+
+type Props = {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'quiet';
+  cta?: string;
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+} & Omit<HTMLAttributes<'a'> & HTMLAttributes<'button'>, 'type' | 'class'>;
+
+const { href, variant = 'primary', type = 'button', cta, class: className, ...rest } = Astro.props;
+const classes = ['button-primitive', `button-${variant}`, 'type-label', className];
+---
+
+{
+  href ? (
+    <a href={href} class:list={classes} data-cta={cta} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class:list={classes} data-cta={cta} {...rest}>
+      <slot />
+    </button>
+  )
+}
+
+<style>
+  .button-primitive {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5em;
+    min-block-size: var(--tap-target);
+    padding-inline: calc(var(--spacing-stack) * 1.25);
+    padding-block: calc(var(--spacing-stack) / 2);
+    border: 1px solid transparent;
+    border-radius: var(--radius-control, 0);
+    text-decoration: none;
+    cursor: pointer;
+    transition:
+      background-color var(--motion-duration) var(--motion-ease),
+      color var(--motion-duration) var(--motion-ease),
+      border-color var(--motion-duration) var(--motion-ease);
+  }
+  .button-primary {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .button-primary:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 88%, var(--color-on-primary));
+  }
+  .button-secondary {
+    background-color: transparent;
+    color: var(--color-on-surface);
+    border-color: currentColor;
+  }
+  .button-secondary:hover {
+    background-color: color-mix(in srgb, var(--color-on-surface) 8%, transparent);
+  }
+  .button-quiet {
+    background-color: transparent;
+    color: var(--color-accent);
+    padding-inline: 0;
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+  .button-primitive:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  .button-primitive:disabled,
+  .button-primitive[aria-disabled='true'] {
+    cursor: not-allowed;
+    opacity: 0.55;
+  }
+</style>

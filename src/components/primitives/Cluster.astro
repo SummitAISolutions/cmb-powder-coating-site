@@ -1,0 +1,44 @@
+---
+/**
+ * Cluster — inline items that wrap: link lists, button pairs, metadata.
+ */
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  space?: 'stack' | 'gutter' | 'section' | (string & {});
+  justify?: 'start' | 'center' | 'end' | 'space-between';
+  align?: 'start' | 'center' | 'end' | 'baseline';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const {
+  as: Tag = 'div',
+  space = 'stack',
+  justify = 'start',
+  align = 'center',
+  class: className,
+  ...rest
+} = Astro.props;
+const roles = ['stack', 'gutter', 'section'];
+const gap = roles.includes(space) ? `var(--spacing-${space})` : space;
+---
+
+<Tag
+  class:list={['cluster-primitive', className]}
+  style={`--cluster-space: ${gap}; --cluster-justify: ${justify}; --cluster-align: ${align};`}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .cluster-primitive {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--cluster-space);
+    justify-content: var(--cluster-justify);
+    align-items: var(--cluster-align);
+  }
+</style>

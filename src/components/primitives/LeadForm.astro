@@ -1,0 +1,172 @@
+---
+/**
+ * LeadForm — a Summit lead form rendered from its approved definition in
+ * search/site.json (`conversion.forms[]` with a `lead` block). A technical
+ * primitive, not a section: compose headings and copy around it in the page.
+ *
+ * The page never names fields, limits or a destination. It renders exactly the
+ * approved fields (standard: name, email, phone, service, message; plus
+ * approved extras), the approved consent wording, a honeypot, and the QA
+ * marker form[data-form="<id>"]. It posts to the Summit endpoint (/api/lead);
+ * WHERE the lead goes (test sink, webhook, …) is server-side configuration,
+ * so swapping the destination never changes this markup or its script.
+ *
+ * Works without JavaScript (a native POST, answered with a redirect to
+ * #<id>-lead-received or #<id>-lead-error). With JavaScript, client.mjs
+ * validates with the server's own rules, submits JSON with an idempotent
+ * submission id, retries only retryable answers, and records attribution.
+ *
+ * Props: formId (required), submitLabel, messages { received, invalid, failed, pending }.
+ */
+import Button from './Button.astro';
+import FormField from './FormField.astro';
+import { searchContext } from '../../lib/local-search/site-context';
+import { findLeadForm, publicFormContract } from '../../lib/leads/contract.mjs';
+
+interface Props {
+  formId: string;
+  submitLabel?: string;
+  messages?: { received?: string; invalid?: string; failed?: string; pending?: string };
+  class?: string;
+}
+
+const { formId, submitLabel = 'Send', messages = {}, class: className } = Astro.props;
+const { entity, site, siteEnv } = searchContext();
+const form = findLeadForm(site, formId);
+if (!form) {
+  throw new Error(`LeadForm "${formId}" is not an approved lead form: add it to search/site.json conversion.forms with a lead block (see search/README.md).`);
+}
+const contract = publicFormContract(form, { entity, routes: site.routes });
+const base = `lead-${contract.form_id}`;
+const text = {
+  received: 'Thank you. Your message was sent.',
+  invalid: 'Please check the highlighted fields.',
+  failed: 'Your message could not be sent. Please try again later or contact us directly.',
+  pending: 'We could not confirm that your message arrived. Please contact us directly.',
+  ...messages,
+};
+// Escaped so approved label text can never close the script element.
+const contractJson = JSON.stringify(contract).replace(/</g, '\\u003c');
+const errorId = (name: string) => `${base}-${name}-error`;
+---
+
+<form
+  data-form={contract.form_id}
+  data-lead-form
+  action={contract.endpoint}
+  method="post"
+  class:list={['lead-form', className]}
+  aria-describedby={`${base}-status`}
+>
+  <script type="application/json" data-lead-contract is:inline set:html={contractJson} />
+  <input type="hidden" name="contract" value={contract.contract} />
+  <input type="hidden" name="form_id" value={contract.form_id} />
+  <input type="hidden" name="route_id" value={contract.route_id} />
+  <input type="hidden" name="page_path" value={contract.page_path} />
+  <input type="hidden" name="site_env" value={siteEnv} />
+  <input type="hidden" name="submission_id" value="" />
+  <input type="hidden" name="started_at" value="" />
+
+  <div class="lead-form-fields">
+    {
+      contract.fields.map((field: any) => (
+        <Fragment>
+          {field.type === 'checkbox' ? (
+            <div class="lead-check">
+              <input type="checkbox" id={`${base}-${field.name}`} name={field.name} value="on" />
+              <label for={`${base}-${field.name}`} class="type-label">{field.label}</label>
+            </div>
+          ) : (
+            <FormField
+              label={field.label}
+              name={field.name}
+              id={`${base}-${field.name}`}
+              type={field.type}
+              required={field.required}
+              hint={field.hint || undefined}
+              autocomplete={field.autocomplete || undefined}
+              maxlength={field.max_length || undefined}
+              options={field.type === 'select' ? [{ value: '', label: 'Choose…' }, ...field.options.map((option: string) => ({ value: option, label: option }))] : []}
+            />
+          )}
+          <p id={errorId(field.name)} class="field-error type-label" data-lead-error-for={field.name} hidden />
+        </Fragment>
+      ))
+    }
+
+    {
+      contract.consent && (
+        <div class="lead-check">
+          <input type="checkbox" id={`${base}-consent`} name="consent" value="on" required={contract.consent.required} />
+          <label for={`${base}-consent`} class="type-label">
+            {contract.consent.label}
+          </label>
+        </div>
+      )
+    }
+    {contract.consent && <p id={errorId('consent')} class="field-error type-label" data-lead-error-for="consent" hidden />}
+
+    <div class="lead-honeypot" data-lead-honeypot aria-hidden="true">
+      <label for={`${base}-hp`}>Leave this field empty</label>
+      <input type="text" id={`${base}-hp`} name={contract.honeypot} value="" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <div><Button type="submit">{submitLabel}</Button></div>
+  </div>
+
+  <p
+    id={`${base}-status`}
+    class="lead-status type-label"
+    data-lead-status
+    role="status"
+    aria-live="polite"
+    data-message-received={text.received}
+    data-message-invalid={text.invalid}
+    data-message-failed={text.failed}
+    data-message-pending={text.pending}
+    data-message-sending="Sending…"
+  >
+  </p>
+  <p id={`${contract.form_id}-lead-received`} class="lead-target type-label">{text.received}</p>
+  <p id={`${contract.form_id}-lead-error`} class="lead-target type-label">{text.failed}</p>
+</form>
+
+<script>
+  import { attachLeadForm, captureAttribution } from '../../lib/leads/client.mjs';
+
+  captureAttribution(window);
+  document.querySelectorAll('form[data-lead-form]').forEach((form) => attachLeadForm(form));
+</script>
+
+<style>
+  .lead-form-fields {
+    display: grid;
+    gap: var(--spacing-stack);
+  }
+  .lead-check {
+    display: flex;
+    align-items: flex-start;
+    gap: calc(var(--spacing-stack) / 2);
+  }
+  .lead-check input {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    margin-block-start: 0.15em;
+  }
+  .lead-honeypot {
+    position: absolute;
+    inset-inline-start: -10000px;
+    inline-size: 1px;
+    block-size: 1px;
+    overflow: hidden;
+  }
+  .lead-status:empty {
+    display: none;
+  }
+  .lead-target {
+    display: none;
+  }
+  .lead-target:target {
+    display: block;
+  }
+</style>

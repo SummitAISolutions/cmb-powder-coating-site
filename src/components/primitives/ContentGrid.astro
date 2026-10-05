@@ -1,0 +1,43 @@
+---
+/**
+ * ContentGrid — an intrinsic, responsive grid: as many columns as fit, each at
+ * least `min` wide. No breakpoints.
+ *
+ * This is a capability, not a layout decision. A row of three identical cards
+ * is a prohibited default; reach for this when the content genuinely is a set
+ * of peers (a gallery, an index), and vary `min`, spans and content per use.
+ */
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  min?: string;
+  gap?: 'stack' | 'gutter' | 'section' | (string & {});
+  dense?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { as: Tag = 'div', min = '16rem', gap = 'gutter', dense = false, class: className, ...rest } = Astro.props;
+const roles = ['stack', 'gutter', 'section'];
+const space = roles.includes(gap) ? `var(--spacing-${gap})` : gap;
+---
+
+<Tag
+  class:list={['grid-primitive', { 'is-dense': dense }, className]}
+  style={`--grid-min: ${min}; --grid-gap: ${space};`}
+  {...rest}
+>
+  <slot />
+</Tag>
+
+<style>
+  .grid-primitive {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(var(--grid-min), 100%), 1fr));
+    gap: var(--grid-gap);
+  }
+  .is-dense {
+    grid-auto-flow: dense;
+  }
+</style>

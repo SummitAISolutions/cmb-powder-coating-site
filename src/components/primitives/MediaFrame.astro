@@ -1,0 +1,92 @@
+---
+/**
+ * MediaFrame — an aspect-ratio frame for an image, picture or video, with a
+ * focal point and an optional caption.
+ *
+ * ratio: "W:H" (match the image-plan slot's aspect_ratio).
+ * focal: CSS object-position, e.g. "50% 35%" (the slot's focal_point).
+ * mobileRatio: optional different crop below 48rem (the slot's crop notes).
+ * bleed: break out of the parent container to the viewport edges.
+ * slot: data-slot id from visual/image-plan.md, so critique can trace it.
+ * visual: what the frame holds, for Stage 4's visual inventory —
+ *   "editorial" (default), "diagram", "illustration" or "decorative". A
+ *   diagram's labelled parts carry data-diagram-node / data-diagram-step so QA
+ *   can check they stay visible and in order on every viewport.
+ *
+ * Put a <ResponsiveImage> (or <video>) in the default slot and the caption in
+ * the "caption" slot.
+ */
+
+interface Props {
+  ratio?: string;
+  mobileRatio?: string;
+  focal?: string;
+  bleed?: boolean;
+  slotId?: string;
+  visual?: 'editorial' | 'diagram' | 'illustration' | 'decorative';
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { ratio = '4:3', mobileRatio, focal = '50% 50%', bleed = false, slotId, visual = 'editorial', class: className, ...rest } = Astro.props;
+if (!['editorial', 'diagram', 'illustration', 'decorative'].includes(visual)) {
+  throw new Error(`MediaFrame visual must be editorial, diagram, illustration or decorative (got "${visual}")`);
+}
+
+const toAspect = (value: string) => {
+  const match = /^(\d+(?:\.\d+)?):(\d+(?:\.\d+)?)$/.exec(value);
+  if (!match) throw new Error(`MediaFrame ratio must look like "16:9" (got "${value}")`);
+  return `${match[1]} / ${match[2]}`;
+};
+const aspect = toAspect(ratio);
+const mobileAspect = mobileRatio ? toAspect(mobileRatio) : aspect;
+const hasCaption = Astro.slots.has('caption');
+---
+
+<figure
+  class:list={['media-frame', { 'is-bleed': bleed }, className]}
+  data-slot={slotId}
+  data-visual={visual}
+  style={`--media-aspect: ${aspect}; --media-aspect-mobile: ${mobileAspect}; --media-focal: ${focal};`}
+  {...rest}
+>
+  <div class="media-frame-box"><slot /></div>
+  {hasCaption && <figcaption class="media-frame-caption type-label text-muted"><slot name="caption" /></figcaption>}
+</figure>
+
+<style>
+  .media-frame {
+    margin: 0;
+  }
+  .media-frame-box {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: var(--media-aspect-mobile);
+    border-radius: var(--radius-media, 0);
+  }
+  @media (min-width: 48rem) {
+    .media-frame-box {
+      aspect-ratio: var(--media-aspect);
+    }
+  }
+  .media-frame-box > :global(:is(img, picture, video, svg)),
+  .media-frame-box > :global(picture > img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: var(--media-focal);
+  }
+  .media-frame-box > :global(picture) > :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: var(--media-focal);
+  }
+  .media-frame-caption {
+    margin-block-start: calc(var(--spacing-stack) / 2);
+  }
+  .is-bleed {
+    inline-size: 100vw;
+    margin-inline-start: calc(50% - 50vw);
+  }
+</style>

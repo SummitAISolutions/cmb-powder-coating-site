@@ -1,0 +1,116 @@
+---
+/**
+ * FormField — label, control, hint and error wired together accessibly.
+ *
+ * The label is always visible (placeholders are not labels). Hint and error
+ * text are linked with aria-describedby; an error sets aria-invalid. Works with
+ * no JavaScript. Where a form submits to is an integration decision recorded
+ * in the source package, never guessed; a Summit lead form is LeadForm.
+ */
+
+interface Option {
+  value: string;
+  label: string;
+}
+
+interface Props {
+  label: string;
+  name: string;
+  type?: 'text' | 'email' | 'tel' | 'url' | 'number' | 'date' | 'textarea' | 'select';
+  id?: string;
+  required?: boolean;
+  hint?: string;
+  error?: string;
+  autocomplete?: string;
+  options?: Option[];
+  rows?: number;
+  maxlength?: number;
+  value?: string;
+  class?: string;
+}
+
+const {
+  label,
+  name,
+  type = 'text',
+  id = `field-${name}`,
+  required = false,
+  hint,
+  error,
+  autocomplete,
+  options = [],
+  rows = 5,
+  maxlength,
+  value,
+  class: className,
+} = Astro.props;
+
+if (!label || !label.trim()) throw new Error(`FormField "${name}" needs a visible label.`);
+if (type === 'select' && options.length === 0) throw new Error(`FormField "${name}" is a select with no options.`);
+
+const hintId = hint ? `${id}-hint` : undefined;
+const errorId = error ? `${id}-error` : undefined;
+const describedBy = [hintId, errorId].filter(Boolean).join(' ') || undefined;
+const common = {
+  id,
+  name,
+  required,
+  autocomplete,
+  maxlength: type === 'select' ? undefined : maxlength,
+  'aria-describedby': describedBy,
+  'aria-invalid': error ? ('true' as const) : undefined,
+};
+---
+
+<div class:list={['field-primitive', { 'has-error': Boolean(error) }, className]}>
+  <label for={id} class="field-label type-label">
+    {label}
+    {required && <span aria-hidden="true"> *</span>}
+    {required && <span class="sr-only"> (required)</span>}
+  </label>
+  {hint && <p id={hintId} class="field-hint type-label text-muted">{hint}</p>}
+  {
+    type === 'textarea' ? (
+      <textarea class="field-control" rows={rows} {...common}>{value}</textarea>
+    ) : type === 'select' ? (
+      <select class="field-control" {...common}>
+        {options.map((option) => (
+          <option value={option.value} selected={option.value === value}>
+            {option.label}
+          </option>
+        ))}
+      </select>
+    ) : (
+      <input class="field-control" type={type} value={value} {...common} />
+    )
+  }
+  {error && <p id={errorId} class="field-error type-label" role="alert">{error}</p>}
+</div>
+
+<style>
+  .field-primitive {
+    display: grid;
+    gap: calc(var(--spacing-stack) / 3);
+  }
+  .field-control {
+    inline-size: 100%;
+    min-block-size: var(--tap-target);
+    padding: calc(var(--spacing-stack) / 2);
+    font: inherit;
+    color: var(--color-on-surface);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-on-surface-muted);
+    border-radius: var(--radius-control, 0);
+  }
+  .field-control:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-accent);
+    outline-offset: 1px;
+  }
+  .has-error .field-control {
+    border-width: 2px;
+    border-color: var(--color-on-surface);
+  }
+  .field-error::before {
+    content: '! ';
+  }
+</style>

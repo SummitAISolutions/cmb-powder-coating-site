@@ -1,0 +1,47 @@
+---
+/**
+ * Container — horizontal bounds and gutters. Layout capability only.
+ *
+ * width: "measure" (reading line length), "content" (default), "wide", or
+ * "full" (edge to edge, gutters kept). Break the container on purpose: an
+ * image-led section is often better composed outside it.
+ */
+import type { HTMLTag } from 'astro/types';
+
+interface Props {
+  as?: HTMLTag;
+  width?: 'measure' | 'content' | 'wide' | 'full';
+  gutters?: boolean;
+  class?: string;
+  [key: string]: unknown;
+}
+
+const { as: Tag = 'div', width = 'content', gutters = true, class: className, ...rest } = Astro.props;
+---
+
+<Tag class:list={['container-primitive', `container-${width}`, { 'no-gutters': !gutters }, className]} {...rest}>
+  <slot />
+</Tag>
+
+<style>
+  .container-primitive {
+    margin-inline: auto;
+    padding-inline: var(--spacing-gutter);
+    inline-size: 100%;
+  }
+  .no-gutters {
+    padding-inline: 0;
+  }
+  .container-measure {
+    max-inline-size: calc(var(--measure) + 2 * var(--spacing-gutter));
+  }
+  .container-content {
+    max-inline-size: calc(var(--content-max) + 2 * var(--spacing-gutter));
+  }
+  .container-wide {
+    max-inline-size: calc(var(--wide-max) + 2 * var(--spacing-gutter));
+  }
+  .container-full {
+    max-inline-size: none;
+  }
+</style>

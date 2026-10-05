@@ -1,0 +1,25 @@
+---
+/**
+ * SkipLink — the first focusable element on every page, jumping to <main>.
+ */
+interface Props {
+  target?: string;
+  label?: string;
+}
+
+const { target = '#main', label = 'Skip to content' } = Astro.props;
+---
+
+<a href={target} class="skip-link sr-only-focusable type-label">{label}</a>
+
+<style>
+  .skip-link:focus {
+    position: fixed;
+    inset-block-start: var(--spacing-stack);
+    inset-inline-start: var(--spacing-stack);
+    z-index: 100;
+    padding: calc(var(--spacing-stack) / 2) var(--spacing-stack);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+</style>

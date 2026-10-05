@@ -1,0 +1,86 @@
+---
+/**
+ * BaseLayout — document shell: language, viewport, the technical SEO baseline,
+ * the global stylesheet, a skip link and the landmark structure.
+ *
+ * Every page names its route in search/site.json (`routeId`); the title, meta
+ * description, canonical URL, robots directive, Open Graph basics, favicon
+ * links and JSON-LD all come from there and from search/business-entity.json.
+ * Nothing about the business is typed into a page's head.
+ *
+ * Indexability follows the build mode (SUMMIT_SITE_ENV): a preview build
+ * (the default) marks every page noindex; a production build leaves indexable
+ * routes indexable. The mode is stamped into <meta name="summit-site-env"> so
+ * QA can tell an intentional preview noindex from a stray one.
+ *
+ * Slots: "head", "header", default (inside <main>), "footer", "after"
+ * (e.g. StickyMobileCTA). <main> carries data-route-landmark="<route id>".
+ *
+ * When search/site.json approves a Summit lead form, every page records
+ * straightforward attribution for the tab session (UTM parameters, external
+ * referrer, landing path) so a lead submitted on a later page keeps it. A
+ * site without lead forms ships no script.
+ */
+import '../styles/global.css';
+import SkipLink from '../components/primitives/SkipLink.astro';
+import { routeContext } from '../lib/local-search/site-context';
+import { canonicalUrl, robotsDirective, SITE_ENV_META } from '../lib/local-search/site.mjs';
+import { buildJsonLd, jsonLdText } from '../lib/local-search/schema.mjs';
+import { leadFormsOf } from '../lib/leads/contract.mjs';
+
+interface Props {
+  routeId: string;
+  lang?: string;
+}
+
+const { routeId, lang = 'en' } = Astro.props;
+const { entity, site, siteEnv, route } = routeContext(routeId);
+const canonical = canonicalUrl(entity, route);
+const robots = robotsDirective(site, route, siteEnv);
+const jsonLd = buildJsonLd({ entity, site, routeId });
+const ogImage = route.ogImage || site.defaultOgImage;
+const absolute = (value: string) => (canonical ? new URL(value, canonical).href : value);
+const icons = site.icons || {};
+const recordsAttribution = leadFormsOf(site).length > 0;
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{route.title}</title>
+    {route.description && <meta name="description" content={route.description} />}
+    {canonical && <link rel="canonical" href={canonical} />}
+    {robots && <meta name="robots" content={robots} />}
+    <meta name={SITE_ENV_META} content={siteEnv} />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={route.title} />
+    {route.description && <meta property="og:description" content={route.description} />}
+    {canonical && <meta property="og:url" content={canonical} />}
+    {entity.publicName && <meta property="og:site_name" content={entity.publicName} />}
+    {ogImage && <meta property="og:image" content={absolute(ogImage)} />}
+    {icons.favicon && <link rel="icon" href={icons.favicon} />}
+    {icons.appleTouchIcon && <link rel="apple-touch-icon" href={icons.appleTouchIcon} />}
+    {jsonLd && <script type="application/ld+json" is:inline set:html={jsonLdText(jsonLd)} />}
+    <slot name="head" />
+  </head>
+  <body>
+    <SkipLink />
+    <slot name="header" />
+    <main id="main" tabindex="-1" data-route-landmark={route.id}>
+      <slot />
+    </main>
+    <slot name="footer" />
+    <slot name="after" />
+    {
+      recordsAttribution && (
+        <script>
+          import { captureAttribution } from '../lib/leads/client.mjs';
+
+          captureAttribution(window);
+        </script>
+      )
+    }
+  </body>
+</html>

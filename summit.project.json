@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "managed_by": "summit",
+  "project_id": "cmb-powder-coating",
+  "project_type": "local-service-website",
+  "template": "website-starter",
+  "github": {
+    "owner": "SummitAISolutions",
+    "repo": "cmb-powder-coating-site",
+    "visibility": "private"
+  },
+  "cloudflare": {
+    "account_id": null,
+    "project": null
+  },
+  "branches": {
+    "production": "main"
+  }
+}
