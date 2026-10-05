@@ -1,4 +1,135 @@
 {
   "schemaVersion": 1,
-  "items": []
+  "items": [
+    {
+      "item": "note:conversion-gap",
+      "value": "conversion-gap",
+      "source_id": "drive-cmb-baseline",
+      "location": "Opportunity Records OPP-001",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "note:no-location-pages",
+      "value": "no-location-pages",
+      "source_id": "drive-cmb-baseline",
+      "location": "Local Market & Category Benchmark §2 item 1",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "note:protect-urls",
+      "value": "protect-urls",
+      "source_id": "drive-cmb-baseline",
+      "location": "Baseline §3, §10; Opportunity Records OPP-010",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "note:review-gap",
+      "value": "review-gap",
+      "source_id": "drive-cmb-baseline",
+      "location": "Search Visibility Baseline Result 3; OPP-004",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "note:review-themes",
+      "value": "review-themes",
+      "source_id": "drive-cmb-baseline",
+      "location": "Baseline §2 public review themes",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "note:search-profile",
+      "value": "search-profile",
+      "source_id": "drive-cmb-baseline",
+      "location": "Search Visibility Baseline; Search Profile v1",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "note:specificity-gap",
+      "value": "specificity-gap",
+      "source_id": "drive-cmb-baseline",
+      "location": "Local Market & Category Benchmark §3; OPP-009",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "note:stray-email",
+      "value": "stray-email",
+      "source_id": "drive-cmb-baseline",
+      "location": "Baseline §2; Owner Question 11",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "prohibited:Any testimonial or review not supplied by the client or quoted from a real public review (the current site's 'Spencer Walsh, Founder Lokamart' lorem-ipsum testimonials are fabricated template filler)",
+      "value": "Any testimonial or review not supplied by the client or quoted from a real public review (the current site's 'Spencer Walsh, Founder Lokamart' lorem-ipsum testimonials are fabricated template filler)",
+      "source_id": "drive-cmb-baseline",
+      "location": "Current-Site & Public-Presence Baseline §5 'Fabricated review content'",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "prohibited:Longevity or years-in-business claims (the business is new; the domain dates from 2024-01-24)",
+      "value": "Longevity or years-in-business claims (the business is new; the domain dates from 2024-01-24)",
+      "source_id": "drive-cmb-baseline",
+      "location": "Local Market & Category Benchmark §2 item 5; Baseline §9",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "prohibited:Turnaround, pricing, part-size or oven-capacity numbers taken from any competitor or benchmark page",
+      "value": "Turnaround, pricing, part-size or oven-capacity numbers taken from any competitor or benchmark page",
+      "source_id": "drive-cmb-baseline",
+      "location": "Local Market & Category Benchmark §5; Opportunity Records OPP-009",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "service:Powder coating",
+      "value": "Powder coating",
+      "source_id": "live-site",
+      "location": "/services/ and homepage; Instagram bio 'Powder coating services'",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    },
+    {
+      "item": "service:Sandblasting",
+      "value": "Sandblasting",
+      "source_id": "live-site",
+      "location": "/services/ and homepage; Instagram bio 'Sandblasting services'",
+      "method": "exact",
+      "recorded_at": "2026-10-05T22:36:57.974Z",
+      "extractor": "source-worker",
+      "confirmed_by": null
+    }
+  ]
 }
