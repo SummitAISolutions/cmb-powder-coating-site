@@ -2,6 +2,76 @@
   "schemaVersion": 1,
   "items": [
     {
+      "item": "fact:Delivery model",
+      "value": "storefront",
+      "source_id": "operator",
+      "location": null,
+      "method": "operator",
+      "recorded_at": "2026-10-05T22:43:43.806Z",
+      "extractor": null,
+      "confirmed_by": "Samuel"
+    },
+    {
+      "item": "fact:Operating base",
+      "value": "Boise, Idaho",
+      "source_id": "operator",
+      "location": null,
+      "method": "operator",
+      "recorded_at": "2026-10-05T22:43:43.806Z",
+      "extractor": null,
+      "confirmed_by": "Samuel"
+    },
+    {
+      "item": "fact:Primary email",
+      "value": "cmbpowdercoating@cmbgroup.us",
+      "source_id": "operator",
+      "location": null,
+      "method": "operator",
+      "recorded_at": "2026-10-05T22:43:43.806Z",
+      "extractor": null,
+      "confirmed_by": "Samuel"
+    },
+    {
+      "item": "fact:Primary phone",
+      "value": "(208) 440-7812",
+      "source_id": "operator",
+      "location": null,
+      "method": "operator",
+      "recorded_at": "2026-10-05T22:43:43.806Z",
+      "extractor": null,
+      "confirmed_by": "Samuel"
+    },
+    {
+      "item": "fact:Public customer-facing address",
+      "value": "9461 Hackamore Dr, Boise, ID 83709",
+      "source_id": "operator",
+      "location": null,
+      "method": "operator",
+      "recorded_at": "2026-10-05T22:43:43.806Z",
+      "extractor": null,
+      "confirmed_by": "Samuel"
+    },
+    {
+      "item": "fact:Service geography",
+      "value": "Treasure Valley, Idaho",
+      "source_id": "operator",
+      "location": null,
+      "method": "operator",
+      "recorded_at": "2026-10-05T22:43:43.806Z",
+      "extractor": null,
+      "confirmed_by": "Samuel"
+    },
+    {
+      "item": "fact:Trading / display name",
+      "value": "CMB Powder Coating",
+      "source_id": "operator",
+      "location": null,
+      "method": "operator",
+      "recorded_at": "2026-10-05T22:43:43.806Z",
+      "extractor": null,
+      "confirmed_by": "Samuel"
+    },
+    {
       "item": "note:conversion-gap",
       "value": "conversion-gap",
       "source_id": "drive-cmb-baseline",

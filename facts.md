@@ -9,15 +9,15 @@ as `[UNKNOWN]` rather than guessing — see `AGENTS.md`.
 ## Business identity
 
 - Legal name: `[UNKNOWN]`
-- Trading / display name: `[UNKNOWN]`
+- Trading / display name: CMB Powder Coating
 - Tagline: `[UNKNOWN]`
 - One-line description: `[UNKNOWN]`
 - Website: `[UNKNOWN]`
 
 ## Contact
 
-- Primary phone: `[UNKNOWN]`
-- Primary email: `[UNKNOWN]`
+- Primary phone: (208) 440-7812
+- Primary email: cmbpowdercoating@cmbgroup.us
 - Mailing address (if different): `[UNKNOWN]`
 - Hours of operation: `[UNKNOWN]`
 - Preferred contact method: `[UNKNOWN]`
@@ -37,11 +37,11 @@ no public address does not mean having no local presence. Public
 customer-facing address is an address or `None`. Delivery model is one of
 `storefront`, `customer-location`, `mobile-service`, `remote` or `hybrid`.
 
-- Operating base: `[UNKNOWN]`
-- Public customer-facing address: `[UNKNOWN]`
-- Service geography: `[UNKNOWN]`
+- Operating base: Boise, Idaho
+- Public customer-facing address: 9461 Hackamore Dr, Boise, ID 83709
+- Service geography: Treasure Valley, Idaho
 - Areas explicitly **not** served: `[UNKNOWN]`
-- Delivery model: `[UNKNOWN]`
+- Delivery model: storefront
 - Local presence / Google Business Profile: `[UNKNOWN]`
 
 ## Publishable commitments
@@ -169,3 +169,4 @@ Anything a build agent needed and could not find. Mirror these into
 | --- | --- | --- |
 | `[UNKNOWN]` | Seeded from template | `[UNKNOWN]` |
 | 2026-10-05 | Recorded 13 item(s) from the source package (live-site, drive-cmb-baseline) | source-worker — see truth/provenance.json |
+| 2026-10-05 | Trading / display name → CMB Powder Coating; Primary phone → (208) 440-7812; Primary email → cmbpowdercoating@cmbgroup.us; Service geography → Treasure Valley, Idaho; Operating base → Boise, Idaho; Delivery model → storefront; Public customer-facing address → 9461 Hackamore Dr, Boise, ID 83709 | Samuel |
