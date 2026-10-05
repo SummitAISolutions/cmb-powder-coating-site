@@ -1,21 +1,57 @@
 {
   "schemaVersion": 1,
-  "status": "template",
-  "source": { "facts": "facts.md", "factsSha256": null },
-  "publicName": null,
+  "status": "client",
+  "source": {
+    "facts": "facts.md",
+    "factsSha256": "sha256:f696955ded47e511a5c9b9b58a421639415585830b758bc704e15949a876e3dd"
+  },
+  "publicName": "CMB Powder Coating",
   "legalName": null,
-  "businessModel": null,
-  "schemaType": null,
-  "primaryPhone": null,
-  "emails": [],
-  "address": { "value": null, "public": false },
-  "serviceAreas": [],
+  "businessModel": "storefront",
+  "deliveryModel": "storefront",
+  "schemaType": "LocalBusiness",
+  "primaryPhone": "+12084407812",
+  "emails": [
+    "cmbpowdercoating@cmbgroup.us"
+  ],
+  "address": {
+    "value": {
+      "streetAddress": "9461 Hackamore Dr",
+      "addressLocality": "Boise",
+      "addressRegion": "ID",
+      "postalCode": "83709"
+    },
+    "public": true
+  },
+  "operatingBase": {
+    "name": "Boise, Idaho"
+  },
+  "serviceAreas": [
+    {
+      "name": "Treasure Valley"
+    },
+    {
+      "name": "Idaho"
+    }
+  ],
   "hours": null,
   "url": null,
   "bookingUrl": null,
   "contactUrl": null,
-  "services": [],
-  "gbpCategories": { "primary": null, "secondary": [] },
+  "services": [
+    {
+      "id": "powder-coating",
+      "name": "Powder coating"
+    },
+    {
+      "id": "sandblasting",
+      "name": "Sandblasting"
+    }
+  ],
+  "gbpCategories": {
+    "primary": null,
+    "secondary": []
+  },
   "sameAs": [],
   "qualifications": [],
   "provenance": {}
