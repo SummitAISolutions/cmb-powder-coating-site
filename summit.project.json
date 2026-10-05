@@ -11,7 +11,7 @@
   },
   "cloudflare": {
     "account_id": null,
-    "project": null
+    "project": "cmb-powder-coating"
   },
   "branches": {
     "production": "main"
