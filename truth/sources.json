@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "status": "template",
+  "status": "client",
   "sources": [
     {
       "id": "repo-facts",
@@ -12,10 +12,36 @@
       ],
       "access": "read-write",
       "verified_at": null
+    },
+    {
+      "id": "drive-cmb-baseline",
+      "type": "connected-folder",
+      "connector": "google-drive",
+      "ref": "drive:folder/1WI1rmtN2ZvdosWw-Zb9MaPuKq6_L9MDt (CMB Powder Coating / 04 Audits & Reports / Baseline)",
+      "role": "public-research",
+      "contains": [
+        "research"
+      ],
+      "access": "read-only",
+      "verified_at": "2026-10-05",
+      "notes": "PRE-OWNER baseline captured 2026-09-23: Public Audit V1, Search Visibility Profile v1, local market benchmark, preliminary opportunity records, 16-question owner list. Evidence, not client truth."
+    },
+    {
+      "id": "live-site",
+      "type": "public-web",
+      "ref": "https://cmbpowdercoating.com/",
+      "role": "public-research",
+      "contains": [
+        "research",
+        "assets"
+      ],
+      "access": "read-only",
+      "verified_at": "2026-09-23",
+      "notes": "Current WordPress/Elementor site. Claims on it are CURRENT_SITE_CLAIM, owner confirmation required."
     }
   ],
   "exclusions": [],
   "research": {
-    "permitted": false
+    "permitted": true
   }
 }
