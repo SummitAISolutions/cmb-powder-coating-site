@@ -16,8 +16,8 @@
  *
  * Nothing here is imported by browser code.
  */
-import site from '../../search/site.json' with { type: 'json' };
-import entity from '../../search/business-entity.json' with { type: 'json' };
+import site from '../../search/site.json';
+import entity from '../../search/business-entity.json';
 import { handleLeadRequest, kvStore, memoryStore } from '../../src/lib/leads/index.mjs';
 
 // Per-isolate fallback for previews without a KV binding. Not durable.

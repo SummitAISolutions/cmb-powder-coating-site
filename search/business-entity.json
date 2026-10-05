@@ -3,7 +3,7 @@
   "status": "client",
   "source": {
     "facts": "facts.md",
-    "factsSha256": "sha256:f696955ded47e511a5c9b9b58a421639415585830b758bc704e15949a876e3dd"
+    "factsSha256": "sha256:a86643b0dff5c0b414ce906e5aefa1b1e1a25ef8e6ab747339c0d0ea79a2a9fc"
   },
   "publicName": "CMB Powder Coating",
   "legalName": null,
@@ -28,10 +28,7 @@
   },
   "serviceAreas": [
     {
-      "name": "Treasure Valley"
-    },
-    {
-      "name": "Idaho"
+      "name": "Idaho's Treasure Valley"
     }
   ],
   "hours": null,
