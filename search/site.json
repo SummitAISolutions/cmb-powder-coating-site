@@ -6,25 +6,85 @@
       "id": "home",
       "path": "/",
       "kind": "home",
-      "title": "[STARTER PLACEHOLDER] Summit website starter",
-      "description": "Placeholder page. Not a client site.",
-      "heading": "[STARTER PLACEHOLDER]",
+      "intent": "convert",
+      "primaryCta": "call",
+      "title": "CMB Powder Coating — powder coating and sandblasting in Boise, Idaho",
+      "description": "CMB Powder Coating is a powder coating and sandblasting shop at 9461 Hackamore Dr, Boise, serving the Treasure Valley. Call (208) 440-7812 or request a quote.",
+      "heading": "Powder coating in Boise, Idaho",
       "necessity": {
         "reason": "entry",
-        "userIntent": "[STARTER PLACEHOLDER] the visitor problem the home page answers",
+        "userIntent": "A Treasure Valley visitor with a metal part to coat wants to know whether CMB Powder Coating can take the job, where the shop is, and how to get a quote.",
+        "searchIntent": "Powder coating in Boise and the Treasure Valley, Idaho",
+        "conversionRole": "Asks the visitor to call the shop, with the quote request as the written alternative.",
+        "contentPurpose": "The only page that introduces CMB Powder Coating as a whole: what it coats, how a job reaches the Hackamore Dr shop, its real Google reviews once authorised, and routes to the services page or the quote request."
+      }
+    },
+    {
+      "id": "services",
+      "path": "/services/",
+      "kind": "service",
+      "service": "powder-coating",
+      "intent": "convert",
+      "primaryCta": "quote",
+      "title": "Powder coating and sandblasting services — CMB Powder Coating, Boise",
+      "description": "Powder coating and sandblasting at CMB Powder Coating in Boise, Idaho: what the shop coats, how parts are prepared and how to request a quote.",
+      "heading": "Powder coating and sandblasting",
+      "necessity": {
+        "reason": "distinct-service",
+        "userIntent": "A visitor who already knows they need a part coated or blasted wants the detail before calling: what the shop works on, how prep and blasting fit in, and what to send for a quote.",
+        "searchIntent": "Powder coating and sandblasting services in Boise, Idaho",
+        "conversionRole": "Asks the visitor to request a quote with a description of the part, or to call.",
+        "contentPurpose": "The one page for the shop's work in detail. Sandblasting is a section here, not its own page, until the owner confirms whether it is sold on its own or is prep for coating."
+      }
+    },
+    {
+      "id": "contact",
+      "path": "/contact-us/",
+      "kind": "contact",
+      "intent": "convert",
+      "primaryCta": "call",
+      "title": "Request a quote — CMB Powder Coating, Boise",
+      "description": "Call CMB Powder Coating at (208) 440-7812 or describe your part to request a quote. Shop at 9461 Hackamore Dr, Boise, ID 83709.",
+      "heading": "Request a quote",
+      "necessity": {
+        "reason": "distinct-conversion",
+        "userIntent": "A visitor ready to get a part coated wants to send the job details or call, and to know where the shop is.",
         "searchIntent": null,
-        "conversionRole": "[STARTER PLACEHOLDER] the one action the home page asks for",
-        "contentPurpose": "[STARTER PLACEHOLDER] what only the home page contains"
+        "conversionRole": "Carries the quote request form (name, phone, email, service, part description) and the call action.",
+        "contentPurpose": "The only page with the quote form, the shop address and directions, and the phone and email together."
       }
     },
     {
       "id": "not-found",
       "path": "/404",
       "kind": "error",
-      "title": "[STARTER PLACEHOLDER] Page not found",
+      "title": "Page not found — CMB Powder Coating",
       "heading": "Page not found"
     }
   ],
+  "conversion": {
+    "ctas": [
+      { "id": "call", "kind": "tel", "target": "entity:primaryPhone" },
+      { "id": "quote", "kind": "internal", "target": "route:contact", "routes": ["home", "services"] }
+    ],
+    "forms": [
+      {
+        "id": "quote",
+        "route": "contact",
+        "mode": "lead-receipt",
+        "lead": {
+          "fields": [
+            { "name": "name", "label": "Name", "required": true },
+            { "name": "phone", "label": "Phone", "required": true, "phoneCheck": true },
+            { "name": "email", "label": "Email" },
+            { "name": "service", "label": "Service", "options": "entity:services" },
+            { "name": "message", "label": "Describe the part: what it is, rough size, metal, current finish and the colour you want", "required": true }
+          ],
+          "destination": { "adapter": "test-sink" }
+        }
+      }
+    ]
+  },
   "indexing": { "production": "index" },
   "crawlers": { "registry": "summit-crawlers-2026-09", "search": "allow", "training": "unset", "agents": {} },
   "icons": { "favicon": null, "appleTouchIcon": null },
