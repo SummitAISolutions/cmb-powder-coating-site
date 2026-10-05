@@ -1,41 +1,46 @@
 {
   "schema_version": 1,
-  "status": "template",
+  "status": "proposed",
   "summary": [
-    "TEMPLATE — the visual director replaces every value here with a real proposal",
-    "Each line names one design choice a person should weigh, in plain words",
-    "Three to six lines; the operator reads these, not visual-direction.md"
+    "A clean local shop, not a motorsport brand: primer-white pages, graphite bands and blued-steel scrims",
+    "One amber action — the call and quote buttons — taken from the gold on CMB's current site and logo, always under dark text",
+    "Big condensed headings (Barlow Condensed) set straight onto images of blasted steel, cured surfaces and shop light",
+    "Openings run full-bleed behind a floating header; a sticky mobile bar keeps Call and Quote one tap away",
+    "Real CMB work photos replace generated material images as soon as the owner authorises them; no generated parts, people or shop interiors",
+    "No numerals, no divider lines, no reviews or ratings until the owner authorises them"
   ],
   "palette": {
-    "surface": "#ffffff",
-    "on-surface": "#1a1a1a",
-    "primary": "#1a1a1a",
-    "on-primary": "#ffffff",
-    "accent": "#555555",
-    "muted": "#999999"
+    "surface": "#F1EFEA",
+    "on-surface": "#16181A",
+    "primary": "#E2A11B",
+    "on-primary": "#16181A",
+    "accent": "#33495A",
+    "muted": "#5F646A"
   },
   "typography": {
-    "display": "system-ui, sans-serif",
-    "body": "system-ui, sans-serif",
-    "scale": 1.25
+    "display": "'Barlow Condensed', 'Arial Narrow', sans-serif",
+    "body": "'Barlow', system-ui, sans-serif",
+    "scale": 1.3,
+    "stylesheet": "https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600&family=Barlow:wght@400;500&display=swap"
   },
-  "shape": { "radius": "8px", "button_style": "solid" },
+  "shape": { "radius": "10px", "button_style": "solid" },
   "density": "comfortable",
-  "surface_treatment": "flat",
-  "style": "minimal",
-  "visual_medium": "typographic",
+  "surface_treatment": "layered",
+  "style": "service",
+  "visual_medium": "photography",
   "hero": {
-    "layout": "stacked",
-    "headline": "Placeholder headline for the design specimen",
-    "subhead": "Placeholder supporting sentence. The proof never states a client fact.",
+    "layout": "editorial",
+    "headline": "A placeholder headline set large in the condensed display face",
+    "subhead": "Placeholder supporting sentence for the specimen. It states no client fact.",
     "cta": "Primary action"
   },
   "section": {
-    "kind": "cards",
-    "title": "Placeholder section",
+    "kind": "process",
+    "title": "Placeholder process section",
     "items": [
-      { "title": "First item", "body": "Placeholder body text." },
-      { "title": "Second item", "body": "Placeholder body text." }
+      { "title": "First step", "body": "Placeholder body text for the specimen." },
+      { "title": "Second step", "body": "Placeholder body text for the specimen." },
+      { "title": "Third step", "body": "Placeholder body text for the specimen." }
     ]
   }
 }
