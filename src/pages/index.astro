@@ -1,78 +1,225 @@
 ---
 /**
- * [STARTER PLACEHOLDER] — not a client page and not a section design.
+ * Home — the only page that introduces CMB Powder Coating as a whole
+ * (search/site.json "home"; approved visual direction, home rhythm):
+ * opening → two tall service cards → full-bleed steel band "How a job works"
+ * → the shop and directions → closing panel → graphite footer.
  *
- * This page exists so the starter builds, so the screenshot harness has
- * something to capture, and so each primitive is exercised once. It contains
- * no client facts. Replace it entirely: real pages are composed per client
- * from the primitives, following the approved visual direction and DESIGN.md.
+ * The proof strip under the opening is NOT rendered: facts.md records no
+ * rating or review authorised for display (INPUT_MANIFEST.md, open question).
+ * Every fact comes from the entity.
  */
-import BaseLayout from '../layouts/BaseLayout.astro';
-import Button from '../components/primitives/Button.astro';
-import Cluster from '../components/primitives/Cluster.astro';
-import Container from '../components/primitives/Container.astro';
-import FormField from '../components/primitives/FormField.astro';
-import MediaFrame from '../components/primitives/MediaFrame.astro';
-import SiteFooter from '../components/primitives/SiteFooter.astro';
-import SiteHeader from '../components/primitives/SiteHeader.astro';
-import SplitLayout from '../components/primitives/SplitLayout.astro';
-import Stack from '../components/primitives/Stack.astro';
-import StickyMobileCTA from '../components/primitives/StickyMobileCTA.astro';
+import ShopLayout from '../layouts/ShopLayout.astro';
+import ImageOpening from '../components/ImageOpening.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ImageBand from '../components/ImageBand.astro';
+import ClosingPanel from '../components/ClosingPanel.astro';
+import DirectionsLink from '../components/DirectionsLink.astro';
+import EntityFact from '../components/primitives/EntityFact.astro';
+import { routeContext } from '../lib/local-search/site-context';
+
+import openingImage from '../assets/generated/home-opening.webp';
+import powderImage from '../assets/generated/card-powder-coating.webp';
+import blastImage from '../assets/generated/card-sandblasting.webp';
+import foothillsImage from '../assets/generated/band-foothills.webp';
+import closingImage from '../assets/generated/closing-powder.webp';
+
+const { entity, route } = routeContext('home');
+const serviceName = (id: string) => {
+  const service = entity.services.find((entry: { id: string }) => entry.id === id);
+  if (!service) throw new Error(`Home: the entity records no service "${id}".`);
+  return service.name as string;
+};
 ---
 
-<BaseLayout routeId="home">
-  <SiteHeader slot="header" brand="[STARTER PLACEHOLDER]" links={[{ href: '/', label: 'Placeholder link' }]} />
+<ShopLayout routeId="home">
+  <ImageOpening image={openingImage} slotId="home-opening" focal="70% 50%" size="tall">
+    <Fragment slot="eyebrow">Powder coating and sandblasting · <EntityFact field="serviceAreas" /></Fragment>
+    <h1 class="type-hero">{route.heading}</h1>
+    <p class="type-lede">From bare metal to a cured finish. Call the shop, or describe your part and request a quote.</p>
+    <Fragment slot="actions">
+      <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call is-large" />
+      <a href="/contact-us/" data-cta="quote" class="cmb-outline is-large">Request a quote</a>
+    </Fragment>
+  </ImageOpening>
 
-  <Container as="section" class="section-space" aria-labelledby="placeholder-title">
-    <SplitLayout ratio="7fr 5fr" align="center">
-      <Stack slot="start" space="gutter">
-        <p class="type-label text-muted">Summit Visual System v1 — technical starter</p>
-        <h1 id="placeholder-title" class="type-display">[STARTER PLACEHOLDER]</h1>
-        <p class="type-body measure">
-          This page only proves that the primitives build and render with tokens from
-          visual/DESIGN.md. It is not a design. Replace it with pages composed from the approved
-          visual direction.
-        </p>
-        <Cluster>
-          <Button href="#placeholder-form" cta="placeholder-primary">Primary placeholder</Button>
-          <Button href="#placeholder-form" variant="secondary">Secondary placeholder</Button>
-        </Cluster>
-      </Stack>
-      <MediaFrame slot="end" ratio="4:5" mobileRatio="4:3" slotId="starter-placeholder">
-        <div class="image-gap" role="img" aria-label="Image slot placeholder: no real asset yet">
-          <span class="type-label">Image slot — needs a real asset</span>
+  <section class="shell home-services" aria-labelledby="services-title">
+    <div class="home-services-head">
+      <p class="eyebrow home-muted">What the shop does</p>
+      <h2 id="services-title" class="type-section">Two processes, one finish</h2>
+    </div>
+    <div class="home-services-cards">
+      <ServiceCard
+        href="/services/#powder-coating"
+        image={powderImage}
+        slotId="card-powder-coating"
+        focal="50% 45%"
+        name={serviceName('powder-coating')}
+        line="A dry powder applied to clean metal, then cured with heat into a continuous coating."
+      />
+      <ServiceCard
+        href="/services/#sandblasting"
+        image={blastImage}
+        slotId="card-sandblasting"
+        focal="40% 50%"
+        name={serviceName('sandblasting')}
+        line="Abrasive blasting that takes old paint, coatings and rust back to bare metal."
+      />
+    </div>
+  </section>
+
+  <ImageBand image={foothillsImage} slotId="band-foothills" focal="50% 70%" aria-labelledby="job-title">
+    <div class="shell job">
+      <div class="job-head">
+        <p class="eyebrow job-eyebrow">Getting a part coated</p>
+        <h2 id="job-title" class="type-section">How a job works</h2>
+      </div>
+      <ol class="job-steps" role="list">
+        <li class="frosted-panel job-step">
+          <h3 class="job-step-title">Describe the part</h3>
+          <p>Call, or use the quote form: what the part is, its rough size, the metal and the colour you want.</p>
+        </li>
+        <li class="frosted-panel job-step">
+          <h3 class="job-step-title">Get a quote</h3>
+          <p>The shop looks at what you sent and quotes the job, including any blasting the part needs first.</p>
+        </li>
+        <li class="frosted-panel job-step">
+          <h3 class="job-step-title">Drop it off at the shop</h3>
+          <p>Bring the part to the storefront:</p>
+          <EntityFact field="address" class="job-address" />
+        </li>
+      </ol>
+    </div>
+  </ImageBand>
+
+  <section class="shell shop" aria-labelledby="shop-title">
+    <div class="shop-panel on-dark">
+      <div class="shop-copy">
+        <p class="eyebrow shop-eyebrow">The shop</p>
+        <h2 id="shop-title" class="type-section">Where to bring your parts</h2>
+        <p class="shop-line">A storefront shop serving the <EntityFact field="serviceAreas" />.</p>
+      </div>
+      <div class="shop-reach">
+        <EntityFact field="address" class="shop-address" />
+        <div class="cmb-actions">
+          <DirectionsLink class="cmb-outline" />
+          <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call" />
         </div>
-      </MediaFrame>
-    </SplitLayout>
-  </Container>
+      </div>
+    </div>
+  </section>
 
-  <Container as="section" width="measure" class="section-space-half" aria-labelledby="placeholder-form-title">
-    <form id="placeholder-form" data-form="placeholder" action="#" method="post">
-      <Stack space="stack">
-        <h2 id="placeholder-form-title" class="type-heading">Form primitive placeholder</h2>
-        <FormField label="Placeholder field" name="placeholder" hint="Hint text is linked with aria-describedby." required />
-        <FormField label="Placeholder message" name="message" type="textarea" rows={3} />
-        <div><Button type="submit">Submit placeholder</Button></div>
-      </Stack>
-    </form>
-  </Container>
-
-  <SiteFooter slot="footer">
-    <p class="type-label text-muted">[STARTER PLACEHOLDER] footer — no client facts.</p>
-  </SiteFooter>
-
-  <StickyMobileCTA slot="after" href="#placeholder-form" label="Sticky CTA placeholder" cta="placeholder-primary" />
-</BaseLayout>
+  <ClosingPanel heading="Have a part that needs a new finish?" image={closingImage} slotId="closing-powder" focal="60% 50%" quoteCta />
+</ShopLayout>
 
 <style>
-  .image-gap {
-    display: grid;
-    place-items: center;
-    inline-size: 100%;
-    block-size: 100%;
+  .home-muted {
     color: var(--color-on-surface-muted);
-    background-color: color-mix(in srgb, var(--color-on-surface) 6%, var(--color-surface));
-    outline: 1px dashed var(--color-on-surface-muted);
-    outline-offset: -1px;
+  }
+  .home-services {
+    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
+    display: grid;
+    gap: 2.25rem;
+  }
+  .home-services-head {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .home-services-cards {
+    display: grid;
+    gap: 1.25rem;
+  }
+  @media (min-width: 48rem) {
+    .home-services-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1.5rem;
+    }
+  }
+
+  .job {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .job-head {
+    display: grid;
+    gap: 0.75rem;
+  }
+  .job-eyebrow {
+    color: color-mix(in srgb, var(--color-on-primary) 80%, transparent);
+  }
+  .job-steps {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 1rem;
+  }
+  .job-step {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+    padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  }
+  .job-step-title {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(1.75rem, 1.5rem + 0.8vw, 2.25rem);
+    line-height: 1;
+  }
+  .job-step p {
+    color: color-mix(in srgb, var(--color-on-primary) 90%, transparent);
+  }
+  .job-step :global(.job-address) {
+    font-weight: 500;
+    line-height: 1.45;
+  }
+  @media (min-width: 60rem) {
+    .job-steps {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.25rem;
+    }
+  }
+
+  .shop {
+    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem) 0;
+  }
+  .shop-panel {
+    display: grid;
+    gap: 2.25rem;
+    padding: clamp(1.75rem, 1.25rem + 3vw, 4rem);
+    background-color: var(--color-graphite);
+    color: var(--color-on-graphite);
+    border-radius: var(--cmb-radius-lg);
+  }
+  .shop-copy {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+  }
+  .shop-eyebrow {
+    color: color-mix(in srgb, var(--color-on-graphite) 74%, transparent);
+  }
+  .shop-line {
+    max-inline-size: 30rem;
+    color: color-mix(in srgb, var(--color-on-graphite) 82%, transparent);
+  }
+  .shop-reach {
+    display: grid;
+    gap: 1.75rem;
+    align-content: end;
+  }
+  .shop-reach :global(.shop-address) {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
+    line-height: 1;
+  }
+  .shop-reach :global(.cmb-outline) {
+    color: var(--color-on-graphite);
+  }
+  @media (min-width: 60rem) {
+    .shop-panel {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+      gap: 4rem;
+    }
   }
 </style>

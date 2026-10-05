@@ -10,3 +10,205 @@
 @import "tailwindcss";
 @import "./theme.generated.css";
 @import "./base.css";
+
+/*
+ * CMB Powder Coating — client layer ("from bare metal to finish", approved
+ * visual direction). Token roles only (visual/DESIGN.md); tints and scrims are
+ * colour-mixes of those roles, never new literals. Generic fallbacks keep the
+ * hierarchy while a face is loading.
+ */
+@layer base {
+  :root {
+    --cmb-radius: var(--radius-media, 10px);
+    --cmb-radius-lg: calc(var(--radius-media, 10px) * 1.6);
+    --cmb-steel-tint: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface));
+    --cmb-primer-deep: color-mix(in srgb, var(--color-on-surface-muted) 10%, var(--color-surface));
+    --cmb-primer-light: color-mix(in srgb, var(--color-surface) 55%, var(--color-on-primary) 45%);
+    --cmb-line: color-mix(in srgb, var(--color-on-surface-muted) 26%, transparent);
+    --cmb-lift: 0 1px 2px color-mix(in srgb, var(--color-on-surface) 8%, transparent),
+      0 18px 40px -20px color-mix(in srgb, var(--color-on-surface) 34%, transparent);
+    --header-overlap: 5.25rem;
+    --content-max: 76rem;
+  }
+  @media (min-width: 60rem) {
+    :root {
+      --header-overlap: 6.5rem;
+    }
+  }
+  body {
+    font-family: var(--font-body), sans-serif;
+    background-color: var(--color-surface);
+  }
+  :is(h1, h2, h3, h4, h5, h6) {
+    font-family: var(--font-heading), sans-serif;
+    font-weight: var(--font-weight-heading, 600);
+    margin: 0;
+  }
+  p,
+  dl,
+  dd,
+  ol,
+  ul,
+  address {
+    margin: 0;
+  }
+  address {
+    font-style: normal;
+  }
+  ::selection {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+}
+
+/* Small uppercase eyebrow in the body face (DESIGN.md "label"). */
+@utility eyebrow {
+  font-family: var(--font-label), sans-serif;
+  font-size: var(--text-label);
+  font-weight: var(--font-weight-label, 500);
+  letter-spacing: var(--tracking-label, 0.14em);
+  line-height: 1.4;
+  text-transform: uppercase;
+}
+
+/* Openings: ~5.5rem desktop, 2.75rem on phones, tight leading. */
+@utility type-hero {
+  font-family: var(--font-display), sans-serif;
+  font-weight: var(--font-weight-display, 600);
+  font-size: clamp(2.75rem, 1.6rem + 4.4vw, var(--text-display));
+  line-height: var(--text-display--line-height, 0.95);
+  letter-spacing: var(--tracking-display, -0.01em);
+}
+
+/* Section headings: ~3.25rem desktop, 2rem on phones. */
+@utility type-section {
+  font-family: var(--font-heading), sans-serif;
+  font-weight: var(--font-weight-heading, 600);
+  font-size: clamp(2rem, 1.45rem + 2.1vw, var(--text-heading));
+  line-height: var(--text-heading--line-height, 1);
+  letter-spacing: var(--tracking-heading, normal);
+}
+
+@utility type-lede {
+  font-family: var(--font-body), sans-serif;
+  font-size: clamp(1.125rem, 1.02rem + 0.4vw, 1.3125rem);
+  line-height: 1.5;
+}
+
+/* Frosted steel panel over imagery: legibility is its job. */
+@utility frosted-panel {
+  background-color: color-mix(in srgb, var(--color-primary) 42%, transparent);
+  border: 1px solid color-mix(in srgb, var(--color-on-primary) 16%, transparent);
+  border-radius: var(--cmb-radius);
+  backdrop-filter: blur(14px) saturate(1.1);
+  -webkit-backdrop-filter: blur(14px) saturate(1.1);
+}
+
+@layer components {
+  .shell {
+    inline-size: calc(100% - 2 * var(--spacing-gutter));
+    max-inline-size: var(--content-max);
+    margin-inline: auto;
+  }
+
+  /* Dark surfaces (imagery, steel, graphite): words in primer, focus ring in
+     amber — blued steel would vanish here. */
+  .on-dark {
+    --color-accent: var(--color-action);
+    color: var(--color-on-primary);
+  }
+
+  /* The action pill: cured amber, graphite text — the only saturated colour on
+     any page, used only for call and quote. */
+  .cmb-pill {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+    min-block-size: 3rem;
+    padding-inline: 1.4rem;
+    border-radius: var(--radius-control, 10px);
+    background-color: var(--color-action);
+    color: var(--color-on-action);
+    font-family: var(--font-body), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 160ms ease, transform 160ms ease;
+  }
+  .cmb-pill:hover {
+    background-color: color-mix(in srgb, var(--color-action) 88%, var(--color-on-surface));
+    transform: translateY(-1px);
+  }
+  .cmb-pill:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-on-surface);
+    outline-offset: 3px;
+  }
+  .cmb-pill.is-large {
+    min-block-size: 3.5rem;
+    padding-inline: 1.75rem;
+    font-size: 1.0625rem;
+  }
+  /* "Call" in front of the number: the number itself comes from the entity. */
+  .cmb-pill--call::before {
+    content: 'Call';
+  }
+
+  /* The quieter companion: outlined in currentColor. */
+  .cmb-outline {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+    min-block-size: 3rem;
+    padding-inline: 1.35rem;
+    border-radius: var(--radius-control, 10px);
+    border: 1px solid currentColor;
+    font-family: var(--font-body), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 160ms ease;
+  }
+  .cmb-outline:hover {
+    background-color: color-mix(in srgb, currentColor 10%, transparent);
+  }
+  .cmb-outline.is-large {
+    min-block-size: 3.5rem;
+    padding-inline: 1.6rem;
+    font-size: 1.0625rem;
+  }
+
+  .cmb-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4em;
+    min-block-size: var(--tap-target);
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.35em;
+  }
+  .cmb-link:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .cmb-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem 1rem;
+  }
+}
+
+/* Role fallbacks for base.css's type utilities (unlayered, so they win). */
+.type-display {
+  font-family: var(--font-display), sans-serif;
+}
+.type-heading {
+  font-family: var(--font-heading), sans-serif;
+}

@@ -1,0 +1,40 @@
+---
+/**
+ * ShopLayout — BaseLayout plus CMB Powder Coating's shared chrome: the
+ * self-hosted faces, the floating header card, the graphite footer and, on
+ * phones, the sticky Call + Quote bar.
+ *
+ * The quote action carries data-cta="quote" only on the routes
+ * search/site.json lists for that CTA; on the contact page the bar's quote
+ * action jumps to the form instead.
+ */
+import BaseLayout from './BaseLayout.astro';
+import ShopHeader from '../components/ShopHeader.astro';
+import ShopFooter from '../components/ShopFooter.astro';
+import MobileActionBar from '../components/MobileActionBar.astro';
+import { routeContext } from '../lib/local-search/site-context';
+
+interface Props {
+  routeId: string;
+}
+
+const { routeId } = Astro.props;
+const { site } = routeContext(routeId);
+const quote = (site.conversion?.ctas || []).find((cta: { id: string }) => cta.id === 'quote');
+const quoteCta = Boolean(quote && (!quote.routes || quote.routes.includes(routeId)));
+const onContact = routeId === 'contact';
+---
+
+<BaseLayout routeId={routeId}>
+  <Fragment slot="head">
+    {/* The display face carries the largest contentful paint, so it is
+        preloaded; the body faces arrive with the stylesheet. Self-hosted on
+        the same origin: no third-party font request. */}
+    <link rel="preload" href="/fonts/barlow-condensed-600.woff2" as="font" type="font/woff2" crossorigin />
+    <link rel="stylesheet" href="/fonts.css" />
+  </Fragment>
+  <ShopHeader slot="header" />
+  <slot />
+  <ShopFooter slot="footer" />
+  <MobileActionBar slot="after" quoteCta={quoteCta} quoteHref={onContact ? '#quote-form' : '/contact-us/'} />
+</BaseLayout>

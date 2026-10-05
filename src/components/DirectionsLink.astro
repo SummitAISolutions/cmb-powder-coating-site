@@ -1,0 +1,23 @@
+---
+/**
+ * DirectionsLink — a Google Maps directions link to the shop, built from the
+ * entity's PUBLIC address (never typed). facts.md records a storefront where
+ * customers drop parts off, so directions are content. A hidden address never
+ * reaches this link: publicAddress() returns null and the build stops.
+ */
+import { searchContext } from '../lib/local-search/site-context';
+import { addressLine, publicAddress } from '../lib/local-search/entity.mjs';
+
+interface Props {
+  class?: string;
+  label?: string;
+}
+
+const { class: className, label = 'Get directions' } = Astro.props;
+const { entity } = searchContext();
+const line = addressLine(publicAddress(entity));
+if (!line) throw new Error('DirectionsLink: the entity records no public address.');
+const href = `https://www.google.com/maps/dir/?api=1&destination=${encodeURIComponent(line)}`;
+---
+
+<a href={href} class={className} target="_blank" rel="noopener">{label} <span aria-hidden="true">↗</span><span class="sr-only"> (opens Google Maps in a new tab)</span></a>

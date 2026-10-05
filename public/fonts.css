@@ -1,0 +1,40 @@
+/**
+ * Self-hosted faces for CMB Powder Coating.
+ *
+ * visual/DESIGN.md, "Typography": the WOFF2 files are served from public/fonts/
+ * with @font-face rules in a static stylesheet OUTSIDE src/, so the faces are
+ * named here and reach component code only as --font-* roles. No hosted-font
+ * import: no third-party request from a visitor's browser and no font-host
+ * round trip in front of the largest contentful paint.
+ *
+ * Barlow and Barlow Condensed (Jeremy Tribby) are SIL Open Font License 1.1,
+ * which permits self-hosting. Latin subsets only, fetched from Google Fonts
+ * (v13) on 2026-10-05.
+ */
+
+/* Display and heading: openings, section headings, card names. */
+@font-face {
+  font-family: 'Barlow Condensed';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url('/fonts/barlow-condensed-600.woff2') format('woff2');
+}
+
+/* Body and interface. */
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/fonts/barlow-400.woff2') format('woff2');
+}
+
+/* Buttons, nav, eyebrows. */
+@font-face {
+  font-family: 'Barlow';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url('/fonts/barlow-500.woff2') format('woff2');
+}

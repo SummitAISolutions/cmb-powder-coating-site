@@ -1,0 +1,63 @@
+---
+/**
+ * MobileActionBar — the phone-width sticky bar (approved visual direction:
+ * "a sticky bottom bar carries Call and Quote"). The starter's StickyMobileCTA
+ * carries one action; the direction asks for two, so this composes the same
+ * mechanics (fixed below 48rem, safe-area aware, a spacer so it never covers
+ * the page end) with the site's own pills.
+ *
+ * The phone comes from the entity (EntityFact, data-cta="call"). The quote
+ * action carries data-cta="quote" only on the routes search/site.json lists for
+ * that CTA; on the contact page it jumps to the form instead.
+ */
+import EntityFact from './primitives/EntityFact.astro';
+
+interface Props {
+  /** Render the quote link as the "quote" conversion CTA (data-cta). */
+  quoteCta?: boolean;
+  /** Where the quote action goes. */
+  quoteHref?: string;
+}
+
+const { quoteCta = false, quoteHref = '/contact-us/' } = Astro.props;
+---
+
+<div class="mobile-bar-spacer" aria-hidden="true"></div>
+<div class="mobile-bar">
+  <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call mobile-bar-call" />
+  <a href={quoteHref} data-cta={quoteCta ? 'quote' : undefined} class="cmb-outline mobile-bar-quote">Quote</a>
+</div>
+
+<style>
+  .mobile-bar,
+  .mobile-bar-spacer {
+    display: none;
+  }
+  @media (max-width: 47.99rem) {
+    .mobile-bar-spacer {
+      display: block;
+      block-size: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+    }
+    .mobile-bar {
+      display: flex;
+      gap: 0.6rem;
+      position: fixed;
+      inset-inline: 0;
+      inset-block-end: 0;
+      z-index: 40;
+      padding: 0.65rem var(--spacing-gutter) calc(0.65rem + env(safe-area-inset-bottom, 0px));
+      background-color: color-mix(in srgb, var(--color-surface) 92%, transparent);
+      box-shadow: 0 -10px 30px -18px color-mix(in srgb, var(--color-on-surface) 45%, transparent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .mobile-bar :global(.mobile-bar-call) {
+      flex: 1;
+      padding-inline: 0.75rem;
+    }
+    .mobile-bar-quote {
+      color: var(--color-primary);
+      padding-inline: 1.25rem;
+    }
+  }
+</style>

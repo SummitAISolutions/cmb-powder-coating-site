@@ -1,8 +1,8 @@
 /*
  * GENERATED from visual/DESIGN.md by scripts/visual/design-md.mjs — do not edit.
  * Change visual/DESIGN.md, then run `npm run design:export`.
- * mode: placeholder
- * source sha256: b4a0c9214a4597942ccd8726aa25f69542867d40266ac5f3bc7f3e08c48631f7
+ * mode: approved
+ * source sha256: 6db88ef47541ec7c04457845c79ff15d16566226bf804b964d520d63b06ffc83
  * exporter: @google/design.md@0.4.0 (css-tailwind)
  */
 
@@ -14,38 +14,43 @@
 }
 
 @theme {
-  --color-surface: #fafafa;
-  --color-on-surface: #1f1f1f;
-  --color-on-surface-muted: #595959;
-  --color-primary: #262626;
-  --color-on-primary: #ffffff;
-  --color-accent: #404040;
-  --font-display: "PLACEHOLDER-SANS";
-  --font-heading: "PLACEHOLDER-SANS";
-  --font-body: "PLACEHOLDER-SANS";
-  --font-label: "PLACEHOLDER-SANS";
-  --text-display: 4.5rem;
-  --text-heading: 2.25rem;
+  --color-surface: #f1efea;
+  --color-on-surface: #16181a;
+  --color-on-surface-muted: #5f646a;
+  --color-primary: #2b3e4c;
+  --color-on-primary: #f1efea;
+  --color-accent: #2b3e4c;
+  --color-action: #e2a11b;
+  --color-on-action: #16181a;
+  --color-graphite: #16181a;
+  --color-on-graphite: #f1efea;
+  --font-display: "Barlow Condensed";
+  --font-heading: "Barlow Condensed";
+  --font-body: "Barlow";
+  --font-label: "Barlow";
+  --text-display: 5.5rem;
+  --text-heading: 3.25rem;
   --text-body: 1.0625rem;
-  --text-label: 0.8125rem;
-  --tracking-display: -0.02em;
-  --tracking-label: 0.04em;
+  --text-label: 0.75rem;
+  --tracking-display: -0.01em;
+  --tracking-heading: -0.005em;
+  --tracking-label: 0.14em;
   --font-weight-display: 600;
   --font-weight-heading: 600;
   --font-weight-body: 400;
-  --font-weight-label: 600;
-  --radius-control: 0px;
-  --radius-media: 0px;
+  --font-weight-label: 500;
+  --radius-control: 10px;
+  --radius-media: 10px;
   --spacing-gutter: 1.5rem;
   --spacing-stack: 1.25rem;
-  --spacing-section: 7rem;
+  --spacing-section: 6rem;
 }
 
 /* Summit supplements: values defined in DESIGN.md that the pinned exporter
    does not emit. Derived from the same file. */
 @theme {
   --text-body--line-height: 1.6;
-  --text-display--line-height: 1.05;
-  --text-heading--line-height: 1.15;
-  --text-label--line-height: 1.3;
+  --text-display--line-height: 0.95;
+  --text-heading--line-height: 1;
+  --text-label--line-height: 1.4;
 }

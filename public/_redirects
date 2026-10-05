@@ -1,0 +1,9 @@
+# Cloudflare Pages redirects: the previous site's URLs, carried forward.
+/about-us/            /             301
+/about-us             /             301
+/david3/about-us/     /             301
+/david3/about-us      /             301
+/david3/services/     /services/    301
+/david3/services      /services/    301
+/david3/contact-us/   /contact-us/  301
+/david3/contact-us    /contact-us/  301

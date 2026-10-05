@@ -1,0 +1,105 @@
+---
+/**
+ * ShopFooter — graphite footer (approved visual direction): the name, one
+ * line, the links, how to reach the shop, and the Summit credit. Every fact
+ * comes from the entity through EntityFact.
+ */
+import EntityFact from './primitives/EntityFact.astro';
+import SiteFooter from './primitives/SiteFooter.astro';
+---
+
+<SiteFooter class="shop-footer on-dark">
+  <div class="shell shop-footer-shell">
+  <div class="shop-footer-grid">
+    <div class="shop-footer-id">
+      <EntityFact field="publicName" class="shop-footer-name" />
+      <p class="shop-footer-line">Powder coating and sandblasting, serving the <EntityFact field="serviceAreas" />.</p>
+    </div>
+    <nav aria-label="Footer" class="shop-footer-nav">
+      <ul role="list">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/contact-us/">Request a quote</a></li>
+      </ul>
+    </nav>
+    <div class="shop-footer-reach">
+      <EntityFact field="primaryPhone" />
+      <EntityFact field="email" />
+      <EntityFact field="address" />
+    </div>
+  </div>
+  <p class="shop-footer-credit">Website built by Summit AI Solutions</p>
+  </div>
+</SiteFooter>
+
+<style>
+  .shop-footer {
+    padding-block: clamp(3rem, 2.5rem + 2vw, 4.5rem) 2rem;
+    background-color: var(--color-graphite);
+    color: var(--color-on-graphite);
+  }
+  /* Align with the page shell inside the primitive's wide container. */
+  .shop-footer-shell {
+    inline-size: 100%;
+  }
+  .shop-footer-grid {
+    display: grid;
+    gap: 2.25rem;
+  }
+  .shop-footer-id {
+    display: grid;
+    gap: 0.75rem;
+    align-content: start;
+  }
+  .shop-footer :global([data-entity='publicName']) {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+    line-height: 1;
+  }
+  .shop-footer-line {
+    max-inline-size: 34ch;
+    color: color-mix(in srgb, var(--color-on-graphite) 78%, transparent);
+  }
+  .shop-footer-nav ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 0.1rem;
+  }
+  .shop-footer a,
+  .shop-footer :global(a) {
+    color: var(--color-on-graphite);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap-target);
+  }
+  .shop-footer a:hover,
+  .shop-footer :global(a:hover) {
+    text-decoration: underline;
+    text-decoration-color: var(--color-action);
+    text-underline-offset: 0.35em;
+  }
+  .shop-footer-reach {
+    display: grid;
+    gap: 0.1rem;
+    align-content: start;
+  }
+  .shop-footer-reach :global(address) {
+    margin-block-start: 0.6rem;
+    color: color-mix(in srgb, var(--color-on-graphite) 78%, transparent);
+    line-height: 1.5;
+  }
+  .shop-footer-credit {
+    margin-block-start: 3rem;
+    font-size: 0.875rem;
+    color: color-mix(in srgb, var(--color-on-graphite) 66%, transparent);
+  }
+  @media (min-width: 48rem) {
+    .shop-footer-grid {
+      grid-template-columns: minmax(0, 1.4fr) minmax(0, 0.8fr) minmax(0, 1fr);
+      gap: 3rem;
+    }
+  }
+</style>

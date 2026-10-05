@@ -1,0 +1,197 @@
+---
+/**
+ * Contact / request a quote (search/site.json "contact"; approved visual
+ * direction): opening → a blued-steel panel with the large phone, the address,
+ * directions and email beside a primer panel holding the approved quote form
+ * (LeadForm "quote") → closing panel.
+ *
+ * Hours are not in facts.md, so none are shown. Every fact comes from the
+ * entity.
+ */
+import ShopLayout from '../layouts/ShopLayout.astro';
+import ImageOpening from '../components/ImageOpening.astro';
+import ClosingPanel from '../components/ClosingPanel.astro';
+import DirectionsLink from '../components/DirectionsLink.astro';
+import Breadcrumbs from '../components/primitives/Breadcrumbs.astro';
+import EntityFact from '../components/primitives/EntityFact.astro';
+import LeadForm from '../components/primitives/LeadForm.astro';
+import { routeContext } from '../lib/local-search/site-context';
+
+import openingImage from '../assets/generated/band-foothills.webp';
+import closingImage from '../assets/generated/closing-powder.webp';
+
+const { route } = routeContext('contact');
+---
+
+<ShopLayout routeId="contact">
+  <ImageOpening image={openingImage} slotId="band-foothills" focal="50% 75%">
+    <Breadcrumbs slot="crumbs" routeId="contact" />
+    <Fragment slot="eyebrow">Call or write</Fragment>
+    <h1 class="type-hero">{route.heading}</h1>
+    <p class="type-lede">Call the shop, or describe your part in the form below.</p>
+    <Fragment slot="actions">
+      <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call is-large" />
+      <a href="#quote-form" class="cmb-outline is-large">Describe your part</a>
+    </Fragment>
+  </ImageOpening>
+
+  <section class="shell reach" aria-label="Contact the shop and request a quote">
+    <div class="reach-steel on-dark">
+      <p class="eyebrow reach-eyebrow">Call the shop</p>
+      <EntityFact field="primaryPhone" cta="call" class="reach-phone" />
+      <div class="reach-block">
+        <h2 class="reach-label">The shop</h2>
+        <EntityFact field="address" class="reach-address" />
+        <DirectionsLink class="cmb-outline reach-directions" />
+      </div>
+      <div class="reach-block">
+        <h2 class="reach-label">Email</h2>
+        <EntityFact field="email" class="reach-email" />
+      </div>
+      <div class="reach-block">
+        <h2 class="reach-label">Serving</h2>
+        <p>The <EntityFact field="serviceAreas" /></p>
+      </div>
+    </div>
+
+    <div id="quote-form" class="reach-form">
+      <p class="eyebrow reach-muted">Quote request</p>
+      <h2 class="type-section reach-form-title">Describe the part</h2>
+      <p class="reach-form-line">What it is, its rough size, the metal, its current finish and the colour you want.</p>
+      <LeadForm
+        formId="quote"
+        submitLabel="Request a quote"
+        class="reach-lead"
+        messages={{
+          received: 'Thank you. Your quote request was sent.',
+          failed: 'Your request could not be sent. Please try again, or call the shop.',
+          pending: 'We could not confirm that your request arrived. Please call the shop.',
+        }}
+      />
+    </div>
+  </section>
+
+  <ClosingPanel heading="Rather talk it through?" image={closingImage} slotId="closing-powder" focal="65% 50%" quoteHref="#quote-form" quoteLabel="Back to the form">
+    Call the shop and describe the part over the phone.
+  </ClosingPanel>
+</ShopLayout>
+
+<style>
+  .reach {
+    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem) 0;
+    display: grid;
+    gap: 1.25rem;
+  }
+  .reach-steel {
+    display: grid;
+    gap: 1.75rem;
+    align-content: start;
+    padding: clamp(1.75rem, 1.25rem + 2.5vw, 3.25rem);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--cmb-radius-lg);
+  }
+  .reach-eyebrow {
+    color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
+    margin-block-end: -1rem;
+  }
+  .reach-steel :global(.reach-phone) {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(2.5rem, 1.8rem + 3vw, 4rem);
+    line-height: 1;
+    color: var(--color-on-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--color-action);
+    text-decoration-thickness: 3px;
+    text-underline-offset: 0.18em;
+    overflow-wrap: anywhere;
+  }
+  .reach-block {
+    display: grid;
+    gap: 0.5rem;
+    justify-items: start;
+  }
+  .reach-label {
+    font-family: var(--font-label), sans-serif;
+    font-size: var(--text-label);
+    font-weight: var(--font-weight-label, 500);
+    letter-spacing: var(--tracking-label, 0.14em);
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
+  }
+  .reach-steel :global(.reach-address) {
+    font-size: 1.25rem;
+    line-height: 1.45;
+  }
+  .reach-steel :global(.reach-directions) {
+    margin-block-start: 0.5rem;
+    color: var(--color-on-primary);
+  }
+  .reach-steel :global(.reach-email) {
+    color: var(--color-on-primary);
+    font-size: 1.125rem;
+    overflow-wrap: anywhere;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap-target);
+  }
+  .reach-form {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    padding: clamp(1.75rem, 1.25rem + 2.5vw, 3.25rem);
+    background-color: var(--cmb-primer-deep);
+    border-radius: var(--cmb-radius-lg);
+  }
+  .reach-muted {
+    color: var(--color-on-surface-muted);
+  }
+  .reach-form-line {
+    max-inline-size: 36rem;
+    color: var(--color-on-surface-muted);
+  }
+  .reach-form :global(.reach-lead) {
+    margin-block-start: 0.75rem;
+  }
+  /* The approved form, dressed for this site through element and attribute
+     selectors only (the primitive's internals are its own). */
+  .reach-form :global(.reach-lead input:not([type='checkbox']):not([type='hidden'])),
+  .reach-form :global(.reach-lead select),
+  .reach-form :global(.reach-lead textarea) {
+    background-color: var(--cmb-primer-light);
+    border-radius: var(--radius-control, 10px);
+  }
+  .reach-form :global(.reach-lead label) {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .reach-form :global(.reach-lead button[type='submit']) {
+    min-block-size: 3.5rem;
+    padding-inline: 1.75rem;
+    border-radius: var(--radius-control, 10px);
+    background-color: var(--color-action);
+    color: var(--color-on-action);
+    font-family: var(--font-body), sans-serif;
+    font-size: 1.0625rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .reach-form :global(.reach-lead button[type='submit']:hover) {
+    background-color: color-mix(in srgb, var(--color-action) 88%, var(--color-on-surface));
+  }
+  .reach-form :global(.reach-lead button[type='submit']:focus-visible) {
+    outline-color: var(--color-on-surface);
+  }
+  @media (min-width: 60rem) {
+    .reach {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 1.5rem;
+      align-items: start;
+    }
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+/**
+ * ServiceCard — a tall image card that is one link to a section of the
+ * services page (approved visual direction: "Two tall image cards — Powder
+ * coating, Sandblasting — each one link to the services page section"). The
+ * generated material image sits under a blued-steel scrim at the foot; the
+ * service name (from the entity) and one line are set on it.
+ *
+ * The image is generated supporting imagery: empty alt, never captioned.
+ */
+import type { ImageMetadata } from 'astro';
+import ResponsiveImage from './primitives/ResponsiveImage.astro';
+
+interface Props {
+  href: string;
+  image: ImageMetadata;
+  slotId: string;
+  name: string;
+  line: string;
+  focal?: string;
+  class?: string;
+}
+
+const { href, image, slotId, name, line, focal = '50% 50%', class: className } = Astro.props;
+---
+
+<a href={href} class:list={['service-card', 'on-dark', className]} style={`--card-focal: ${focal};`}>
+  <span class="service-card-media" data-slot={slotId} data-visual="decorative">
+    <ResponsiveImage src={image} alt="" decorative sizes="(min-width: 60rem) 36rem, 100vw" />
+  </span>
+  <span class="service-card-copy">
+    <span class="service-card-name">{name}</span>
+    <span class="service-card-line">{line}</span>
+    <span class="service-card-route" aria-hidden="true">More about {name.toLowerCase()} <span class="service-card-arrow">→</span></span>
+  </span>
+</a>
+
+<style>
+  .service-card {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    align-items: end;
+    min-block-size: clamp(26rem, 20rem + 18vw, 36rem);
+    overflow: hidden;
+    border-radius: var(--cmb-radius);
+    text-decoration: none;
+    box-shadow: var(--cmb-lift);
+  }
+  .service-card-media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .service-card-media :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: var(--card-focal);
+    transition: transform 900ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  }
+  .service-card-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-primary) 8%, transparent) 25%,
+      color-mix(in srgb, var(--color-primary) 60%, transparent) 58%,
+      color-mix(in srgb, var(--color-primary) 94%, transparent) 100%
+    );
+  }
+  .service-card:hover .service-card-media :global(img) {
+    transform: scale(1.04);
+  }
+  .service-card-copy {
+    display: grid;
+    gap: 0.6rem;
+    padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+  }
+  .service-card-name {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(2.5rem, 2rem + 2vw, 3.75rem);
+    line-height: 0.95;
+  }
+  .service-card-line {
+    max-inline-size: 32ch;
+    color: color-mix(in srgb, var(--color-on-primary) 88%, transparent);
+  }
+  .service-card-route {
+    margin-block-start: 0.4rem;
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-thickness: 1px;
+    text-decoration-color: var(--color-action);
+    text-underline-offset: 0.35em;
+  }
+  .service-card-arrow {
+    display: inline-block;
+    transition: transform 200ms ease;
+  }
+  .service-card:hover .service-card-arrow {
+    transform: translateX(4px);
+  }
+  .service-card:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-primary);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .service-card-media :global(img),
+    .service-card-arrow {
+      transition: none;
+    }
+  }
+</style>

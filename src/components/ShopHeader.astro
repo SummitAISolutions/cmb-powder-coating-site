@@ -1,0 +1,126 @@
+---
+/**
+ * ShopHeader — the floating header card (approved visual direction,
+ * "Composition Strategy"): sticky and inset over the full-bleed openings, the
+ * business name (from the entity — no approved logo file exists yet), Services
+ * and Request a quote, and the amber call pill on wide screens. On phones the
+ * starter's Menu disclosure opens as a floating panel over the page; the
+ * sticky bottom bar carries Call and Quote.
+ */
+import EntityFact from './primitives/EntityFact.astro';
+import SiteHeader from './primitives/SiteHeader.astro';
+import { searchContext } from '../lib/local-search/site-context';
+
+const { entity } = searchContext();
+const links = [
+  { href: '/services/', label: 'Services' },
+  { href: '/contact-us/', label: 'Request a quote' },
+];
+---
+
+<SiteHeader brand={entity.publicName} links={links} class="shop-header">
+  <span slot="brand" class="shop-brand">
+    <EntityFact field="publicName" class="shop-brand-name" />
+  </span>
+  <span slot="actions" class="shop-header-call">
+    <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call" />
+  </span>
+</SiteHeader>
+
+<style>
+  .shop-header {
+    position: sticky;
+    inset-block-start: 0.75rem;
+    z-index: 30;
+    inline-size: calc(100% - 2 * var(--spacing-gutter) + 1rem);
+    max-inline-size: calc(var(--content-max) + 2rem);
+    margin: 0.75rem auto 0;
+    padding-block: 0.2rem;
+    background-color: color-mix(in srgb, var(--color-surface) 95%, transparent);
+    border-radius: var(--cmb-radius);
+    box-shadow: var(--cmb-lift);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.9875rem;
+    font-weight: 500;
+  }
+  .shop-header :global(nav[data-nav='primary'] a) {
+    text-decoration: none;
+    color: var(--color-on-surface);
+  }
+  .shop-header :global(nav[data-nav='primary'] a:hover),
+  .shop-header :global(nav[data-nav='primary'] a[aria-current='page']) {
+    text-decoration: underline;
+    text-decoration-thickness: 2px;
+    text-decoration-color: var(--color-action);
+    text-underline-offset: 0.45em;
+  }
+  .shop-brand {
+    display: inline-flex;
+    align-items: center;
+    color: var(--color-on-surface);
+  }
+  .shop-brand :global([data-entity='publicName']) {
+    white-space: nowrap;
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: 1.6rem;
+    letter-spacing: -0.005em;
+    line-height: 1;
+  }
+  /* Below 48rem SiteHeader's Menu disclosure opens a floating panel under the
+     card. :global because the disclosure is the primitive's own markup, styled
+     only through its stable attributes. */
+  .shop-header :global(nav[data-nav='primary'] > details) {
+    position: static;
+  }
+  .shop-header :global([data-nav-toggle]) {
+    list-style: none;
+    padding-inline: 1.1rem;
+    border-radius: var(--radius-control, 10px);
+    border: 1px solid var(--cmb-line);
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .shop-header :global([data-nav-toggle]::-webkit-details-marker) {
+    display: none;
+  }
+  .shop-header :global(details[open] > [data-nav-toggle]) {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .shop-header :global(nav[data-nav='primary'] > details > ul) {
+    position: absolute;
+    inset-inline: 0;
+    inset-block-start: calc(100% + 0.5rem);
+    display: grid;
+    gap: 0.1rem;
+    padding: 0.75rem 1.25rem 1rem;
+    background-color: var(--color-surface);
+    border-radius: var(--cmb-radius);
+    box-shadow: var(--cmb-lift);
+  }
+  .shop-header :global(nav[data-nav='primary'] > details > ul a) {
+    display: flex;
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: 1.75rem;
+  }
+  .shop-header-call {
+    display: none;
+  }
+  @media (max-width: 24rem) {
+    .shop-brand :global([data-entity='publicName']) {
+      font-size: 1.35rem;
+    }
+  }
+  @media (min-width: 64rem) {
+    .shop-header-call {
+      display: inline-flex;
+    }
+  }
+</style>

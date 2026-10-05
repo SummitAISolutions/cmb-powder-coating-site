@@ -1,0 +1,199 @@
+---
+/**
+ * Services — the one page for the shop's work in detail (search/site.json
+ * "services"; approved visual direction): opening → powder coating →
+ * sandblasting (a section, not its own page, until the owner says whether it is
+ * sold on its own) → what to send for a quote → closing panel.
+ *
+ * Copy describes powder coating and sandblasting as processes, plainly and in
+ * general. facts.md records no turnaround, prices, size limits, colour range,
+ * specialities or warranties, so none are stated. Every fact comes from the
+ * entity.
+ */
+import ShopLayout from '../layouts/ShopLayout.astro';
+import ImageOpening from '../components/ImageOpening.astro';
+import ClosingPanel from '../components/ClosingPanel.astro';
+import Breadcrumbs from '../components/primitives/Breadcrumbs.astro';
+import EntityFact from '../components/primitives/EntityFact.astro';
+import MediaFrame from '../components/primitives/MediaFrame.astro';
+import ResponsiveImage from '../components/primitives/ResponsiveImage.astro';
+import { routeContext } from '../lib/local-search/site-context';
+
+import openingImage from '../assets/generated/services-opening.webp';
+import powderImage from '../assets/generated/card-powder-coating.webp';
+import blastImage from '../assets/generated/card-sandblasting.webp';
+import closingImage from '../assets/generated/home-opening.webp';
+
+const { entity, route } = routeContext('services');
+const serviceName = (id: string) => {
+  const service = entity.services.find((entry: { id: string }) => entry.id === id);
+  if (!service) throw new Error(`Services: the entity records no service "${id}".`);
+  return service.name as string;
+};
+---
+
+<ShopLayout routeId="services">
+  <ImageOpening image={openingImage} slotId="services-opening" focal="72% 50%">
+    <Breadcrumbs slot="crumbs" routeId="services" />
+    <Fragment slot="eyebrow">Services</Fragment>
+    <h1 class="type-hero">{route.heading}</h1>
+    <p class="type-lede">What each process does, and what helps when you ask for a quote.</p>
+    <Fragment slot="actions">
+      <a href="/contact-us/" data-cta="quote" class="cmb-pill is-large">Request a quote</a>
+      <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
+    </Fragment>
+  </ImageOpening>
+
+  <section id="powder-coating" class="shell svc svc--powder" aria-labelledby="powder-title">
+    <div class="svc-copy">
+      <p class="eyebrow svc-muted">The finish</p>
+      <h2 id="powder-title" class="type-section">{serviceName('powder-coating')}</h2>
+      <p class="svc-lead">Powder coating is a dry finish. Fine powder is sprayed onto clean, bare metal, where an electrostatic charge holds it in place.</p>
+      <p>The part is then baked. The heat melts the powder so it flows together and cures into one continuous coating, rather than drying the way paint does.</p>
+      <p>Because the coating bonds to whatever surface is under it, the metal has to be clean first — which is where sandblasting comes in.</p>
+    </div>
+    <MediaFrame ratio="4:5" mobileRatio="4:3" focal="50% 45%" slotId="card-powder-coating" visual="decorative" class="svc-media">
+      <ResponsiveImage src={powderImage} alt="" decorative sizes="(min-width: 60rem) 30rem, 100vw" />
+    </MediaFrame>
+  </section>
+
+  <section id="sandblasting" class="shell svc-band-wrap" aria-labelledby="blast-title">
+    <div class="svc svc--blast">
+      <MediaFrame ratio="4:5" mobileRatio="4:3" focal="40% 50%" slotId="card-sandblasting" visual="decorative" class="svc-media">
+        <ResponsiveImage src={blastImage} alt="" decorative sizes="(min-width: 60rem) 30rem, 100vw" />
+      </MediaFrame>
+      <div class="svc-copy">
+        <p class="eyebrow svc-muted">The preparation</p>
+        <h2 id="blast-title" class="type-section">{serviceName('sandblasting')}</h2>
+        <p class="svc-lead">Sandblasting — abrasive blasting — drives fine abrasive at the surface under air pressure.</p>
+        <p>It strips old paint, old coatings, rust and mill scale, and leaves bare metal with an even, slightly rough surface that a new coating can grip.</p>
+        <p>If you are not sure whether your part needs blasting, ask when you call or request a quote.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="send on-dark" aria-labelledby="send-title">
+    <div class="shell send-inner">
+      <div class="send-head">
+        <p class="eyebrow send-eyebrow">Before you call</p>
+        <h2 id="send-title" class="type-section">What helps with a quote</h2>
+        <p class="send-line">The more the shop knows about the part, the easier it is to quote. Any of these helps:</p>
+        <div class="cmb-actions send-actions">
+          <a href="/contact-us/" data-cta="quote" class="cmb-pill is-large">Request a quote</a>
+          <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
+        </div>
+      </div>
+      <ul class="send-list" role="list">
+        <li><span class="send-item">Photos, or a short description of the part</span></li>
+        <li><span class="send-item">Its rough size</span></li>
+        <li><span class="send-item">The metal, if you know it</span></li>
+        <li><span class="send-item">The current finish — paint, an old coating, rust or bare metal</span></li>
+        <li><span class="send-item">The colour and finish you want</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <ClosingPanel heading="Ready to send the details?" image={closingImage} slotId="home-opening" focal="35% 50%" quoteCta>
+    Describe the part in the quote form, or call the shop and talk it through.
+  </ClosingPanel>
+</ShopLayout>
+
+<style>
+  .svc-muted {
+    color: var(--color-on-surface-muted);
+  }
+  .svc {
+    display: grid;
+    gap: 2.25rem;
+    align-items: center;
+  }
+  .svc--powder {
+    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
+  }
+  .svc-copy {
+    display: grid;
+    gap: 1.1rem;
+    align-content: center;
+    max-inline-size: 38rem;
+  }
+  .svc-copy p {
+    font-size: 1.0625rem;
+    line-height: 1.65;
+  }
+  .svc-copy .svc-lead {
+    font-size: clamp(1.1875rem, 1.05rem + 0.5vw, 1.375rem);
+    line-height: 1.5;
+  }
+  .svc-band-wrap {
+    padding-block-end: clamp(4rem, 3rem + 4vw, 6.5rem);
+  }
+  .svc--blast {
+    padding: clamp(1.5rem, 1rem + 3vw, 3.5rem);
+    background-color: var(--cmb-steel-tint);
+    border-radius: var(--cmb-radius-lg);
+  }
+  @media (min-width: 60rem) {
+    .svc--powder {
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      gap: 5rem;
+    }
+    .svc--blast {
+      grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+      gap: 4.5rem;
+    }
+  }
+
+  .send {
+    padding-block: clamp(4.5rem, 3.5rem + 4vw, 7rem);
+    background-color: var(--color-graphite);
+    color: var(--color-on-graphite);
+  }
+  .send-inner {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .send-head {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    justify-items: start;
+  }
+  .send-eyebrow {
+    color: color-mix(in srgb, var(--color-on-graphite) 74%, transparent);
+  }
+  .send-line {
+    max-inline-size: 30rem;
+    color: color-mix(in srgb, var(--color-on-graphite) 84%, transparent);
+  }
+  .send-actions {
+    margin-block-start: 0.75rem;
+  }
+  .send-actions :global(.cmb-outline) {
+    color: var(--color-on-graphite);
+  }
+  .send-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .send-list li {
+    padding: 1.1rem 1.35rem;
+    background-color: color-mix(in srgb, var(--color-primary) 55%, var(--color-graphite));
+    border-radius: var(--cmb-radius);
+  }
+  .send-item {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(1.375rem, 1.2rem + 0.7vw, 1.75rem);
+    line-height: 1.1;
+  }
+  @media (min-width: 60rem) {
+    .send-inner {
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 5rem;
+      align-items: center;
+    }
+  }
+</style>
