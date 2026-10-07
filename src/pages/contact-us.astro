@@ -1,116 +1,137 @@
 ---
 /**
- * Contact / request a quote (search/site.json "contact"; approved visual
- * direction): opening → a blued-steel panel with the large phone, the address,
- * directions and email beside a primer panel holding the approved quote form
- * (LeadForm "quote") → closing panel.
+ * Contact / request a quote (search/site.json "contact"). Texting a photo is
+ * the owner's preferred contact (facts.md), so it comes first.
  *
- * Hours are not in facts.md, so none are shown. Every fact comes from the
- * entity.
+ * Rhythm: graphite opener on a real white wheel → primer: a graphite panel
+ * (text first, then call, the shop address and directions, appointment hours,
+ * email) beside a primer-deep panel holding the approved quote form (LeadForm
+ * "quote") → steel reviews band → graphite closing CTA.
+ *
+ * Every fact comes from the entity; every promise from facts.md through
+ * <Commitment>.
  */
 import ShopLayout from '../layouts/ShopLayout.astro';
-import ImageOpening from '../components/ImageOpening.astro';
-import ClosingPanel from '../components/ClosingPanel.astro';
+import Opener from '../components/Opener.astro';
+import ReviewsBand from '../components/ReviewsBand.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 import DirectionsLink from '../components/DirectionsLink.astro';
+import PhoneAction from '../components/PhoneAction.astro';
 import Breadcrumbs from '../components/primitives/Breadcrumbs.astro';
+import Commitment from '../components/primitives/Commitment.astro';
 import EntityFact from '../components/primitives/EntityFact.astro';
 import LeadForm from '../components/primitives/LeadForm.astro';
 import { routeContext } from '../lib/local-search/site-context';
-
-import openingImage from '../assets/generated/band-foothills.webp';
-import closingImage from '../assets/generated/closing-powder.webp';
+import { work } from '../lib/work';
 
 const { route } = routeContext('contact');
+const opening = work('white-face');
+const closing = work('gunmetal-pair');
 ---
 
 <ShopLayout routeId="contact">
-  <ImageOpening image={openingImage} slotId="band-foothills" focal="50% 75%">
+  <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 50%">
     <Breadcrumbs slot="crumbs" routeId="contact" />
-    <Fragment slot="eyebrow">Call or write</Fragment>
     <h1 class="type-hero">{route.heading}</h1>
-    <p class="type-lede">Call the shop, or describe your part in the form below.</p>
+    <p class="type-lede">Text a photo of the part, call the shop, or send the details in the form below.</p>
     <Fragment slot="actions">
-      <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call is-large" />
-      <a href="#quote-form" class="cmb-outline is-large">Describe your part</a>
+      <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
+      <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
     </Fragment>
-  </ImageOpening>
+  </Opener>
 
-  <section class="shell reach" aria-label="Contact the shop and request a quote">
-    <div class="reach-steel on-dark">
-      <p class="eyebrow reach-eyebrow">Call the shop</p>
-      <EntityFact field="primaryPhone" cta="call" class="reach-phone" />
-      <div class="reach-block">
-        <h2 class="reach-label">The shop</h2>
-        <EntityFact field="address" class="reach-address" />
-        <DirectionsLink class="cmb-outline reach-directions" />
+  <section class="surface-primer section-pad" aria-label="Text, call or request a quote">
+    <div class="shell reach">
+      <div class="reach-panel surface-graphite">
+        <div class="reach-block reach-block--text">
+          <h2 class="reach-title">Text a photo</h2>
+          <PhoneAction kind="sms" cta="text" label="Text" showNumber class="reach-sms" />
+          <Commitment id="text-quotes" as="p" class="reach-note" />
+        </div>
+        <div class="reach-block">
+          <h2 class="reach-label">Or call</h2>
+          <EntityFact field="primaryPhone" cta="call" class="reach-phone" />
+        </div>
+        <div class="reach-block">
+          <h2 class="reach-label">The shop</h2>
+          <EntityFact field="address" class="reach-address" />
+          <Commitment id="hours" as="p" class="reach-note" />
+          <DirectionsLink class="cmb-solid-light reach-directions" />
+        </div>
+        <div class="reach-block">
+          <h2 class="reach-label">Email</h2>
+          <EntityFact field="email" class="reach-email" />
+        </div>
       </div>
-      <div class="reach-block">
-        <h2 class="reach-label">Email</h2>
-        <EntityFact field="email" class="reach-email" />
-      </div>
-      <div class="reach-block">
-        <h2 class="reach-label">Serving</h2>
-        <p><EntityFact field="serviceAreas" /></p>
-      </div>
-    </div>
 
-    <div id="quote-form" class="reach-form">
-      <p class="eyebrow reach-muted">Quote request</p>
-      <h2 class="type-section reach-form-title">Describe the part</h2>
-      <p class="reach-form-line">What it is, its rough size, the metal, its current finish and the colour you want.</p>
-      <LeadForm
-        formId="quote"
-        submitLabel="Request a quote"
-        class="reach-lead"
-        messages={{
-          received: 'Thank you. Your quote request was sent.',
-          failed: 'Your request could not be sent. Please try again, or call the shop.',
-          pending: 'We could not confirm that your request arrived. Please call the shop.',
-        }}
-      />
+      <div id="quote-form" class="reach-form">
+        <h2 class="type-section reach-form-title">Or describe the part</h2>
+        <p class="reach-form-line">What it is, its rough size, the metal, its current finish and the colour you want.</p>
+        <LeadForm
+          formId="quote"
+          submitLabel="Request a quote"
+          class="reach-lead"
+          messages={{
+            received: 'Thank you. Your quote request was sent.',
+            failed: 'Your request could not be sent. Please try again, or text or call the shop.',
+            pending: 'We could not confirm that your request arrived. Please text or call the shop.',
+          }}
+        />
+      </div>
     </div>
   </section>
 
-  <ClosingPanel heading="Rather talk it through?" image={closingImage} slotId="closing-powder" focal="65% 50%" quoteHref="#quote-form" quoteLabel="Back to the form">
-    Call the shop and describe the part over the phone.
-  </ClosingPanel>
+  <ReviewsBand reviews={['review-jeff', 'review-randy', 'review-matthew', 'review-ben']} />
+
+  <ClosingCta heading="Rather talk it through?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" quoteHref="#quote-form" quoteLabel="Back to the form">
+    Text or call the shop and describe the part.
+  </ClosingCta>
 </ShopLayout>
 
 <style>
   .reach {
-    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem) 0;
     display: grid;
-    gap: 1.25rem;
+    gap: 1rem;
   }
-  .reach-steel {
+  .reach-panel {
     display: grid;
-    gap: 1.75rem;
+    gap: 2rem;
     align-content: start;
     padding: clamp(1.75rem, 1.25rem + 2.5vw, 3.25rem);
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
-    border-radius: var(--cmb-radius-lg);
+    border-radius: var(--cmb-radius);
   }
-  .reach-eyebrow {
-    color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
-    margin-block-end: -1rem;
+  .reach-block {
+    display: grid;
+    gap: 0.6rem;
+    justify-items: start;
   }
-  .reach-steel :global(.reach-phone) {
+  .reach-block--text {
+    padding-block-end: 1.75rem;
+    border-block-end: 3px solid var(--color-action);
+  }
+  .reach-title {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(2rem, 1.6rem + 1.4vw, 2.75rem);
+    line-height: 1;
+  }
+  .reach-panel :global(.reach-sms) {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0 0.35em;
     font-family: var(--font-display), sans-serif;
     font-weight: var(--font-weight-display, 600);
     font-size: clamp(2.5rem, 1.8rem + 3vw, 4rem);
     line-height: 1;
-    color: var(--color-on-primary);
-    text-decoration: underline;
-    text-decoration-color: var(--color-action);
-    text-decoration-thickness: 3px;
-    text-underline-offset: 0.18em;
-    overflow-wrap: anywhere;
+    color: var(--color-action);
+    text-decoration: none;
   }
-  .reach-block {
-    display: grid;
-    gap: 0.5rem;
-    justify-items: start;
+  .reach-panel :global(.reach-sms:hover) {
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+  .reach-panel :global(.reach-note) {
+    max-inline-size: 30rem;
+    color: color-mix(in srgb, var(--color-on-graphite) 86%, transparent);
   }
   .reach-label {
     font-family: var(--font-label), sans-serif;
@@ -118,18 +139,31 @@ const { route } = routeContext('contact');
     font-weight: var(--font-weight-label, 500);
     letter-spacing: var(--tracking-label, 0.14em);
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
+    color: color-mix(in srgb, var(--color-on-graphite) 78%, transparent);
   }
-  .reach-steel :global(.reach-address) {
+  .reach-panel :global(.reach-phone) {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.5rem);
+    line-height: 1;
+    color: var(--color-on-graphite);
+    text-decoration: underline;
+    text-decoration-color: var(--color-action);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.18em;
+    display: inline-flex;
+    align-items: center;
+    min-block-size: var(--tap-target);
+  }
+  .reach-panel :global(.reach-address) {
     font-size: 1.25rem;
     line-height: 1.45;
   }
-  .reach-steel :global(.reach-directions) {
-    margin-block-start: 0.5rem;
-    color: var(--color-on-primary);
+  .reach-panel :global(.reach-directions) {
+    margin-block-start: 0.4rem;
   }
-  .reach-steel :global(.reach-email) {
-    color: var(--color-on-primary);
+  .reach-panel :global(.reach-email) {
+    color: var(--color-on-graphite);
     font-size: 1.125rem;
     overflow-wrap: anywhere;
     display: inline-flex;
@@ -142,10 +176,7 @@ const { route } = routeContext('contact');
     align-content: start;
     padding: clamp(1.75rem, 1.25rem + 2.5vw, 3.25rem);
     background-color: var(--cmb-primer-deep);
-    border-radius: var(--cmb-radius-lg);
-  }
-  .reach-muted {
-    color: var(--color-on-surface-muted);
+    border-radius: var(--cmb-radius);
   }
   .reach-form-line {
     max-inline-size: 36rem;
@@ -160,7 +191,7 @@ const { route } = routeContext('contact');
   .reach-form :global(.reach-lead select),
   .reach-form :global(.reach-lead textarea) {
     background-color: var(--cmb-primer-light);
-    border-radius: var(--radius-control, 10px);
+    border-radius: var(--cmb-radius-sm);
   }
   .reach-form :global(.reach-lead label) {
     font-family: var(--font-body), sans-serif;
@@ -172,7 +203,7 @@ const { route } = routeContext('contact');
   .reach-form :global(.reach-lead button[type='submit']) {
     min-block-size: 3.5rem;
     padding-inline: 1.75rem;
-    border-radius: var(--radius-control, 10px);
+    border-radius: var(--cmb-radius-sm);
     background-color: var(--color-action);
     color: var(--color-on-action);
     font-family: var(--font-body), sans-serif;
@@ -190,7 +221,7 @@ const { route } = routeContext('contact');
   @media (min-width: 60rem) {
     .reach {
       grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
-      gap: 1.5rem;
+      gap: 1rem;
       align-items: start;
     }
   }

@@ -4,29 +4,33 @@
  * answers unknown paths with it and a 404 status (without it, Pages would
  * answer every unknown path with the home page and a 200 — a soft 404).
  *
- * Same grammar as every page: an opening, then the closing panel.
+ * Same grammar as every page: an opener on a real work photo, the shared
+ * reviews band, then the closing CTA.
  */
 import ShopLayout from '../layouts/ShopLayout.astro';
-import ImageOpening from '../components/ImageOpening.astro';
-import ClosingPanel from '../components/ClosingPanel.astro';
+import Opener from '../components/Opener.astro';
+import ReviewsBand from '../components/ReviewsBand.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 import { routeContext } from '../lib/local-search/site-context';
-
-import openingImage from '../assets/generated/services-opening.webp';
-import closingImage from '../assets/generated/closing-powder.webp';
+import { work } from '../lib/work';
 
 const { route } = routeContext('not-found');
+const opening = work('gloss-black-top');
+const closing = work('silver-pair');
 ---
 
 <ShopLayout routeId="not-found">
-  <ImageOpening image={openingImage} slotId="services-opening" focal="72% 50%">
+  <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 50%">
     <Fragment slot="eyebrow">Error 404</Fragment>
     <h1 class="type-hero">{route.heading}</h1>
     <p class="type-lede">That page does not exist, or it moved when the site was rebuilt.</p>
     <Fragment slot="actions">
-      <a href="/" class="cmb-outline is-large">Back to the home page</a>
-      <a href="/services/" class="cmb-outline is-large">See the services</a>
+      <a href="/" class="cmb-solid-light is-large">Back to the home page</a>
+      <a href="/our-work/" class="cmb-outline is-large">See our work</a>
     </Fragment>
-  </ImageOpening>
+  </Opener>
 
-  <ClosingPanel heading="Looking for a quote?" image={closingImage} slotId="closing-powder" focal="60% 50%" />
+  <ReviewsBand />
+
+  <ClosingCta heading="Looking for a quote?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" />
 </ShopLayout>

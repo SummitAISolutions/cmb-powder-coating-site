@@ -1,0 +1,130 @@
+---
+/**
+ * ReviewsBand — the shared reviews section, placed directly above the
+ * closing CTA on every page except /reviews/, which is the full reviews page
+ * (Samuel, 2026-10-07: "a high quality reviews section on each page ... above
+ * the cta banner at the bottom").
+ *
+ * Blued-steel band: the authorised Google rating and count (ProofRow — every
+ * value traces to facts.md), a curated set of real Google reviews (verbatim
+ * from facts.md through ReviewCard / Quote), links to read them all and to
+ * leave one on Google. No review or rating JSON-LD, no review dates.
+ */
+import ProofRow from './primitives/ProofRow.astro';
+import ReviewCard from './ReviewCard.astro';
+import Stars from './Stars.astro';
+import { GOOGLE_PROFILE_URL, GOOGLE_RATING, GOOGLE_REVIEW_COUNT, RATING_AS_OF, RATING_SOURCE, reviewsById } from '../lib/reviews';
+
+interface Props {
+  /** facts.md review ids to show, strongest first. */
+  reviews?: string[];
+}
+
+const { reviews: ids = ['review-ben', 'review-edward', 'review-randy', 'review-jeff'] } = Astro.props;
+const reviews = reviewsById(ids);
+---
+
+<section class="reviews-band on-dark" aria-labelledby="reviews-band-title">
+  <div class="shell rb">
+    <div class="rb-head">
+      <h2 id="reviews-band-title" class="type-section">What customers say</h2>
+      <div class="rb-score">
+        <Stars class="rb-stars" />
+        <ProofRow
+          class="rb-proof"
+          label="Google rating"
+          items={[
+            { value: GOOGLE_RATING, label: 'Google rating', source: RATING_SOURCE },
+            { value: GOOGLE_REVIEW_COUNT, label: 'Google reviews', source: RATING_SOURCE },
+          ]}
+        />
+        {RATING_AS_OF && <p class="rb-asof">As shown on Google in {RATING_AS_OF}.</p>}
+      </div>
+      <div class="cmb-actions rb-actions">
+        <a href="/reviews/" class="cmb-solid-light">Read all {GOOGLE_REVIEW_COUNT} reviews</a>
+        <a href={GOOGLE_PROFILE_URL} class="cmb-link rb-leave" rel="noopener" target="_blank">Leave a review on Google <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+
+    {
+      reviews.length > 0 && (
+        <div class="rb-cards">
+          {reviews.map((review) => (
+            <ReviewCard review={review} />
+          ))}
+        </div>
+      )
+    }
+  </div>
+</section>
+
+<style>
+  .reviews-band {
+    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .rb {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .rb-head {
+    display: grid;
+    gap: 1.5rem;
+    align-content: start;
+    justify-items: start;
+  }
+  .rb-score {
+    display: grid;
+    gap: 0.9rem;
+    justify-items: start;
+  }
+  .rb-score :global(.rb-stars) {
+    font-size: 1.5rem;
+  }
+  .rb-score :global(.rb-proof) {
+    gap: 2.5rem;
+  }
+  .rb-score :global(.rb-proof dd) {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(3.75rem, 2.9rem + 3.5vw, 6rem);
+    line-height: 0.9;
+    color: var(--color-on-primary);
+  }
+  .rb-score :global(.rb-proof dt) {
+    font-family: var(--font-label), sans-serif;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label, 0.14em);
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-on-primary) 82%, transparent);
+  }
+  .rb-asof {
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--color-on-primary) 80%, transparent);
+  }
+  .rb-actions {
+    padding-block-start: 1.25rem;
+    border-block-start: 3px solid var(--color-action);
+  }
+  .rb-leave {
+    color: var(--color-on-primary);
+  }
+  .rb-cards {
+    display: grid;
+    gap: 1rem;
+    align-items: start;
+  }
+  @media (min-width: 48rem) {
+    .rb-cards {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .rb {
+      grid-template-columns: minmax(0, 0.72fr) minmax(0, 1.28fr);
+      gap: 4rem;
+      align-items: start;
+    }
+  }
+</style>

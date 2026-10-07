@@ -1,0 +1,56 @@
+---
+/**
+ * ReviewCard — one real Google review, through the starter's Quote primitive
+ * (which refuses a quotation without a facts.md source). The wording and the
+ * display name come from facts.md via src/lib/reviews.ts, exactly as recorded.
+ * Stars are drawn only for the review's own recorded rating.
+ */
+import Quote from './primitives/Quote.astro';
+import Stars from './Stars.astro';
+import { REVIEW_SOURCE, type Review } from '../lib/reviews';
+
+interface Props {
+  review: Review;
+  class?: string;
+}
+
+const { review, class: className } = Astro.props;
+---
+
+<Quote attribution={review.name} context="Google review" source={REVIEW_SOURCE} class:list={['review-card', className]}>
+  {review.rating === 5 ? <Stars class="review-card-stars" /> : null}
+  <span class="sr-only">Rated {review.rating} out of 5.</span>
+  <p class="review-card-text">“{review.quote}”</p>
+</Quote>
+
+<style>
+  .review-card {
+    display: grid;
+    align-content: start;
+    gap: 1rem;
+    padding: clamp(1.4rem, 1.1rem + 1vw, 2rem);
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    border-block-start: 3px solid var(--color-action);
+    border-radius: var(--cmb-radius-sm);
+    box-shadow: var(--cmb-lift);
+  }
+  .review-card :global(.review-card-stars) {
+    font-size: 1rem;
+  }
+  .review-card-text {
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+  .review-card :global(figcaption) {
+    font-family: var(--font-body), sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 600;
+    letter-spacing: 0;
+    text-transform: none;
+  }
+  .review-card :global(figcaption .text-muted) {
+    font-weight: 400;
+    color: var(--color-on-surface-muted);
+  }
+</style>

@@ -7,16 +7,16 @@
       "path": "/",
       "kind": "home",
       "intent": "convert",
-      "primaryCta": "call",
-      "title": "CMB Powder Coating — powder coating and sandblasting in Boise, Idaho",
-      "description": "CMB Powder Coating is a powder coating and sandblasting shop at 9461 Hackamore Dr, Boise, serving the Treasure Valley. Call (208) 440-7812 or request a quote.",
+      "primaryCta": "text",
+      "title": "CMB Powder Coating | Powder coating and sandblasting in Boise, Idaho",
+      "description": "CMB Powder Coating is a powder coating shop at 9461 Hackamore Dr, Boise, serving the Treasure Valley. Text a photo of your part for a quote, or call (208) 440-7812.",
       "heading": "Powder coating in Boise, Idaho",
       "necessity": {
         "reason": "entry",
         "userIntent": "A Treasure Valley visitor with a metal part to coat wants to know whether CMB Powder Coating can take the job, where the shop is, and how to get a quote.",
         "searchIntent": "Powder coating in Boise and the Treasure Valley, Idaho",
-        "conversionRole": "Asks the visitor to call the shop, with the quote request as the written alternative.",
-        "contentPurpose": "The only page that introduces CMB Powder Coating as a whole: what it coats, how a job reaches the Hackamore Dr shop, its real Google reviews once authorised, and routes to the services page or the quote request."
+        "conversionRole": "Asks the visitor to text a photo of the part for a quote, with calling the shop and the quote form as the alternatives.",
+        "contentPurpose": "The only page that introduces CMB Powder Coating as a whole: what the shop coats (from its real job photos), turnaround and rush jobs, how a job reaches the Hackamore Dr shop, its Google reviews, and routes to the services, work and quote pages."
       }
     },
     {
@@ -25,16 +25,49 @@
       "kind": "service",
       "service": "powder-coating",
       "intent": "convert",
-      "primaryCta": "quote",
-      "title": "Powder coating and sandblasting services — CMB Powder Coating, Boise",
-      "description": "Powder coating and sandblasting at CMB Powder Coating in Boise, Idaho: what the shop coats, how parts are prepared and how to request a quote.",
+      "primaryCta": "text",
+      "title": "Powder coating and sandblasting services | CMB Powder Coating, Boise",
+      "description": "Powder coating at CMB Powder Coating in Boise, Idaho: what the shop coats, sandblasting as prep, what to send for a quote, turnaround and rush jobs.",
       "heading": "Powder coating and sandblasting",
       "necessity": {
         "reason": "distinct-service",
-        "userIntent": "A visitor who already knows they need a part coated or blasted wants the detail before calling: what the shop works on, how prep and blasting fit in, and what to send for a quote.",
+        "userIntent": "A visitor who already knows they need a part coated wants the detail before getting in touch: what the shop works on, where sandblasting fits, what to send for a quote and how long a job takes.",
         "searchIntent": "Powder coating and sandblasting services in Boise, Idaho",
-        "conversionRole": "Asks the visitor to request a quote with a description of the part, or to call.",
-        "contentPurpose": "The one page for the shop's work in detail. Sandblasting is a section here, not its own page, until the owner confirms whether it is sold on its own or is prep for coating."
+        "conversionRole": "Asks the visitor to text a photo of the part with its size and colour for a quote, or to call.",
+        "contentPurpose": "The one page for the shop's work in detail. Sandblasting is a section here because the owner confirmed it is mostly prep for powder coating, not a separate service page."
+      }
+    },
+    {
+      "id": "our-work",
+      "path": "/our-work/",
+      "kind": "content",
+      "intent": "convert",
+      "primaryCta": "text",
+      "title": "Our work: powder coated wheels, calipers, frames and equipment | CMB Powder Coating",
+      "description": "Photos of real parts powder coated by CMB Powder Coating in Boise: wheels and rims, brake calipers, frames, equipment attachments and fire hydrants.",
+      "heading": "Our work",
+      "necessity": {
+        "reason": "distinct-information",
+        "userIntent": "A visitor deciding whether to trust the shop with a part wants to see real finished jobs, in finishes and part types like theirs, before sending a photo.",
+        "searchIntent": "Examples of powder coated wheels and parts from a Boise shop",
+        "conversionRole": "Shows the evidence first, then asks the visitor to text a photo of their own part for a quote.",
+        "contentPurpose": "The only gallery of CMB's real work photos, grouped by part type: wheels and rims, brake calipers, frames, and equipment and commercial parts."
+      }
+    },
+    {
+      "id": "reviews",
+      "path": "/reviews/",
+      "kind": "content",
+      "intent": "inform",
+      "title": "Reviews | CMB Powder Coating, Boise",
+      "description": "CMB Powder Coating is rated 5.0 on Google from 9 reviews. Read every review, then text a photo of your part for a quote.",
+      "heading": "Customer reviews",
+      "necessity": {
+        "reason": "trust-support-legal",
+        "userIntent": "A visitor comparing powder coaters wants to read what earlier customers said about the work, the price and the communication before choosing a shop.",
+        "searchIntent": "CMB Powder Coating reviews",
+        "conversionRole": "Links to the Google profile to read or leave a review, then asks the visitor to text a photo or call.",
+        "contentPurpose": "The only page with all of the shop's Google reviews, verbatim, beside the authorised rating and photos of finished parts."
       }
     },
     {
@@ -42,30 +75,56 @@
       "path": "/contact-us/",
       "kind": "contact",
       "intent": "convert",
-      "primaryCta": "call",
-      "title": "Request a quote — CMB Powder Coating, Boise",
-      "description": "Call CMB Powder Coating at (208) 440-7812 or describe your part to request a quote. Shop at 9461 Hackamore Dr, Boise, ID 83709.",
+      "primaryCta": "text",
+      "title": "Request a quote | CMB Powder Coating, Boise",
+      "description": "Text a photo of your part to CMB Powder Coating at (208) 440-7812, call, or send the details in the quote form. Shop at 9461 Hackamore Dr, Boise, ID 83709.",
       "heading": "Request a quote",
       "necessity": {
         "reason": "distinct-conversion",
-        "userIntent": "A visitor ready to get a part coated wants to send the job details or call, and to know where the shop is.",
+        "userIntent": "A visitor ready to get a part coated wants to send the job details by text, phone or form, and to know where the shop is and when to come by.",
         "searchIntent": null,
-        "conversionRole": "Carries the quote request form (name, phone, email, service, part description) and the call action.",
-        "contentPurpose": "The only page with the quote form, the shop address and directions, and the phone and email together."
+        "conversionRole": "Puts texting a photo first, then the call action and the quote request form (name, phone, email, service, part description).",
+        "contentPurpose": "The only page with the quote form, the shop address, directions, appointment hours and every way to reach the shop together."
       }
     },
     {
       "id": "not-found",
       "path": "/404",
       "kind": "error",
-      "title": "Page not found — CMB Powder Coating",
+      "title": "Page not found | CMB Powder Coating",
       "heading": "Page not found"
     }
   ],
   "conversion": {
     "ctas": [
-      { "id": "call", "kind": "tel", "target": "entity:primaryPhone" },
-      { "id": "quote", "kind": "internal", "target": "route:contact", "routes": ["home", "services"] }
+      {
+        "id": "text",
+        "kind": "sms",
+        "target": "entity:primaryPhone"
+      },
+      {
+        "id": "call",
+        "kind": "tel",
+        "target": "entity:primaryPhone",
+        "routes": [
+          "home",
+          "services",
+          "our-work",
+          "reviews",
+          "contact"
+        ]
+      },
+      {
+        "id": "quote",
+        "kind": "internal",
+        "target": "route:contact",
+        "routes": [
+          "home",
+          "services",
+          "our-work",
+          "reviews"
+        ]
+      }
     ],
     "forms": [
       {
@@ -74,21 +133,58 @@
         "mode": "lead-receipt",
         "lead": {
           "fields": [
-            { "name": "name", "label": "Name", "required": true },
-            { "name": "phone", "label": "Phone", "required": true, "phoneCheck": true },
-            { "name": "email", "label": "Email" },
-            { "name": "service", "label": "Service", "options": "entity:services" },
-            { "name": "message", "label": "Describe the part: what it is, rough size, metal, current finish and the colour you want", "required": true }
+            {
+              "name": "name",
+              "label": "Name",
+              "required": true
+            },
+            {
+              "name": "phone",
+              "label": "Phone",
+              "required": true,
+              "phoneCheck": true
+            },
+            {
+              "name": "email",
+              "label": "Email"
+            },
+            {
+              "name": "service",
+              "label": "Service",
+              "options": "entity:services"
+            },
+            {
+              "name": "message",
+              "label": "Describe the part: what it is, rough size, metal, current finish and the colour you want",
+              "required": true
+            }
           ],
-          "destination": { "adapter": "test-sink" }
+          "destination": {
+            "adapter": "test-sink"
+          }
         }
       }
     ]
   },
-  "indexing": { "production": "index" },
-  "crawlers": { "registry": "summit-crawlers-2026-09", "search": "allow", "training": "unset", "agents": {} },
-  "icons": { "favicon": null, "appleTouchIcon": null },
+  "indexing": {
+    "production": "index"
+  },
+  "crawlers": {
+    "registry": "summit-crawlers-2026-09",
+    "search": "allow",
+    "training": "unset",
+    "agents": {}
+  },
+  "icons": {
+    "favicon": null,
+    "appleTouchIcon": null
+  },
   "defaultOgImage": null,
   "logo": null,
-  "integrations": { "searchConsole": null, "bingWebmaster": null, "indexNow": null, "aiSearchMonitoring": null }
+  "integrations": {
+    "searchConsole": null,
+    "bingWebmaster": null,
+    "indexNow": null,
+    "aiSearchMonitoring": null
+  }
 }

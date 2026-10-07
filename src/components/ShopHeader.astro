@@ -2,10 +2,10 @@
 /**
  * ShopHeader — the floating header card (approved visual direction,
  * "Composition Strategy"): sticky and inset over the full-bleed openings, the
- * business name (from the entity — no approved logo file exists yet), Services
- * and Request a quote, and the amber call pill on wide screens. On phones the
+ * business name (from the entity — no approved logo file exists yet), Services,
+ * Our Work, Reviews and Request a quote, and the amber call pill on wide screens. On phones the
  * starter's Menu disclosure opens as a floating panel over the page; the
- * sticky bottom bar carries Call and Quote.
+ * sticky bottom bar carries Text and Call.
  */
 import EntityFact from './primitives/EntityFact.astro';
 import SiteHeader from './primitives/SiteHeader.astro';
@@ -14,6 +14,8 @@ import { searchContext } from '../lib/local-search/site-context';
 const { entity } = searchContext();
 const links = [
   { href: '/services/', label: 'Services' },
+  { href: '/our-work/', label: 'Our Work' },
+  { href: '/reviews/', label: 'Reviews' },
   { href: '/contact-us/', label: 'Request a quote' },
 ];
 ---
@@ -27,6 +29,22 @@ const links = [
   </span>
 </SiteHeader>
 
+<script>
+  // The phone menu opens over the page; a tap outside it or Escape closes it.
+  const menu = document.querySelector<HTMLDetailsElement>('.shop-header nav[data-nav="primary"] > details');
+  if (menu) {
+    document.addEventListener('click', (event) => {
+      if (menu.open && !menu.contains(event.target as Node)) menu.open = false;
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape' && menu.open) {
+        menu.open = false;
+        menu.querySelector('summary')?.focus();
+      }
+    });
+  }
+</script>
+
 <style>
   .shop-header {
     position: sticky;
@@ -37,7 +55,7 @@ const links = [
     margin: 0.75rem auto 0;
     padding-block: 0.2rem;
     background-color: color-mix(in srgb, var(--color-surface) 95%, transparent);
-    border-radius: var(--cmb-radius);
+    border-radius: var(--cmb-radius-sm);
     box-shadow: var(--cmb-lift);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
@@ -78,7 +96,7 @@ const links = [
   .shop-header :global([data-nav-toggle]) {
     list-style: none;
     padding-inline: 1.1rem;
-    border-radius: var(--radius-control, 10px);
+    border-radius: var(--cmb-radius-sm);
     border: 1px solid var(--cmb-line);
     font-family: var(--font-body), sans-serif;
     font-size: 0.9375rem;
@@ -101,7 +119,8 @@ const links = [
     gap: 0.1rem;
     padding: 0.75rem 1.25rem 1rem;
     background-color: var(--color-surface);
-    border-radius: var(--cmb-radius);
+    border-radius: var(--cmb-radius-sm);
+    border-block-start: 3px solid var(--color-action);
     box-shadow: var(--cmb-lift);
   }
   .shop-header :global(nav[data-nav='primary'] > details > ul a) {

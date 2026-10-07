@@ -1,0 +1,35 @@
+---
+/**
+ * PhoneAction — a call (tel:) or text (sms:) action with its own short label.
+ * The number is never typed: the link is built from the entity's canonical
+ * phone (src/lib/format/phone.mjs), so it cannot drift, and the build's link
+ * check compares it with the entity. Use EntityFact where the number itself
+ * should be read; use this where the action is the label ("Text a photo").
+ *
+ * kind "sms" is the owner's preferred contact (facts.md: Preferred contact
+ * method). cta adds the data-cta QA marker (search/site.json conversion.ctas).
+ * showNumber appends the human-form number after the label.
+ */
+import { searchContext } from '../lib/local-search/site-context';
+import { displayPhone, telHref } from '../lib/format/phone.mjs';
+
+interface Props {
+  kind?: 'tel' | 'sms';
+  label?: string;
+  cta?: string;
+  showNumber?: boolean;
+  class?: string;
+}
+
+const { kind = 'tel', label, cta, showNumber = false, class: className } = Astro.props;
+const { entity } = searchContext();
+const tel = entity.primaryPhone ? telHref(entity.primaryPhone) : null;
+if (!tel) throw new Error('PhoneAction: the entity records no primary phone.');
+const href = kind === 'sms' ? tel.replace(/^tel:/, 'sms:') : tel;
+const number = displayPhone(entity.primaryPhone);
+const text = label ?? (kind === 'sms' ? 'Text the shop' : 'Call the shop');
+---
+
+<a href={href} data-cta={cta} class={className}>
+  <span class="phone-action-label">{text}</span>{showNumber ? <span class="phone-action-number">{` ${number}`}</span> : <span class="sr-only">{` ${number}`}</span>}
+</a>

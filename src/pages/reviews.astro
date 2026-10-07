@@ -1,0 +1,222 @@
+---
+/**
+ * Reviews (search/site.json "reviews"). This page IS the reviews section, so
+ * the shared ReviewsBand is not repeated here; the closing CTA still ends it.
+ *
+ * Rhythm: graphite opener with the authorised Google rating → primer, all nine
+ * Google reviews verbatim from facts.md → graphite "what customers see at
+ * pickup" (real finished parts) → steel-tint "leave a review" → graphite
+ * closing CTA. No review or rating JSON-LD, no review dates, no reviewer
+ * photos.
+ */
+import ShopLayout from '../layouts/ShopLayout.astro';
+import Opener from '../components/Opener.astro';
+import ClosingCta from '../components/ClosingCta.astro';
+import ReviewCard from '../components/ReviewCard.astro';
+import Stars from '../components/Stars.astro';
+import Breadcrumbs from '../components/primitives/Breadcrumbs.astro';
+import Commitment from '../components/primitives/Commitment.astro';
+import EntityFact from '../components/primitives/EntityFact.astro';
+import ProofRow from '../components/primitives/ProofRow.astro';
+import ResponsiveImage from '../components/primitives/ResponsiveImage.astro';
+import { routeContext } from '../lib/local-search/site-context';
+import { allReviews, GOOGLE_PROFILE_URL, GOOGLE_RATING, GOOGLE_REVIEW_COUNT, RATING_AS_OF, RATING_SOURCE } from '../lib/reviews';
+import { work } from '../lib/work';
+
+const { route } = routeContext('reviews');
+const reviews = allReviews();
+const opening = work('copper-rack');
+const pickup = ['gloss-black-top', 'white-face', 'gloss-red', 'bronze-pair', 'silver-pair', 'calipers-silver'].map(work);
+const closing = work('light-blue-pair');
+---
+
+<ShopLayout routeId="reviews">
+  <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="45% 50%">
+    <Breadcrumbs slot="crumbs" routeId="reviews" />
+    <h1 class="type-hero">{route.heading}</h1>
+    <div class="rating">
+      <Stars class="rating-stars" />
+      <ProofRow
+        class="rating-proof"
+        label="Google rating"
+        items={[
+          { value: GOOGLE_RATING, label: 'Google rating', source: RATING_SOURCE },
+          { value: GOOGLE_REVIEW_COUNT, label: 'Google reviews', source: RATING_SOURCE },
+        ]}
+      />
+      {RATING_AS_OF && <p class="rating-asof">For <EntityFact field="publicName" />, as shown on Google in {RATING_AS_OF}.</p>}
+    </div>
+    <Fragment slot="actions">
+      <a href={GOOGLE_PROFILE_URL} class="cmb-solid-light is-large" rel="noopener" target="_blank">Read them on Google <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+      <a href={GOOGLE_PROFILE_URL} class="cmb-outline is-large" rel="noopener" target="_blank">Leave a review <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+    </Fragment>
+  </Opener>
+
+  <section class="surface-primer section-pad" aria-labelledby="all-title">
+    <div class="shell all">
+      <div class="cmb-head">
+        <h2 id="all-title" class="type-section">What customers wrote</h2>
+        <p>Every Google review of the shop, exactly as the customer wrote it.</p>
+      </div>
+      <div class="all-cards">
+        {reviews.map((review) => <ReviewCard review={review} class="all-card" />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="surface-graphite section-pad" aria-labelledby="pickup-title">
+    <div class="shell pickup">
+      <div class="pickup-copy">
+        <h2 id="pickup-title" class="type-section">What customers see at pickup</h2>
+        <Commitment id="service-pride" as="p" class="pickup-pride" />
+        <a href="/our-work/" class="cmb-link pickup-more">See all of our work <span aria-hidden="true">→</span></a>
+      </div>
+      <ul class="pickup-grid" role="list">
+        {pickup.map((photo) => (
+          <li class="pickup-cell" data-slot="work-photos" data-visual="editorial">
+            <ResponsiveImage src={photo.src} alt={photo.alt} sizes="(min-width: 60rem) 14rem, 45vw" widths={[480, 768]} />
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="surface-tint section-pad" aria-labelledby="leave-title">
+    <div class="shell leave">
+      <Stars class="leave-stars" />
+      <h2 id="leave-title" class="type-section">Had a part coated with us?</h2>
+      <p class="leave-line">A Google review helps the next customer in the Treasure Valley find the shop. It takes a minute.</p>
+      <div class="cmb-actions">
+        <a href={GOOGLE_PROFILE_URL} class="cmb-solid-dark is-large" rel="noopener" target="_blank">Leave a review on Google <span aria-hidden="true">↗</span><span class="sr-only"> (opens in a new tab)</span></a>
+      </div>
+    </div>
+  </section>
+
+  <ClosingCta heading="Your part could be next" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" quoteCta />
+</ShopLayout>
+
+<style>
+  .rating {
+    display: grid;
+    gap: 0.8rem;
+    justify-items: start;
+  }
+  .rating :global(.rating-stars) {
+    font-size: 1.5rem;
+  }
+  .rating :global(.rating-proof) {
+    gap: 2.5rem;
+  }
+  .rating :global(.rating-proof dd) {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(3.5rem, 2.6rem + 3.5vw, 5.5rem);
+    line-height: 0.9;
+    color: var(--color-on-graphite);
+  }
+  .rating :global(.rating-proof dt) {
+    font-family: var(--font-label), sans-serif;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label, 0.14em);
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-on-graphite) 82%, transparent);
+  }
+  .rating-asof {
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--color-on-graphite) 80%, transparent);
+  }
+
+  .all {
+    display: grid;
+    gap: 2.25rem;
+  }
+  .all-cards {
+    columns: 1;
+    column-gap: 1rem;
+  }
+  .all-cards :global(.all-card) {
+    break-inside: avoid;
+    margin-block-end: 1rem;
+  }
+  @media (min-width: 44rem) {
+    .all-cards {
+      columns: 2;
+    }
+  }
+  @media (min-width: 72rem) {
+    .all-cards {
+      columns: 3;
+    }
+  }
+
+  .pickup {
+    display: grid;
+    gap: 2.5rem;
+    align-items: center;
+  }
+  .pickup-copy {
+    display: grid;
+    gap: 1.25rem;
+    justify-items: start;
+  }
+  .pickup-copy :global(.pickup-pride) {
+    max-inline-size: 30rem;
+    padding-inline-start: 1.15rem;
+    border-inline-start: 3px solid var(--color-action);
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.25rem);
+    line-height: 1.1;
+  }
+  .pickup-more {
+    color: var(--color-on-graphite);
+  }
+  .pickup-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .pickup-cell {
+    overflow: hidden;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--cmb-radius-sm);
+  }
+  .pickup-cell :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+  }
+  @media (min-width: 48rem) {
+    .pickup-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 60rem) {
+    .pickup {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 4.5rem;
+    }
+  }
+
+  .leave {
+    display: grid;
+    gap: 1.1rem;
+    justify-items: center;
+    text-align: center;
+  }
+  .leave :global(.leave-stars) {
+    font-size: 2rem;
+  }
+  .leave-line {
+    max-inline-size: 34rem;
+    font-size: 1.125rem;
+    color: var(--color-on-surface-muted);
+  }
+  .leave .cmb-actions {
+    margin-block-start: 0.5rem;
+    justify-content: center;
+  }
+</style>

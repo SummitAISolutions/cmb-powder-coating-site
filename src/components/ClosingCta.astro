@@ -1,0 +1,138 @@
+---
+/**
+ * ClosingCta — every page ends here, composed like the opener: a graphite
+ * field with the page's own real work photo on the right, the heading, one
+ * line, an amber rule, then the actions — text a photo (the owner's preferred
+ * contact), call, and the quote form.
+ *
+ * quoteCta: mark the quote link as the "quote" conversion CTA (only on the
+ * routes search/site.json lists for it). quoteHref / quoteLabel: where it
+ * goes and what it says (the contact page points at its own form).
+ */
+import type { ImageMetadata } from 'astro';
+import PhoneAction from './PhoneAction.astro';
+import Commitment from './primitives/Commitment.astro';
+import EntityFact from './primitives/EntityFact.astro';
+import ResponsiveImage from './primitives/ResponsiveImage.astro';
+
+interface Props {
+  heading: string;
+  image: ImageMetadata;
+  alt: string;
+  slotId: string;
+  focal?: string;
+  quoteCta?: boolean;
+  quoteHref?: string;
+  quoteLabel?: string;
+  id?: string;
+}
+
+const {
+  heading,
+  image,
+  alt,
+  slotId,
+  focal = '50% 50%',
+  quoteCta = false,
+  quoteHref = '/contact-us/',
+  quoteLabel = 'Request a quote',
+  id = 'close',
+} = Astro.props;
+---
+
+<section class="closing on-dark" aria-labelledby={`${id}-title`} style={`--closing-focal: ${focal};`}>
+  <div class="closing-media" data-slot={slotId} data-visual="editorial">
+    <ResponsiveImage src={image} alt={alt} sizes="(min-width: 60rem) 50vw, 100vw" />
+  </div>
+  <div class="shell closing-inner">
+    <div class="closing-copy">
+      <h2 id={`${id}-title`} class="type-hero closing-heading">{heading}</h2>
+      <p class="closing-line"><slot><Commitment id="text-quotes" /></slot></p>
+      <div class="closing-actions">
+        <div class="cmb-actions">
+          <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
+          <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
+        </div>
+        <a href={quoteHref} data-cta={quoteCta ? 'quote' : undefined} class="cmb-link closing-quote">{quoteLabel} <span aria-hidden="true">→</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .closing {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    padding-block: clamp(5rem, 3.5rem + 6vw, 8rem);
+    background-color: var(--color-graphite);
+    color: var(--color-on-graphite);
+  }
+  .closing-media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .closing-media :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: var(--closing-focal);
+  }
+  .closing-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--color-graphite) 70%, transparent) 0%,
+      color-mix(in srgb, var(--color-graphite) 84%, transparent) 45%,
+      color-mix(in srgb, var(--color-graphite) 94%, transparent) 100%
+    );
+  }
+  .closing-copy {
+    display: grid;
+    gap: 1.15rem;
+    justify-items: start;
+    max-inline-size: 38rem;
+  }
+  .closing-heading {
+    max-inline-size: 13ch;
+    font-size: clamp(2.5rem, 1.6rem + 3.6vw, 4.75rem);
+  }
+  .closing-line {
+    max-inline-size: 32rem;
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.25rem);
+    color: color-mix(in srgb, var(--color-on-graphite) 88%, transparent);
+  }
+  .closing-actions {
+    display: grid;
+    gap: 0.75rem;
+    justify-items: start;
+    margin-block-start: 0.6rem;
+    padding-block-start: 1.4rem;
+    border-block-start: 3px solid var(--color-action);
+    min-inline-size: min(100%, 26rem);
+  }
+  .closing-actions :global(.cmb-outline) {
+    color: var(--color-on-graphite);
+  }
+  .closing-quote {
+    color: var(--color-on-graphite);
+  }
+  @media (min-width: 60rem) {
+    .closing-media {
+      inset-inline-start: auto;
+      inline-size: 52%;
+    }
+    .closing-media::after {
+      background: linear-gradient(
+        90deg,
+        var(--color-graphite) 0%,
+        color-mix(in srgb, var(--color-graphite) 60%, transparent) 22%,
+        color-mix(in srgb, var(--color-graphite) 8%, transparent) 55%,
+        transparent 100%
+      );
+    }
+  }
+</style>

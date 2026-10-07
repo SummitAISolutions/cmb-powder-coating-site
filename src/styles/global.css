@@ -19,8 +19,13 @@
  */
 @layer base {
   :root {
-    --cmb-radius: var(--radius-media, 10px);
-    --cmb-radius-lg: calc(var(--radius-media, 10px) * 1.6);
+    /* Near-square corners (Samuel, 2026-10-07, after the Grill Docs grammar):
+       the DESIGN.md radius stays as the token; the client layer squares it. */
+    --cmb-radius-sm: 3px;
+    --cmb-radius: 4px;
+    --cmb-radius-lg: 6px;
+    --radius-media: 4px;
+    --radius-control: 3px;
     --cmb-steel-tint: color-mix(in srgb, var(--color-primary) 18%, var(--color-surface));
     --cmb-primer-deep: color-mix(in srgb, var(--color-on-surface-muted) 10%, var(--color-surface));
     --cmb-primer-light: color-mix(in srgb, var(--color-surface) 55%, var(--color-on-primary) 45%);
@@ -127,7 +132,7 @@
     gap: 0.45em;
     min-block-size: 3rem;
     padding-inline: 1.4rem;
-    border-radius: var(--radius-control, 10px);
+    border-radius: var(--cmb-radius-sm);
     background-color: var(--color-action);
     color: var(--color-on-action);
     font-family: var(--font-body), sans-serif;
@@ -164,7 +169,7 @@
     gap: 0.45em;
     min-block-size: 3rem;
     padding-inline: 1.35rem;
-    border-radius: var(--radius-control, 10px);
+    border-radius: var(--cmb-radius-sm);
     border: 1px solid currentColor;
     font-family: var(--font-body), sans-serif;
     font-size: 1rem;
@@ -181,6 +186,98 @@
     min-block-size: 3.5rem;
     padding-inline: 1.6rem;
     font-size: 1.0625rem;
+  }
+
+  /* A solid primer button for dark surfaces (reviews, gallery links): an
+     action that is not a call or a quote, so it is never amber. */
+  .cmb-solid-light {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+    min-block-size: 3rem;
+    padding-inline: 1.35rem;
+    border-radius: var(--cmb-radius-sm);
+    background-color: var(--color-surface);
+    color: var(--color-on-surface);
+    font-family: var(--font-body), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 160ms ease;
+  }
+  .cmb-solid-light:hover {
+    background-color: color-mix(in srgb, var(--color-surface) 86%, var(--color-primary));
+  }
+  .cmb-solid-light:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-action);
+    outline-offset: 3px;
+  }
+
+  .cmb-solid-dark {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+    min-block-size: 3rem;
+    padding-inline: 1.35rem;
+    border-radius: var(--cmb-radius-sm);
+    background-color: var(--color-graphite);
+    color: var(--color-on-graphite);
+    font-family: var(--font-body), sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1.2;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: background-color 160ms ease;
+  }
+  .cmb-solid-dark:hover {
+    background-color: var(--color-primary);
+  }
+  .cmb-solid-light.is-large,
+  .cmb-solid-dark.is-large {
+    min-block-size: 3.5rem;
+    padding-inline: 1.6rem;
+    font-size: 1.0625rem;
+  }
+
+  /* Surfaces rotate so no two adjacent sections match: primer, primer-deep,
+     steel tint, blued steel, graphite. */
+  .surface-primer {
+    background-color: var(--color-surface);
+  }
+  .surface-deep {
+    background-color: var(--cmb-primer-deep);
+  }
+  .surface-tint {
+    background-color: var(--cmb-steel-tint);
+  }
+  .surface-steel {
+    --color-accent: var(--color-action);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .surface-graphite {
+    --color-accent: var(--color-action);
+    background-color: var(--color-graphite);
+    color: var(--color-on-graphite);
+  }
+  .section-pad {
+    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
+  }
+
+  /* Small amber-ruled heading block: one per section, no eyebrow needed. */
+  .cmb-head {
+    display: grid;
+    gap: 0.9rem;
+    max-inline-size: 44rem;
+  }
+  .cmb-head > p {
+    font-size: clamp(1.0625rem, 1rem + 0.3vw, 1.1875rem);
+    line-height: 1.55;
   }
 
   .cmb-link {

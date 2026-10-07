@@ -1,32 +1,21 @@
 ---
 /**
- * MobileActionBar — the phone-width sticky bar (approved visual direction:
- * "a sticky bottom bar carries Call and Quote"). The starter's StickyMobileCTA
- * carries one action; the direction asks for two, so this composes the same
+ * MobileActionBar — the phone-width sticky bar. Text a photo is the owner's
+ * preferred contact (facts.md), so it is the amber action; Call sits beside
+ * it. The starter's StickyMobileCTA carries one action; this composes the same
  * mechanics (fixed below 48rem, safe-area aware, a spacer so it never covers
- * the page end) with the site's own pills.
+ * the page end) with two.
  *
- * The phone comes from the entity (EntityFact, data-cta="call"). The quote
- * action carries data-cta="quote" only on the routes search/site.json lists for
- * that CTA; on the contact page it jumps to the form instead.
+ * Both links are built from the entity's phone (PhoneAction), never typed.
  */
-import EntityFact from './primitives/EntityFact.astro';
-
-interface Props {
-  /** Render the quote link as the "quote" conversion CTA (data-cta). */
-  quoteCta?: boolean;
-  /** Where the quote action goes. */
-  quoteHref?: string;
-}
-
-const { quoteCta = false, quoteHref = '/contact-us/' } = Astro.props;
+import PhoneAction from './PhoneAction.astro';
 ---
 
 <div class="mobile-bar-spacer" aria-hidden="true"></div>
-<div class="mobile-bar">
-  <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call mobile-bar-call" />
-  <a href={quoteHref} data-cta={quoteCta ? 'quote' : undefined} class="cmb-outline mobile-bar-quote">Quote</a>
-</div>
+<nav class="mobile-bar" aria-label="Text or call the shop">
+  <PhoneAction kind="sms" cta="text" label="Text a photo" class="cmb-pill mobile-bar-text" />
+  <PhoneAction kind="tel" cta="call" label="Call" class="cmb-outline mobile-bar-call" />
+</nav>
 
 <style>
   .mobile-bar,
@@ -37,6 +26,7 @@ const { quoteCta = false, quoteHref = '/contact-us/' } = Astro.props;
     .mobile-bar-spacer {
       display: block;
       block-size: calc(4.5rem + env(safe-area-inset-bottom, 0px));
+      background-color: var(--color-graphite);
     }
     .mobile-bar {
       display: flex;
@@ -46,18 +36,17 @@ const { quoteCta = false, quoteHref = '/contact-us/' } = Astro.props;
       inset-block-end: 0;
       z-index: 40;
       padding: 0.65rem var(--spacing-gutter) calc(0.65rem + env(safe-area-inset-bottom, 0px));
-      background-color: color-mix(in srgb, var(--color-surface) 92%, transparent);
-      box-shadow: 0 -10px 30px -18px color-mix(in srgb, var(--color-on-surface) 45%, transparent);
+      background-color: var(--color-graphite);
+      box-shadow: 0 -10px 30px -18px color-mix(in srgb, var(--color-graphite) 60%, transparent);
       backdrop-filter: blur(12px);
       -webkit-backdrop-filter: blur(12px);
     }
+    .mobile-bar :global(.mobile-bar-text) {
+      flex: 1.4;
+    }
     .mobile-bar :global(.mobile-bar-call) {
       flex: 1;
-      padding-inline: 0.75rem;
-    }
-    .mobile-bar-quote {
-      color: var(--color-primary);
-      padding-inline: 1.25rem;
+      color: var(--color-on-graphite);
     }
   }
 </style>

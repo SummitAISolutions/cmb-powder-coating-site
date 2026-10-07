@@ -1,211 +1,364 @@
 ---
 /**
  * Home — the only page that introduces CMB Powder Coating as a whole
- * (search/site.json "home"; approved visual direction, home rhythm):
- * opening → two tall service cards → full-bleed steel band "How a job works"
- * → the shop and directions → closing panel → graphite footer.
+ * (search/site.json "home").
  *
- * The proof strip under the opening is NOT rendered: facts.md records no
- * rating or review authorised for display (INPUT_MANIFEST.md, open question).
- * Every fact comes from the entity.
+ * Rhythm (surfaces rotate so no two neighbours match): graphite opener on a
+ * real copper wheel → steel-tint commitments strip → primer work tiles →
+ * graphite "how a job works" beside a real photo → primer shop and
+ * directions → steel reviews band → graphite closing CTA.
+ *
+ * Every business fact comes from the entity (EntityFact, PhoneAction); every
+ * promise from facts.md through <Commitment>; every photo is a real CMB job
+ * (src/lib/work.ts).
  */
 import ShopLayout from '../layouts/ShopLayout.astro';
-import ImageOpening from '../components/ImageOpening.astro';
-import ServiceCard from '../components/ServiceCard.astro';
-import ImageBand from '../components/ImageBand.astro';
-import ClosingPanel from '../components/ClosingPanel.astro';
+import Opener from '../components/Opener.astro';
+import ReviewsBand from '../components/ReviewsBand.astro';
+import ClosingCta from '../components/ClosingCta.astro';
 import DirectionsLink from '../components/DirectionsLink.astro';
+import PhoneAction from '../components/PhoneAction.astro';
+import Commitment from '../components/primitives/Commitment.astro';
 import EntityFact from '../components/primitives/EntityFact.astro';
+import ResponsiveImage from '../components/primitives/ResponsiveImage.astro';
 import { routeContext } from '../lib/local-search/site-context';
+import { work } from '../lib/work';
 
-import openingImage from '../assets/generated/home-opening.webp';
-import powderImage from '../assets/generated/card-powder-coating.webp';
-import blastImage from '../assets/generated/card-sandblasting.webp';
-import foothillsImage from '../assets/generated/band-foothills.webp';
-import closingImage from '../assets/generated/closing-powder.webp';
+const { route } = routeContext('home');
 
-const { entity, route } = routeContext('home');
-const serviceName = (id: string) => {
-  const service = entity.services.find((entry: { id: string }) => entry.id === id);
-  if (!service) throw new Error(`Home: the entity records no service "${id}".`);
-  return service.name as string;
-};
+const opening = work('copper-face');
+const howPhoto = work('gloss-red');
+const closing = work('copper-rack-2');
+
+const tiles = [
+  { href: '/our-work/#wheels', name: 'Wheels and rims', photo: work('copper-rack'), focal: '45% 50%', line: 'Gloss, metallic, flake and textured finishes.', size: 'tall' },
+  { href: '/our-work/#calipers', name: 'Brake calipers', photo: work('calipers-silver'), focal: '50% 50%', line: 'Brake calipers, coated and cured.', size: 'small' },
+  { href: '/our-work/#frames', name: 'Frames', photo: work('frame-ebike'), focal: '40% 45%', line: 'Frames, like this electric bike.', size: 'small' },
+  { href: '/our-work/#equipment', name: 'Equipment and commercial', photo: work('fire-hydrants'), focal: '50% 55%', line: 'Excavator attachments, fire hydrants and more.', size: 'wide' },
+];
 ---
 
 <ShopLayout routeId="home">
-  <ImageOpening image={openingImage} slotId="home-opening" focal="70% 50%" size="tall">
-    <Fragment slot="eyebrow">Powder coating and sandblasting · <EntityFact field="serviceAreas" /></Fragment>
+  <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 56%" mobileFocal="50% 40%" size="tall">
+    <Fragment slot="eyebrow">Powder coating · <EntityFact field="serviceAreas" /></Fragment>
     <h1 class="type-hero">{route.heading}</h1>
-    <p class="type-lede">From bare metal to a cured finish. Call the shop, or describe your part and request a quote.</p>
+    <p class="type-lede">Wheels, calipers, frames and equipment parts, coated at our Boise shop.</p>
     <Fragment slot="actions">
-      <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call is-large" />
-      <a href="/contact-us/" data-cta="quote" class="cmb-outline is-large">Request a quote</a>
+      <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
+      <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
     </Fragment>
-  </ImageOpening>
+  </Opener>
 
-  <section class="shell home-services" aria-labelledby="services-title">
-    <div class="home-services-head">
-      <p class="eyebrow home-muted">What the shop does</p>
-      <h2 id="services-title" class="type-section">Two processes, one finish</h2>
-    </div>
-    <div class="home-services-cards">
-      <ServiceCard
-        href="/services/#powder-coating"
-        image={powderImage}
-        slotId="card-powder-coating"
-        focal="50% 45%"
-        name={serviceName('powder-coating')}
-        line="A dry powder applied to clean metal, then cured with heat into a continuous coating."
-      />
-      <ServiceCard
-        href="/services/#sandblasting"
-        image={blastImage}
-        slotId="card-sandblasting"
-        focal="40% 50%"
-        name={serviceName('sandblasting')}
-        line="Abrasive blasting that takes old paint, coatings and rust back to bare metal."
-      />
+  <section class="surface-tint promise" aria-label="Turnaround, rush jobs, colours and customers">
+    <ul class="shell promise-list" role="list">
+      <li><h2 class="promise-name">Turnaround</h2><Commitment id="turnaround" as="p" class="promise-text" /></li>
+      <li><h2 class="promise-name">Rush jobs</h2><Commitment id="rush" as="p" class="promise-text" /></li>
+      <li><h2 class="promise-name">Colours</h2><Commitment id="colours" as="p" class="promise-text" /></li>
+      <li><h2 class="promise-name">Who we work with</h2><Commitment id="customers" as="p" class="promise-text" /></li>
+    </ul>
+  </section>
+
+  <section class="surface-primer section-pad" aria-labelledby="work-title">
+    <div class="shell work">
+      <div class="cmb-head">
+        <h2 id="work-title" class="type-section">What we coat</h2>
+        <p>Real jobs from the shop: wheels and rims, brake calipers, frames, equipment parts and more.</p>
+      </div>
+      <div class="tiles">
+        {tiles.map((tile) => (
+          <a href={tile.href} class:list={['tile', `tile--${tile.size}`, 'on-dark']} style={`--tile-focal: ${tile.focal};`}>
+            <span class="tile-media" data-slot="work-photos" data-visual="editorial">
+              <ResponsiveImage src={tile.photo.src} alt={tile.photo.alt} sizes={tile.size === 'small' ? '(min-width: 60rem) 24rem, 100vw' : '(min-width: 60rem) 40rem, 100vw'} />
+            </span>
+            <span class="tile-body">
+              <span class="tile-name">{tile.name}</span>
+              <span class="tile-line">{tile.line}</span>
+              <span class="tile-more" aria-hidden="true">See the photos →</span>
+            </span>
+          </a>
+        ))}
+      </div>
+      <a href="/our-work/" class="cmb-link work-all">See all of our work <span aria-hidden="true">→</span></a>
     </div>
   </section>
 
-  <ImageBand image={foothillsImage} slotId="band-foothills" focal="50% 70%" aria-labelledby="job-title">
+  <section class="surface-graphite section-pad" aria-labelledby="job-title">
     <div class="shell job">
-      <div class="job-head">
-        <p class="eyebrow job-eyebrow">Getting a part coated</p>
+      <figure class="job-photo" data-slot="work-photos" data-visual="editorial">
+        <ResponsiveImage src={howPhoto.src} alt={howPhoto.alt} sizes="(min-width: 60rem) 34rem, 100vw" />
+      </figure>
+      <div class="job-copy">
         <h2 id="job-title" class="type-section">How a job works</h2>
-      </div>
-      <ol class="job-steps" role="list">
-        <li class="frosted-panel job-step">
-          <h3 class="job-step-title">Describe the part</h3>
-          <p>Call, or use the quote form: what the part is, its rough size, the metal and the colour you want.</p>
-        </li>
-        <li class="frosted-panel job-step">
-          <h3 class="job-step-title">Get a quote</h3>
-          <p>The shop looks at what you sent and quotes the job, including any blasting the part needs first.</p>
-        </li>
-        <li class="frosted-panel job-step">
-          <h3 class="job-step-title">Drop it off at the shop</h3>
-          <p>Bring the part to the storefront:</p>
-          <EntityFact field="address" class="job-address" />
-        </li>
-      </ol>
-    </div>
-  </ImageBand>
-
-  <section class="shell shop" aria-labelledby="shop-title">
-    <div class="shop-panel on-dark">
-      <div class="shop-copy">
-        <p class="eyebrow shop-eyebrow">The shop</p>
-        <h2 id="shop-title" class="type-section">Where to bring your parts</h2>
-        <p class="shop-line">A storefront shop serving <EntityFact field="serviceAreas" />.</p>
-      </div>
-      <div class="shop-reach">
-        <EntityFact field="address" class="shop-address" />
+        <ol class="job-steps" role="list">
+          <li>
+            <h3 class="job-step-title">Text a photo</h3>
+            <Commitment id="text-quotes" as="p" />
+          </li>
+          <li>
+            <h3 class="job-step-title">Get your quote</h3>
+            <p>The shop looks at what you sent and replies with a quote for the job.</p>
+          </li>
+          <li>
+            <h3 class="job-step-title">Drop it off at the shop</h3>
+            <EntityFact field="address" class="job-address" />
+            <Commitment id="hours" as="p" />
+          </li>
+        </ol>
         <div class="cmb-actions">
-          <DirectionsLink class="cmb-outline" />
-          <EntityFact field="primaryPhone" cta="call" class="cmb-pill cmb-pill--call" />
+          <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
         </div>
       </div>
     </div>
   </section>
 
-  <ClosingPanel heading="Have a part that needs a new finish?" image={closingImage} slotId="closing-powder" focal="60% 50%" quoteCta />
+  <section class="surface-primer section-pad" aria-labelledby="shop-title">
+    <div class="shell shop">
+      <div class="shop-copy">
+        <h2 id="shop-title" class="type-section">Where to bring your parts</h2>
+        <p class="shop-line">A storefront shop in Boise, serving <EntityFact field="serviceAreas" />. Customers drop their parts off here.</p>
+        <Commitment id="service-pride" as="p" class="shop-pride" />
+      </div>
+      <div class="shop-reach surface-steel">
+        <EntityFact field="address" class="shop-address" />
+        <Commitment id="hours" as="p" class="shop-hours" />
+        <div class="cmb-actions">
+          <DirectionsLink class="cmb-solid-light" />
+          <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call shop-call" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <ReviewsBand />
+
+  <ClosingCta heading="Have a part that needs a new finish?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="45% 50%" quoteCta>
+    Text a photo, call the shop, or send the details in the quote form.
+  </ClosingCta>
 </ShopLayout>
 
 <style>
-  .home-muted {
-    color: var(--color-on-surface-muted);
+  .promise {
+    padding-block: clamp(2.5rem, 2rem + 2vw, 3.75rem);
   }
-  .home-services {
-    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
+  .promise-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 1.75rem 2rem;
+  }
+  .promise-list li {
+    display: grid;
+    gap: 0.5rem;
+    align-content: start;
+    padding-inline-start: 1rem;
+    border-inline-start: 3px solid var(--color-action);
+  }
+  .promise-name {
+    font-family: var(--font-display), sans-serif;
+    font-size: clamp(1.6rem, 1.35rem + 1vw, 2.25rem);
+    line-height: 1;
+  }
+  .promise-list :global(.promise-text) {
+    color: var(--color-on-surface);
+    line-height: 1.5;
+  }
+  @media (min-width: 40rem) {
+    .promise-list {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 64rem) {
+    .promise-list {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+
+  .work {
     display: grid;
     gap: 2.25rem;
   }
-  .home-services-head {
+  .tiles {
     display: grid;
     gap: 0.75rem;
   }
-  .home-services-cards {
+  .tile {
+    position: relative;
+    isolation: isolate;
     display: grid;
-    gap: 1.25rem;
+    align-items: end;
+    min-block-size: 20rem;
+    overflow: hidden;
+    border-radius: var(--cmb-radius-sm);
+    background-color: var(--color-graphite);
+    color: var(--color-on-graphite);
+    text-decoration: none;
+  }
+  .tile-media {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+  }
+  .tile-media :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: var(--tile-focal);
+    transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .tile-media::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 35%, color-mix(in srgb, var(--color-graphite) 80%, transparent) 100%);
+  }
+  .tile:hover .tile-media :global(img) {
+    transform: scale(1.04);
+  }
+  .tile-body {
+    display: grid;
+    gap: 0.35rem;
+    margin: 0.75rem;
+    padding: 1.1rem 1.25rem 1.2rem;
+    background-color: color-mix(in srgb, var(--color-graphite) 86%, transparent);
+    border-block-start: 3px solid var(--color-action);
+  }
+  .tile-name {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem);
+    line-height: 0.95;
+  }
+  .tile-line {
+    color: color-mix(in srgb, var(--color-on-graphite) 86%, transparent);
+    font-size: 0.9875rem;
+  }
+  .tile-more {
+    margin-block-start: 0.25rem;
+    font-weight: 500;
+    color: var(--color-action);
+  }
+  .tile:focus-visible {
+    outline: var(--focus-ring-width) solid var(--color-primary);
+    outline-offset: 3px;
+  }
+  .work-all {
+    justify-self: start;
   }
   @media (min-width: 48rem) {
-    .home-services-cards {
+    .tiles {
       grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 1.5rem;
+    }
+    .tile--tall,
+    .tile--wide {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (min-width: 60rem) {
+    .tiles {
+      grid-template-columns: 1.15fr 1fr 1fr;
+      grid-template-rows: 21rem 21rem;
+    }
+    .tile {
+      min-block-size: 0;
+    }
+    .tile--tall {
+      grid-column: 1;
+      grid-row: 1 / span 2;
+    }
+    .tile--wide {
+      grid-column: 2 / span 2;
     }
   }
 
   .job {
     display: grid;
     gap: 2.5rem;
+    align-items: center;
   }
-  .job-head {
+  .job-photo {
+    margin: 0;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border-radius: var(--cmb-radius-sm);
+  }
+  .job-photo :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    object-position: 50% 45%;
+  }
+  .job-copy {
     display: grid;
-    gap: 0.75rem;
-  }
-  .job-eyebrow {
-    color: color-mix(in srgb, var(--color-on-primary) 80%, transparent);
+    gap: 2rem;
+    justify-items: start;
   }
   .job-steps {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 1rem;
+    gap: 1.6rem;
   }
-  .job-step {
+  .job-steps li {
     display: grid;
-    gap: 0.75rem;
-    align-content: start;
-    padding: clamp(1.5rem, 1.2rem + 1vw, 2.25rem);
+    gap: 0.45rem;
+    padding-inline-start: 1.15rem;
+    border-inline-start: 3px solid var(--color-action);
   }
   .job-step-title {
     font-family: var(--font-display), sans-serif;
-    font-size: clamp(1.75rem, 1.5rem + 0.8vw, 2.25rem);
+    font-size: clamp(1.6rem, 1.4rem + 0.8vw, 2.125rem);
     line-height: 1;
   }
-  .job-step p {
-    color: color-mix(in srgb, var(--color-on-primary) 90%, transparent);
+  .job-steps p,
+  .job-steps :global(address) {
+    color: color-mix(in srgb, var(--color-on-graphite) 88%, transparent);
+    max-inline-size: 34rem;
   }
-  .job-step :global(.job-address) {
+  .job-steps :global(.job-address) {
     font-weight: 500;
-    line-height: 1.45;
+    color: var(--color-on-graphite);
   }
   @media (min-width: 60rem) {
-    .job-steps {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1.25rem;
+    .job {
+      grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr);
+      gap: 5rem;
+    }
+    .job-photo {
+      aspect-ratio: 4 / 5;
     }
   }
 
   .shop {
-    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem) 0;
-  }
-  .shop-panel {
     display: grid;
-    gap: 2.25rem;
-    padding: clamp(1.75rem, 1.25rem + 3vw, 4rem);
-    background-color: var(--color-graphite);
-    color: var(--color-on-graphite);
-    border-radius: var(--cmb-radius-lg);
+    gap: 2rem;
+    align-items: stretch;
   }
   .shop-copy {
     display: grid;
-    gap: 1rem;
-    align-content: start;
-  }
-  .shop-eyebrow {
-    color: color-mix(in srgb, var(--color-on-graphite) 74%, transparent);
+    gap: 1.25rem;
+    align-content: center;
   }
   .shop-line {
+    max-inline-size: 34rem;
+    font-size: 1.0625rem;
+    color: var(--color-on-surface-muted);
+  }
+  .shop-copy :global(.shop-pride) {
     max-inline-size: 30rem;
-    color: color-mix(in srgb, var(--color-on-graphite) 82%, transparent);
+    padding-inline-start: 1.15rem;
+    border-inline-start: 3px solid var(--color-action);
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(1.6rem, 1.3rem + 1.2vw, 2.25rem);
+    line-height: 1.1;
   }
   .shop-reach {
     display: grid;
-    gap: 1.75rem;
-    align-content: end;
+    gap: 1.25rem;
+    align-content: center;
+    padding: clamp(1.75rem, 1.25rem + 2.5vw, 3.5rem);
+    border-radius: var(--cmb-radius);
   }
   .shop-reach :global(.shop-address) {
     font-family: var(--font-display), sans-serif;
@@ -213,13 +366,22 @@ const serviceName = (id: string) => {
     font-size: clamp(2.25rem, 1.6rem + 2.6vw, 3.75rem);
     line-height: 1;
   }
-  .shop-reach :global(.cmb-outline) {
-    color: var(--color-on-graphite);
+  .shop-reach :global(.shop-hours) {
+    max-inline-size: 30rem;
+    color: color-mix(in srgb, var(--color-on-primary) 86%, transparent);
+  }
+  .shop-reach :global(.shop-call) {
+    color: var(--color-on-primary);
   }
   @media (min-width: 60rem) {
-    .shop-panel {
-      grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    .shop {
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
       gap: 4rem;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .tile-media :global(img) {
+      transition: none;
     }
   }
 </style>

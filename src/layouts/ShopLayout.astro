@@ -2,11 +2,7 @@
 /**
  * ShopLayout — BaseLayout plus CMB Powder Coating's shared chrome: the
  * self-hosted faces, the floating header card, the graphite footer and, on
- * phones, the sticky Call + Quote bar.
- *
- * The quote action carries data-cta="quote" only on the routes
- * search/site.json lists for that CTA; on the contact page the bar's quote
- * action jumps to the form instead.
+ * phones, the sticky Text + Call bar.
  */
 import BaseLayout from './BaseLayout.astro';
 import ShopHeader from '../components/ShopHeader.astro';
@@ -19,10 +15,7 @@ interface Props {
 }
 
 const { routeId } = Astro.props;
-const { site } = routeContext(routeId);
-const quote = (site.conversion?.ctas || []).find((cta: { id: string }) => cta.id === 'quote');
-const quoteCta = Boolean(quote && (!quote.routes || quote.routes.includes(routeId)));
-const onContact = routeId === 'contact';
+routeContext(routeId);
 ---
 
 <BaseLayout routeId={routeId}>
@@ -36,5 +29,5 @@ const onContact = routeId === 'contact';
   <ShopHeader slot="header" />
   <slot />
   <ShopFooter slot="footer" />
-  <MobileActionBar slot="after" quoteCta={quoteCta} quoteHref={onContact ? '#quote-form' : '/contact-us/'} />
+  <MobileActionBar slot="after" />
 </BaseLayout>
