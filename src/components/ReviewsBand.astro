@@ -1,0 +1,209 @@
+---
+/**
+ * ReviewsBand — the shared reviews section, placed directly above the
+ * closing CTA on every page except /reviews/ (Samuel, 2026-10-07: "a high
+ * quality reviews section on each page ... above the cta banner at the
+ * bottom").
+ *
+ * Blued-steel band: the authorised Google rating and count (facts.md, through
+ * ProofRow — every value traces to facts.md), links to read the reviews and to
+ * leave one on Google, and a strip of real CMB work photos. Quote cards appear
+ * only once facts.md "Supplied testimonials" records real quotations
+ * (src/lib/reviews.ts); none are written here. No review or rating JSON-LD.
+ */
+import ProofRow from './primitives/ProofRow.astro';
+import Quote from './primitives/Quote.astro';
+import ResponsiveImage from './primitives/ResponsiveImage.astro';
+import Stars from './Stars.astro';
+import { GOOGLE_PROFILE_URL, GOOGLE_RATING, GOOGLE_REVIEW_COUNT, RATING_AS_OF, REVIEW_SOURCE, testimonials } from '../lib/reviews';
+import { work } from '../lib/work';
+
+interface Props {
+  /** Four work-photo keys for the strip; each page picks ones it does not already lead with. */
+  photos?: string[];
+}
+
+const { photos = ['copper-face', 'gloss-red', 'calipers-silver', 'fire-hydrants'] } = Astro.props;
+const strip = photos.map(work);
+const quotes = testimonials();
+---
+
+<section class="reviews-band on-dark" aria-labelledby="reviews-band-title">
+  <div class="shell rb">
+    <div class="rb-score">
+      <Stars class="rb-stars" />
+      <ProofRow
+        class="rb-proof"
+        label="Google rating"
+        items={[
+          { value: GOOGLE_RATING, label: 'Google rating', source: REVIEW_SOURCE },
+          { value: GOOGLE_REVIEW_COUNT, label: 'Google reviews', source: REVIEW_SOURCE },
+        ]}
+      />
+      {RATING_AS_OF && <p class="rb-asof">As shown on Google in {RATING_AS_OF}.</p>}
+    </div>
+
+    <div class="rb-copy">
+      <h2 id="reviews-band-title" class="type-section">Customer reviews</h2>
+      <p class="rb-line">Read what customers wrote about the shop on Google. If we have coated a part for you, a review there helps the next customer find us.</p>
+      <div class="cmb-actions rb-actions">
+        <a href={GOOGLE_PROFILE_URL} class="cmb-solid-light" rel="noopener" target="_blank">Read our Google reviews <span aria-hidden="true">↗</span><span class="sr-only"> (opens Google in a new tab)</span></a>
+        <a href={GOOGLE_PROFILE_URL} class="cmb-link rb-leave" rel="noopener" target="_blank">Leave a review <span aria-hidden="true">↗</span><span class="sr-only"> (opens Google in a new tab)</span></a>
+      </div>
+    </div>
+
+    {
+      quotes.length > 0 && (
+        <div class="rb-quotes">
+          {quotes.map((entry) => (
+            <Quote attribution={entry.attribution} context={entry.context ?? 'Google review'} source={REVIEW_SOURCE} class="rb-quote">
+              <p>{entry.quote}</p>
+            </Quote>
+          ))}
+        </div>
+      )
+    }
+
+    <a href="/our-work/" class="rb-strip" data-slot="work-photos" data-visual="editorial">
+      <span class="rb-strip-grid">
+        {strip.map((photo) => (
+          <span class="rb-strip-cell">
+            <ResponsiveImage src={photo.src} alt={photo.alt} sizes="(min-width: 60rem) 16rem, 45vw" widths={[480, 768]} />
+          </span>
+        ))}
+      </span>
+      <span class="rb-strip-label">See more of our work <span aria-hidden="true">→</span></span>
+    </a>
+  </div>
+</section>
+
+<style>
+  .reviews-band {
+    padding-block: clamp(4rem, 3rem + 4vw, 6.5rem);
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+  .rb {
+    display: grid;
+    gap: 2.5rem;
+  }
+  .rb-score {
+    display: grid;
+    gap: 1rem;
+    align-content: start;
+    justify-items: start;
+  }
+  .rb-score :global(.rb-stars) {
+    font-size: 1.6rem;
+  }
+  .rb-score :global(.rb-proof) {
+    gap: 2.5rem;
+  }
+  .rb-score :global(.rb-proof dd) {
+    font-family: var(--font-display), sans-serif;
+    font-weight: var(--font-weight-display, 600);
+    font-size: clamp(4rem, 3rem + 4vw, 6.5rem);
+    line-height: 0.9;
+    color: var(--color-on-primary);
+  }
+  .rb-score :global(.rb-proof dt) {
+    font-family: var(--font-label), sans-serif;
+    font-size: var(--text-label);
+    letter-spacing: var(--tracking-label, 0.14em);
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--color-on-primary) 80%, transparent);
+  }
+  .rb-asof {
+    font-size: 0.9375rem;
+    color: color-mix(in srgb, var(--color-on-primary) 78%, transparent);
+  }
+  .rb-copy {
+    display: grid;
+    gap: 1.1rem;
+    align-content: center;
+    justify-items: start;
+  }
+  .rb-line {
+    max-inline-size: 34rem;
+    font-size: 1.0625rem;
+    color: color-mix(in srgb, var(--color-on-primary) 88%, transparent);
+  }
+  .rb-actions {
+    margin-block-start: 0.5rem;
+    padding-block-start: 1.25rem;
+    border-block-start: 3px solid var(--color-action);
+  }
+  .rb-leave {
+    color: var(--color-on-primary);
+  }
+  .rb-quotes {
+    display: grid;
+    gap: 1rem;
+  }
+  .rb-quotes :global(.rb-quote) {
+    padding: 1.5rem;
+    background-color: color-mix(in srgb, var(--color-graphite) 30%, var(--color-primary));
+    border-block-start: 3px solid var(--color-action);
+  }
+  .rb-strip {
+    display: grid;
+    gap: 0.9rem;
+    color: var(--color-on-primary);
+    text-decoration: none;
+  }
+  .rb-strip-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.5rem;
+  }
+  .rb-strip-cell {
+    display: block;
+    overflow: hidden;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--cmb-radius-sm);
+    background-color: var(--color-graphite);
+  }
+  .rb-strip-cell :global(img) {
+    inline-size: 100%;
+    block-size: 100%;
+    object-fit: cover;
+    transition: transform 600ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .rb-strip:hover .rb-strip-cell :global(img) {
+    transform: scale(1.04);
+  }
+  .rb-strip-label {
+    font-weight: 500;
+    text-decoration: underline;
+    text-decoration-color: var(--color-action);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.35em;
+    justify-self: start;
+    min-block-size: var(--tap-target);
+    display: inline-flex;
+    align-items: center;
+  }
+  @media (min-width: 48rem) {
+    .rb-strip-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+    .rb-quotes {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+  @media (min-width: 60rem) {
+    .rb {
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 3rem 5rem;
+    }
+    .rb-quotes,
+    .rb-strip {
+      grid-column: 1 / -1;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .rb-strip-cell :global(img) {
+      transition: none;
+    }
+  }
+</style>
