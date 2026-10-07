@@ -8,7 +8,7 @@ as `[UNKNOWN]` rather than guessing — see `AGENTS.md`.
 
 ## Business identity
 
-- Legal name: `[UNKNOWN]`
+- Legal name: CMB Group LLC
 - Trading / display name: CMB Powder Coating
 - Tagline: `[UNKNOWN]`
 - One-line description: `[UNKNOWN]`
@@ -20,7 +20,7 @@ as `[UNKNOWN]` rather than guessing — see `AGENTS.md`.
 - Primary email: cmbpowdercoating@cmbgroup.us
 - Mailing address (if different): `[UNKNOWN]`
 - Hours of operation: `[UNKNOWN]`
-- Preferred contact method: `[UNKNOWN]`
+- Preferred contact method: Text, with a photo of the part, its size and the colour you want
 
 ## Services
 
@@ -57,7 +57,16 @@ confirms the wording). Status: `confirmed`, `conflicting`, `missing` or
 
 | ID | Kind | Commitment | Visibility | Wording | Source | Support | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| `[UNKNOWN]` | `[UNKNOWN]` | `[UNKNOWN]` | `[UNKNOWN]` | `[UNKNOWN]` | `[UNKNOWN]` | `[UNKNOWN]` | `[UNKNOWN]` |
+| turnaround | commitment | Typical turnaround is about a week, sometimes faster depending on workload and colour. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| rush | offer | Rush jobs are available. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| colours | commitment | A wide variety of colours. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| quick-turnaround | commitment | Quick turnaround times. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| text-quotes | policy | Quotes by text: send a photo of the part with its size and the colour you want. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| hours | policy | Flexible hours: available most of the day by appointment or with a heads-up. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| sandblasting-prep | policy | Sandblasting is done mostly as preparation for powder coating. | public-constrained | Sandblasting is mostly prep for powder coating. | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| customers | commitment | Works with both individual customers and businesses. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| service-pride | commitment | Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result. | public-constrained | We take pride in fast, quality work and great customer service, and in seeing customers happy with the final result. | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| oven-size | commitment | Current oven capacity about 78 x 64 x 22 (units not stated); a bigger oven is in progress. | internal-only |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
 
 ## People
 
@@ -92,8 +101,8 @@ Record only what the client has confirmed and can substantiate.
 Only reproduce testimonials the client has supplied and authorized.
 
 - Supplied testimonials: `[UNKNOWN]`
-- Review platform links: `[UNKNOWN]`
-- Ratings/counts authorized for display: `[UNKNOWN]`
+- Review platform links: Google Business Profile: https://www.google.com/maps?cid=8908024561109658504
+- Ratings/counts authorized for display: Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07)
 
 ## Brand
 
@@ -171,3 +180,4 @@ Anything a build agent needed and could not find. Mirror these into
 | 2026-10-05 | Recorded 13 item(s) from the source package (live-site, drive-cmb-baseline) | source-worker — see truth/provenance.json |
 | 2026-10-05 | Trading / display name → CMB Powder Coating; Primary phone → (208) 440-7812; Primary email → cmbpowdercoating@cmbgroup.us; Service geography → Treasure Valley, Idaho; Operating base → Boise, Idaho; Delivery model → storefront; Public customer-facing address → 9461 Hackamore Dr, Boise, ID 83709 | Samuel |
 | 2026-10-05 | Service geography → Idaho's Treasure Valley | Samuel |
+| 2026-10-07 | Legal name → CMB Group LLC; Preferred contact method → Text, with a photo of the part, its size and the colour you want; Review platform links → Google Business Profile: https://www.google.com/maps?cid=8908024561109658504; Ratings/counts authorized for display → Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07); Commitment turnaround: Typical turnaround is about a week, sometimes faster depending on workload and colour.; Commitment rush: Rush jobs are available.; Commitment colours: A wide variety of colours.; Commitment quick-turnaround: Quick turnaround times.; Commitment text-quotes: Quotes by text: send a photo of the part with its size and the colour you want.; Commitment hours: Flexible hours: available most of the day by appointment or with a heads-up.; Commitment sandblasting-prep: Sandblasting is done mostly as preparation for powder coating.; Commitment customers: Works with both individual customers and businesses.; Commitment service-pride: Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result.; Commitment oven-size: Current oven capacity about 78 x 64 x 22 (units not stated); a bigger oven is in progress. | David (owner), relayed by Samuel 2026-10-07 |

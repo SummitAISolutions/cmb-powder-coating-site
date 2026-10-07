@@ -3,10 +3,10 @@
   "status": "client",
   "source": {
     "facts": "facts.md",
-    "factsSha256": "sha256:a86643b0dff5c0b414ce906e5aefa1b1e1a25ef8e6ab747339c0d0ea79a2a9fc"
+    "factsSha256": "sha256:c091649942819d2b9d6fdca3f68f07073766c30a4920c64a223430dce60d750a"
   },
   "publicName": "CMB Powder Coating",
-  "legalName": null,
+  "legalName": "CMB Group LLC",
   "businessModel": "storefront",
   "deliveryModel": "storefront",
   "schemaType": "LocalBusiness",

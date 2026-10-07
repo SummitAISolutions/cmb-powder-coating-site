@@ -4,10 +4,10 @@
   "status": "client",
   "source": {
     "facts": "facts.md",
-    "factsSha256": "sha256:a86643b0dff5c0b414ce906e5aefa1b1e1a25ef8e6ab747339c0d0ea79a2a9fc"
+    "factsSha256": "sha256:c091649942819d2b9d6fdca3f68f07073766c30a4920c64a223430dce60d750a"
   },
   "identity": {
-    "legalName": null,
+    "legalName": "CMB Group LLC",
     "displayName": "CMB Powder Coating",
     "tagline": null,
     "description": null,
@@ -18,7 +18,7 @@
     "primaryEmail": "cmbpowdercoating@cmbgroup.us",
     "mailingAddress": null,
     "hours": null,
-    "preferredContact": null
+    "preferredContact": "Text, with a photo of the part, its size and the colour you want"
   },
   "geography": {
     "operatingBase": "Boise, Idaho",
@@ -47,7 +47,108 @@
       "excluded": null
     }
   ],
-  "commitments": [],
+  "commitments": [
+    {
+      "id": "turnaround",
+      "kind": "commitment",
+      "statement": "Typical turnaround is about a week, sometimes faster depending on workload and colour.",
+      "visibility": "public",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "rush",
+      "kind": "offer",
+      "statement": "Rush jobs are available.",
+      "visibility": "public",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "colours",
+      "kind": "commitment",
+      "statement": "A wide variety of colours.",
+      "visibility": "public",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "quick-turnaround",
+      "kind": "commitment",
+      "statement": "Quick turnaround times.",
+      "visibility": "public",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "text-quotes",
+      "kind": "policy",
+      "statement": "Quotes by text: send a photo of the part with its size and the colour you want.",
+      "visibility": "public",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "hours",
+      "kind": "policy",
+      "statement": "Flexible hours: available most of the day by appointment or with a heads-up.",
+      "visibility": "public",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "sandblasting-prep",
+      "kind": "policy",
+      "statement": "Sandblasting is done mostly as preparation for powder coating.",
+      "visibility": "public-constrained",
+      "wording": "Sandblasting is mostly prep for powder coating.",
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "customers",
+      "kind": "commitment",
+      "statement": "Works with both individual customers and businesses.",
+      "visibility": "public",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "service-pride",
+      "kind": "commitment",
+      "statement": "Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result.",
+      "visibility": "public-constrained",
+      "wording": "We take pride in fast, quality work and great customer service, and in seeing customers happy with the final result.",
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    },
+    {
+      "id": "oven-size",
+      "kind": "commitment",
+      "statement": "Current oven capacity about 78 x 64 x 22 (units not stated); a bigger oven is in progress.",
+      "visibility": "internal-only",
+      "wording": null,
+      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "support": "exact",
+      "status": "confirmed"
+    }
+  ],
   "prohibitedClaims": [
     "Any testimonial or review not supplied by the client or quoted from a real public review (the current site's 'Spencer Walsh, Founder Lokamart' lorem-ipsum testimonials are fabricated template filler)",
     "Longevity or years-in-business claims (the business is new; the domain dates from 2024-01-24)",
@@ -107,8 +208,8 @@
     "publishablePrices": null,
     "nonPublishablePrices": null,
     "testimonials": null,
-    "reviewLinks": null,
-    "ratings": null
+    "reviewLinks": "Google Business Profile: https://www.google.com/maps?cid=8908024561109658504",
+    "ratings": "Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07)"
   },
   "openQuestions": [
     "Which jobs does CMB most want more of, and which does it not want (automotive/enthusiast parts, wheels, commercial/production, other)? This decides what the homepage leads with.",
