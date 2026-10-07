@@ -100,9 +100,28 @@ Record only what the client has confirmed and can substantiate.
 
 Only reproduce testimonials the client has supplied and authorized.
 
-- Supplied testimonials: `[UNKNOWN]`
+- Supplied testimonials: Nine Google reviews, transcribed verbatim from Samuel's screenshots of the Google Business Profile (2026-10-07); display authorised by the owner. See the table below.
 - Review platform links: Google Business Profile: https://www.google.com/maps?cid=8908024561109658504
 - Ratings/counts authorized for display: Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07)
+
+### Google reviews (verbatim, display authorised)
+
+Transcribed exactly from Google, including the reviewers' own spelling. Display
+names are shortened to first name and last initial (business names kept).
+All nine are 5 stars. Customer photos attached to these reviews belong to the
+reviewers and are not used on the site.
+
+| ID | Reviewer (display) | Rating | Review |
+| --- | --- | --- | --- |
+| review-ben | Ben E. | 5 | Highly recommend CMB Powder Coating. He did an excellent job powder coating the rock sliders on my FJ Cruiser. The quality was top-notch, the turnaround was fast, and the pricing was very fair. You can tell he takes pride in his work. 5-star experience. |
+| review-brentech | BrenTech | 5 | The last bit of items I sent in for powder coat through I tell you all his work does not disappoint. If you’re in the treasure valley area and looking for powder coating, this is the guy! Amazing work! |
+| review-edward | Edward K. | 5 | David is very communicative, professional and offers great work at a good price point. He's coated my wheels, rotors, brakes, and was even able to do a stencil properly. Im very happy with the work. |
+| review-daniil | Daniil P. | 5 | Loved the way my rims turned out! Highly recommend! |
+| review-randy | Randy W. | 5 | CMB is the best powder coating service in the Treasure Valley! David is affordable, commutative, quick and very flexible. CMB does high quality work that lasts. I highly recommend David and his company! |
+| review-matthew | Matthew W. | 5 | super easy to work with. great results. i would gladly go back to him for future work. thanks again! |
+| review-jeff | Jeff S. | 5 | Great customer service and lead times! This is my new powder coat guy I've used for several small projects so far. Keep up the good work! |
+| review-mrdi | MRDI Studios | 5 | Very satisfied with the results. Thank you! |
+| review-alex | Alex G. | 5 | Good quality for a good price. Highly recommend |
 
 ## Brand
 
@@ -181,3 +200,4 @@ Anything a build agent needed and could not find. Mirror these into
 | 2026-10-05 | Trading / display name → CMB Powder Coating; Primary phone → (208) 440-7812; Primary email → cmbpowdercoating@cmbgroup.us; Service geography → Treasure Valley, Idaho; Operating base → Boise, Idaho; Delivery model → storefront; Public customer-facing address → 9461 Hackamore Dr, Boise, ID 83709 | Samuel |
 | 2026-10-05 | Service geography → Idaho's Treasure Valley | Samuel |
 | 2026-10-07 | Legal name → CMB Group LLC; Preferred contact method → Text, with a photo of the part, its size and the colour you want; Review platform links → Google Business Profile: https://www.google.com/maps?cid=8908024561109658504; Ratings/counts authorized for display → Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07); Commitment turnaround: Typical turnaround is about a week, sometimes faster depending on workload and colour.; Commitment rush: Rush jobs are available.; Commitment colours: A wide variety of colours.; Commitment quick-turnaround: Quick turnaround times.; Commitment text-quotes: Quotes by text: send a photo of the part with its size and the colour you want.; Commitment hours: Flexible hours: available most of the day by appointment or with a heads-up.; Commitment sandblasting-prep: Sandblasting is done mostly as preparation for powder coating.; Commitment customers: Works with both individual customers and businesses.; Commitment service-pride: Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result.; Commitment oven-size: Current oven capacity about 78 x 64 x 22 (units not stated); a bigger oven is in progress. | David (owner), relayed by Samuel 2026-10-07 |
+| 2026-10-07 | Supplied testimonials → Nine Google reviews, transcribed verbatim from Samuel's screenshots of the Google Business Profile (2026-10-07); display authorised by the owner. See the table below. | Samuel (screenshots of Google reviews), 2026-10-07 |
