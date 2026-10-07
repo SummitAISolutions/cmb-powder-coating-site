@@ -66,7 +66,8 @@ confirms the wording). Status: `confirmed`, `conflicting`, `missing` or
 | sandblasting-prep | policy | Sandblasting is done mostly as preparation for powder coating. | public-constrained | Sandblasting is mostly prep for powder coating. | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
 | customers | commitment | Works with both individual customers and businesses. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
 | service-pride | commitment | Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result. | public-constrained | We take pride in fast, quality work and great customer service, and in seeing customers happy with the final result. | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| oven-size | commitment | Current oven capacity about 78 x 64 x 22 (units not stated); a bigger oven is in progress. | internal-only |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| oven-size | commitment | Current oven capacity is about 78 x 64 x 22 inches. | public-constrained | Our oven takes parts up to about 78 × 64 × 22 inches. | Owner answers relayed by Samuel, 2026-10-07; units (inches) confirmed by Samuel | exact | confirmed |
+| bigger-oven | commitment | A bigger oven is in progress. | internal-only |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
 
 ## People
 
@@ -165,30 +166,16 @@ truth. Never published.
 ## Open questions
 
 Anything a build agent needed and could not find. Mirror these into
-`INPUT_MANIFEST.md`.
+`INPUT_MANIFEST.md`. Answered 2026-10-07 by the owner (relayed by Samuel)
+and removed: job mix, sandblasting, drop-off and hours, turnaround and rush,
+oven size, quoting, legal name, second phone, photo use, review display,
+site claims, and the public-research identity facts Samuel confirmed.
 
-- Which jobs does CMB most want more of, and which does it not want (automotive/enthusiast parts, wheels, commercial/production, other)? This decides what the homepage leads with.
-- Is sandblasting a service CMB sells on its own, or only a prep step inside powder coating? (Decides whether it gets its own page.)
-- How do parts reach the shop (customer drop-off at 9461 Hackamore Dr, pickup/delivery, shipping), and what are the hours? Sets the delivery model and whether the address is shown.
-- Realistic turnaround in days, and is rush work offered?
-- Physical limits: oven/booth size, maximum part size and weight.
-- What does CMB need to quote a job (photos, dimensions, metal type, colour), and where should quote requests be delivered (email, text)?
-- Legal/registered business name and its relationship to 'CMB Group' (footer '© 2024 CMBGroup', email domain cmbgroup.us).
-- Is the second number (986) 229-5116 shown on the current site still a business line, or should only (208) 440-7812 be published?
-- May the site use CMB's real work photos from Instagram and the current site's media library, and are full-resolution originals available?
-- May the site display the 5.0 Google rating and quote the nine real Google reviews?
-- Confirm or drop the current site's claims: 'No Delays' / 'On Time' / 'Quick Response', 'save you money and time', 'hundreds of colors', 'a new upcoming company' (2024).
-- Public research suggests Trading / display name: "CMB Powder Coating" — is that correct?
-- Public research suggests Website: "https://cmbpowdercoating.com/" — is that correct?
+- Where should quote-form submissions be delivered (the owner prefers text; the form currently goes to the preview test sink only)?
+- Is CMB-Logo.jpg (wordmark "CMB POWDER COATING — Product & Service by CMB Group") approved for the site, and is a full-resolution or vector version available?
+- Public research suggests Website: "https://cmbpowdercoating.com/" — is that correct (needed for canonical URLs at launch)?
 - Public research suggests One-line description: "Powder coating and sandblasting in Boise, Idaho" — is that correct?
-- Public research suggests Primary phone: "(208) 440-7812" — is that correct?
-- Public research suggests Primary email: "cmbpowdercoating@cmbgroup.us" — is that correct?
-- Public research suggests Operating base: "Boise, Idaho" — is that correct?
-- Public research suggests Public customer-facing address: "9461 Hackamore Dr, Boise, ID 83709" — is that correct?
-- Public research suggests Service geography: "Treasure Valley, Idaho" — is that correct?
 - Public research suggests Local presence / Google Business Profile: "Google Business Profile 'CMB Powder Coating', Boise ID, primary category Powder coating service" — is that correct?
-- Public research suggests Review platform links: "Google Business Profile (Maps CID 8908024561109658504)" — is that correct?
-- Public research suggests Logo files: "CMB-Logo.jpg on the current site (wordmark 'CMB POWDER COATING — Product & Service by CMB Group')" — is that correct?
 - Public research suggests Things to avoid saying: "The misspelling 'CMB Power Coating'" — is that correct?
 
 ## Change log
@@ -201,3 +188,4 @@ Anything a build agent needed and could not find. Mirror these into
 | 2026-10-05 | Service geography → Idaho's Treasure Valley | Samuel |
 | 2026-10-07 | Legal name → CMB Group LLC; Preferred contact method → Text, with a photo of the part, its size and the colour you want; Review platform links → Google Business Profile: https://www.google.com/maps?cid=8908024561109658504; Ratings/counts authorized for display → Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07); Commitment turnaround: Typical turnaround is about a week, sometimes faster depending on workload and colour.; Commitment rush: Rush jobs are available.; Commitment colours: A wide variety of colours.; Commitment quick-turnaround: Quick turnaround times.; Commitment text-quotes: Quotes by text: send a photo of the part with its size and the colour you want.; Commitment hours: Flexible hours: available most of the day by appointment or with a heads-up.; Commitment sandblasting-prep: Sandblasting is done mostly as preparation for powder coating.; Commitment customers: Works with both individual customers and businesses.; Commitment service-pride: Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result.; Commitment oven-size: Current oven capacity about 78 x 64 x 22 (units not stated); a bigger oven is in progress. | David (owner), relayed by Samuel 2026-10-07 |
 | 2026-10-07 | Supplied testimonials → Nine Google reviews, transcribed verbatim from Samuel's screenshots of the Google Business Profile (2026-10-07); display authorised by the owner. See the table below. | Samuel (screenshots of Google reviews), 2026-10-07 |
+| 2026-10-07 | Commitment oven-size: Current oven capacity is about 78 x 64 x 22 inches.; Commitment bigger-oven: A bigger oven is in progress. | Samuel (units confirmed), 2026-10-07 |
