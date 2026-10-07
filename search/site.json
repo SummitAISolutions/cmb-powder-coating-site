@@ -8,7 +8,7 @@
       "kind": "home",
       "intent": "convert",
       "primaryCta": "text",
-      "title": "CMB Powder Coating | Powder coating and sandblasting in Boise, Idaho",
+      "title": "CMB Powder Coating | Powder coating in Boise, Idaho",
       "description": "CMB Powder Coating is a powder coating shop at 9461 Hackamore Dr, Boise, serving the Treasure Valley. Text a photo of your part for a quote, or call (208) 440-7812.",
       "heading": "Powder coating in Boise, Idaho",
       "necessity": {
@@ -17,7 +17,8 @@
         "searchIntent": "Powder coating in Boise and the Treasure Valley, Idaho",
         "conversionRole": "Asks the visitor to text a photo of the part for a quote, with calling the shop and the quote form as the alternatives.",
         "contentPurpose": "The only page that introduces CMB Powder Coating as a whole: what the shop coats (from its real job photos), turnaround and rush jobs, how a job reaches the Hackamore Dr shop, its Google reviews, and routes to the services, work and quote pages."
-      }
+      },
+      "breadcrumb": "Home"
     },
     {
       "id": "services",
@@ -27,13 +28,13 @@
       "intent": "convert",
       "primaryCta": "text",
       "title": "Powder coating and sandblasting services | CMB Powder Coating, Boise",
-      "description": "Powder coating at CMB Powder Coating in Boise, Idaho: what the shop coats, sandblasting as prep, what to send for a quote, turnaround and rush jobs.",
+      "description": "Powder coating in Boise, Idaho: what we coat, sandblasting as prep, what to send for a quote, turnaround, and rush jobs.",
       "heading": "Powder coating and sandblasting",
       "necessity": {
         "reason": "distinct-service",
         "userIntent": "A visitor who already knows they need a part coated wants the detail before getting in touch: what the shop works on, where sandblasting fits, what to send for a quote and how long a job takes.",
         "searchIntent": "Powder coating and sandblasting services in Boise, Idaho",
-        "conversionRole": "Asks the visitor to text a photo of the part with its size and colour for a quote, or to call.",
+        "conversionRole": "Asks the visitor to text a photo of the part with its size and color for a quote, or to call.",
         "contentPurpose": "The one page for the shop's work in detail. Sandblasting is a section here because the owner confirmed it is mostly prep for powder coating, not a separate service page."
       }
     },
@@ -43,8 +44,8 @@
       "kind": "content",
       "intent": "convert",
       "primaryCta": "text",
-      "title": "Our work: powder coated wheels, calipers, frames and equipment | CMB Powder Coating",
-      "description": "Photos of real parts powder coated by CMB Powder Coating in Boise: wheels and rims, brake calipers, frames, equipment attachments and fire hydrants.",
+      "title": "Our work: powder-coated wheels, calipers, frames, and equipment | CMB Powder Coating",
+      "description": "Photos of real parts powder coated by CMB Powder Coating in Boise: wheels and rims, brake calipers, frames, equipment attachments, and fire hydrants.",
       "heading": "Our work",
       "necessity": {
         "reason": "distinct-information",
@@ -155,7 +156,7 @@
             },
             {
               "name": "message",
-              "label": "Describe the part: what it is, rough size, metal, current finish and the colour you want",
+              "label": "Describe the part: what it is, its rough size, the metal, its current finish, and the color you want",
               "required": true
             }
           ],

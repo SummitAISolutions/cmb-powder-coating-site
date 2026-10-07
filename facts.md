@@ -20,7 +20,7 @@ as `[UNKNOWN]` rather than guessing — see `AGENTS.md`.
 - Primary email: cmbpowdercoating@cmbgroup.us
 - Mailing address (if different): `[UNKNOWN]`
 - Hours of operation: `[UNKNOWN]`
-- Preferred contact method: Text, with a photo of the part, its size and the colour you want
+- Preferred contact method: Text, with a photo of the part, its size and the color you want
 
 ## Services
 
@@ -57,15 +57,15 @@ confirms the wording). Status: `confirmed`, `conflicting`, `missing` or
 
 | ID | Kind | Commitment | Visibility | Wording | Source | Support | Status |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| turnaround | commitment | Typical turnaround is about a week, sometimes faster depending on workload and colour. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| rush | offer | Rush jobs are available. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| colours | commitment | A wide variety of colours. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| quick-turnaround | commitment | Quick turnaround times. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| text-quotes | policy | Quotes by text: send a photo of the part with its size and the colour you want. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| hours | policy | Flexible hours: available most of the day by appointment or with a heads-up. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| turnaround | commitment | Typical turnaround is about a week. It can be faster, depending on workload and color. | public |  | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
+| rush | offer | Rush jobs are available. | public |  | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
+| colours | commitment | Choose from a wide variety of colors. | public |  | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
+| quick-turnaround | commitment | Quick turnaround times. | public |  | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
+| text-quotes | policy | For a quote, text a photo of the part with its size and the color you want. | public |  | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
+| hours | policy | Hours are flexible. We're available all day by appointment or with a heads-up. | public |  | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
 | sandblasting-prep | policy | Sandblasting is done mostly as preparation for powder coating. | public-constrained | Sandblasting is mostly prep for powder coating. | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| customers | commitment | Works with both individual customers and businesses. | public |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
-| service-pride | commitment | Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result. | public-constrained | We take pride in fast, quality work and great customer service, and in seeing customers happy with the final result. | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
+| customers | commitment | We work with individual customers and businesses. | public |  | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
+| service-pride | commitment | Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result. | public-constrained | We're proud of the speed and quality of our work, and of seeing customers happy with the final result. | Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07 | exact | confirmed |
 | oven-size | commitment | Current oven capacity is about 78 x 64 x 22 inches. | public-constrained | Our oven takes parts up to about 78 × 64 × 22 inches. | Owner answers relayed by Samuel, 2026-10-07; units (inches) confirmed by Samuel | exact | confirmed |
 | bigger-oven | commitment | A bigger oven is in progress. | internal-only |  | Owner answers relayed by Samuel, 2026-10-07 | exact | confirmed |
 
@@ -103,7 +103,7 @@ Only reproduce testimonials the client has supplied and authorized.
 
 - Supplied testimonials: Nine Google reviews, transcribed verbatim from Samuel's screenshots of the Google Business Profile (2026-10-07); display authorised by the owner. See the table below.
 - Review platform links: Google Business Profile: https://www.google.com/maps?cid=8908024561109658504
-- Ratings/counts authorized for display: Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07)
+- Ratings/counts authorized for display: Google rating 5.0 from 9 reviews (as observed 2026-10-07 in Samuel's screenshots of the Google Business Profile; display authorised by the owner 2026-10-07)
 
 ### Google reviews (verbatim, display authorised)
 
@@ -189,3 +189,6 @@ site claims, and the public-research identity facts Samuel confirmed.
 | 2026-10-07 | Legal name → CMB Group LLC; Preferred contact method → Text, with a photo of the part, its size and the colour you want; Review platform links → Google Business Profile: https://www.google.com/maps?cid=8908024561109658504; Ratings/counts authorized for display → Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07); Commitment turnaround: Typical turnaround is about a week, sometimes faster depending on workload and colour.; Commitment rush: Rush jobs are available.; Commitment colours: A wide variety of colours.; Commitment quick-turnaround: Quick turnaround times.; Commitment text-quotes: Quotes by text: send a photo of the part with its size and the colour you want.; Commitment hours: Flexible hours: available most of the day by appointment or with a heads-up.; Commitment sandblasting-prep: Sandblasting is done mostly as preparation for powder coating.; Commitment customers: Works with both individual customers and businesses.; Commitment service-pride: Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result.; Commitment oven-size: Current oven capacity about 78 x 64 x 22 (units not stated); a bigger oven is in progress. | David (owner), relayed by Samuel 2026-10-07 |
 | 2026-10-07 | Supplied testimonials → Nine Google reviews, transcribed verbatim from Samuel's screenshots of the Google Business Profile (2026-10-07); display authorised by the owner. See the table below. | Samuel (screenshots of Google reviews), 2026-10-07 |
 | 2026-10-07 | Commitment oven-size: Current oven capacity is about 78 x 64 x 22 inches.; Commitment bigger-oven: A bigger oven is in progress. | Samuel (units confirmed), 2026-10-07 |
+| 2026-10-07 | Preferred contact method → Text, with a photo of the part, its size and the color you want; Ratings/counts authorized for display → Google rating 5.0 from 9 reviews (as observed 2026-10-07 in Samuel's screenshots of the Google Business Profile; display authorised by the owner 2026-10-07); Commitment turnaround: Typical turnaround is about a week, and sometimes faster depending on workload and color.; Commitment rush: Rush jobs are available.; Commitment colours: Choose from a wide variety of colors.; Commitment quick-turnaround: Quick turnaround times.; Commitment text-quotes: For a quote, text a photo of the part with its size and the color you want.; Commitment hours: Hours are flexible. We are available all day by appointment or with a heads-up.; Commitment customers: We work with individual customers and businesses.; Commitment service-pride: Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result. | Samuel (US-English copy edit), 2026-10-07 |
+| 2026-10-07 | Commitment hours: Hours are flexible. We're available all day by appointment or with a heads-up.; Commitment service-pride: Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result. | Samuel (US-English copy edit), 2026-10-07 |
+| 2026-10-07 | Commitment turnaround: Typical turnaround is about a week. It can be faster, depending on workload and color. | Samuel (US-English copy edit), 2026-10-07 |

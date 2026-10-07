@@ -23,7 +23,7 @@ const closing = work('silver-pair');
   <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 50%">
     <Fragment slot="eyebrow">Error 404</Fragment>
     <h1 class="type-hero">{route.heading}</h1>
-    <p class="type-lede">That page does not exist, or it moved when the site was rebuilt.</p>
+    <p class="type-lede">That page doesn't exist, or it moved when we rebuilt the site.</p>
     <Fragment slot="actions">
       <a href="/" class="cmb-solid-light is-large">Back to the home page</a>
       <a href="/our-work/" class="cmb-outline is-large">See our work</a>
@@ -32,5 +32,7 @@ const closing = work('silver-pair');
 
   <ReviewsBand />
 
-  <ClosingCta heading="Looking for a quote?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" />
+  <ClosingCta heading="Looking for a quote?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%">
+    Text a photo of your part, or use the quote form.
+  </ClosingCta>
 </ShopLayout>

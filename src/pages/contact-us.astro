@@ -33,7 +33,7 @@ const closing = work('gunmetal-pair');
   <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 50%">
     <Breadcrumbs slot="crumbs" routeId="contact" />
     <h1 class="type-hero">{route.heading}</h1>
-    <p class="type-lede">Text a photo of the part, call the shop, or send the details in the form below.</p>
+    <p class="type-lede">Text a photo of the part, call us, or send the details in the form below.</p>
     <Fragment slot="actions">
       <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
       <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
@@ -66,15 +66,15 @@ const closing = work('gunmetal-pair');
 
       <div id="quote-form" class="reach-form">
         <h2 class="type-section reach-form-title">Or describe the part</h2>
-        <p class="reach-form-line">What it is, its rough size, the metal, its current finish and the colour you want.</p>
+        <p class="reach-form-line">No photo handy? Tell us about the part, and we'll get back to you.</p>
         <LeadForm
           formId="quote"
           submitLabel="Request a quote"
           class="reach-lead"
           messages={{
-            received: 'Thank you. Your quote request was sent.',
-            failed: 'Your request could not be sent. Please try again, or text or call the shop.',
-            pending: 'We could not confirm that your request arrived. Please text or call the shop.',
+            received: 'Thanks! Your quote request was sent.',
+            failed: "Your request couldn't be sent. Please try again, or text or call us.",
+            pending: "We couldn't confirm that your request arrived. Please text or call us.",
           }}
         />
       </div>
@@ -84,7 +84,7 @@ const closing = work('gunmetal-pair');
   <ReviewsBand reviews={['review-jeff', 'review-randy', 'review-matthew', 'review-ben']} />
 
   <ClosingCta heading="Rather talk it through?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" quoteHref="#quote-form" quoteLabel="Back to the form">
-    Text or call the shop and describe the part.
+    Text or call us and describe the part.
   </ClosingCta>
 </ShopLayout>
 

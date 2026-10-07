@@ -44,7 +44,7 @@ const closing = work('gloss-black-six-spoke');
   <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 60%" mobileFocal="50% 55%">
     <Breadcrumbs slot="crumbs" routeId="services" />
     <h1 class="type-hero">{route.heading}</h1>
-    <p class="type-lede">What the shop coats, what to send for a quote, and how long a job takes.</p>
+    <p class="type-lede">What we coat, what to send for a quote, and how long a job takes.</p>
     <Fragment slot="actions">
       <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
       <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
@@ -88,7 +88,7 @@ const closing = work('gloss-black-six-spoke');
       <div class="svc-copy">
         <h2 id="blast-title" class="type-section">{serviceName('sandblasting')}</h2>
         <Commitment id="sandblasting-prep" as="p" class="svc-blast-lead" />
-        <p>Abrasive blasting strips old paint, old coatings, rust and mill scale, and leaves bare metal with an even surface that a new coating can grip.</p>
+        <p>Abrasive blasting strips old paint, old coatings, rust, and mill scale, leaving bare metal with an even surface a new coating can grip.</p>
         <p>Not sure whether your part needs it? Ask when you text or call.</p>
       </div>
     </div>
@@ -98,7 +98,7 @@ const closing = work('gloss-black-six-spoke');
     <div class="shell send">
       <div class="send-head">
         <h2 id="send-title" class="type-section">What to send for a quote</h2>
-        <Commitment id="text-quotes" as="p" class="send-line" />
+        <p class="send-line">Text us these three things:</p>
         <EntityFact field="primaryPhone" class="send-number" link={false} />
         <div class="cmb-actions">
           <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
@@ -108,7 +108,7 @@ const closing = work('gloss-black-six-spoke');
       <ul class="send-list" role="list">
         <li><span class="send-item">A photo of the part</span><span class="send-hint">The whole part, in good light.</span></li>
         <li><span class="send-item">Its size</span><span class="send-hint">Rough dimensions are fine.</span></li>
-        <li><span class="send-item">The colour you want</span><span class="send-hint">And the finish, if you know it: gloss, satin, metallic or textured.</span></li>
+        <li><span class="send-item">The color you want</span><span class="send-hint">Plus the finish, if you know it: gloss, satin, metallic, or textured.</span></li>
       </ul>
     </div>
   </section>
@@ -118,9 +118,8 @@ const closing = work('gloss-black-six-spoke');
       <div class="time-card surface-steel">
         <h2 id="time-title" class="type-section">Turnaround</h2>
         <Commitment id="turnaround" as="p" class="time-lead" />
-        <Commitment id="quick-turnaround" as="p" />
         <div class="time-rush">
-          <h3 class="time-sub">Rush jobs</h3>
+          <h3 class="time-sub">Need it sooner?</h3>
           <Commitment id="rush" as="p" />
         </div>
       </div>
@@ -129,7 +128,7 @@ const closing = work('gloss-black-six-spoke');
           <ResponsiveImage src={business.src} alt={business.alt} sizes="(min-width: 60rem) 36rem, 100vw" />
         </figure>
         <div class="time-who-body">
-          <h3 class="time-sub">Individuals and businesses</h3>
+          <h3 class="time-sub">Customers</h3>
           <Commitment id="customers" as="p" />
         </div>
       </div>
@@ -138,7 +137,9 @@ const closing = work('gloss-black-six-spoke');
 
   <ReviewsBand reviews={['review-randy', 'review-edward', 'review-ben', 'review-jeff']} />
 
-  <ClosingCta heading="Ready to send the details?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" quoteCta />
+  <ClosingCta heading="Ready to send the details?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" quoteCta>
+    Text us a photo, and we'll get you a quote.
+  </ClosingCta>
 </ShopLayout>
 
 <style>

@@ -31,30 +31,30 @@ const howPhoto = work('gloss-red');
 const closing = work('copper-rack-2');
 
 const tiles = [
-  { href: '/our-work/#wheels', name: 'Wheels and rims', photo: work('copper-rack'), focal: '45% 50%', line: 'Gloss, metallic, flake and textured finishes.', size: 'tall' },
-  { href: '/our-work/#calipers', name: 'Brake calipers', photo: work('calipers-silver'), focal: '50% 50%', line: 'Brake calipers, coated and cured.', size: 'small' },
-  { href: '/our-work/#frames', name: 'Frames', photo: work('frame-ebike'), focal: '40% 45%', line: 'Frames, like this electric bike.', size: 'small' },
-  { href: '/our-work/#equipment', name: 'Equipment and commercial', photo: work('fire-hydrants'), focal: '50% 55%', line: 'Excavator attachments, fire hydrants and more.', size: 'wide' },
+  { href: '/our-work/#wheels', name: 'Wheels and rims', photo: work('copper-rack'), focal: '45% 50%', line: 'Gloss, metallic, flake, and textured finishes.', size: 'tall' },
+  { href: '/our-work/#calipers', name: 'Brake calipers', photo: work('calipers-silver'), focal: '50% 50%', line: 'Shown here in silver.', size: 'small' },
+  { href: '/our-work/#frames', name: 'Frames', photo: work('frame-ebike'), focal: '40% 45%', line: 'Like this e-bike frame in satin black.', size: 'small' },
+  { href: '/our-work/#equipment', name: 'Equipment and commercial', photo: work('fire-hydrants'), focal: '50% 55%', line: 'Excavator attachments, fire hydrants, and more.', size: 'wide' },
 ];
 ---
 
 <ShopLayout routeId="home">
   <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 56%" mobileFocal="50% 40%" size="tall">
-    <Fragment slot="eyebrow">Powder coating · <EntityFact field="serviceAreas" /></Fragment>
+    <Fragment slot="eyebrow"><EntityFact field="serviceAreas" /></Fragment>
     <h1 class="type-hero">{route.heading}</h1>
-    <p class="type-lede">Wheels, calipers, frames and equipment parts, coated at our Boise shop.</p>
+    <p class="type-lede">Wheels, calipers, frames, and equipment parts, coated at our Boise shop.</p>
     <Fragment slot="actions">
       <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
       <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
     </Fragment>
   </Opener>
 
-  <section class="surface-tint promise" aria-label="Turnaround, rush jobs, colours and customers">
+  <section class="surface-tint promise" aria-label="Turnaround, rush jobs, colors, and customers">
     <ul class="shell promise-list" role="list">
       <li><h2 class="promise-name">Turnaround</h2><Commitment id="turnaround" as="p" class="promise-text" /></li>
-      <li><h2 class="promise-name">Rush jobs</h2><Commitment id="rush" as="p" class="promise-text" /></li>
-      <li><h2 class="promise-name">Colours</h2><Commitment id="colours" as="p" class="promise-text" /></li>
-      <li><h2 class="promise-name">Who we work with</h2><Commitment id="customers" as="p" class="promise-text" /></li>
+      <li><h2 class="promise-name">Need it sooner?</h2><Commitment id="rush" as="p" class="promise-text" /></li>
+      <li><h2 class="promise-name">Colors</h2><Commitment id="colours" as="p" class="promise-text" /></li>
+      <li><h2 class="promise-name">Customers</h2><Commitment id="customers" as="p" class="promise-text" /></li>
     </ul>
   </section>
 
@@ -62,7 +62,7 @@ const tiles = [
     <div class="shell work">
       <div class="cmb-head">
         <h2 id="work-title" class="type-section">What we coat</h2>
-        <p>Real jobs from the shop: wheels and rims, brake calipers, frames, equipment parts and more.</p>
+        <p>A few recent jobs from the shop.</p>
       </div>
       <div class="tiles">
         {tiles.map((tile) => (
@@ -91,17 +91,16 @@ const tiles = [
         <h2 id="job-title" class="type-section">How a job works</h2>
         <ol class="job-steps" role="list">
           <li>
-            <h3 class="job-step-title">Text a photo</h3>
+            <h3 class="job-step-title">Send a photo</h3>
             <Commitment id="text-quotes" as="p" />
           </li>
           <li>
             <h3 class="job-step-title">Get your quote</h3>
-            <p>The shop looks at what you sent and replies with a quote for the job.</p>
+            <p>We'll look at what you sent and reply with a quote.</p>
           </li>
           <li>
-            <h3 class="job-step-title">Drop it off at the shop</h3>
-            <EntityFact field="address" class="job-address" />
-            <Commitment id="hours" as="p" />
+            <h3 class="job-step-title">Drop it off</h3>
+            <p>Bring the part to our Boise shop.</p>
           </li>
         </ol>
         <div class="cmb-actions">
@@ -115,7 +114,7 @@ const tiles = [
     <div class="shell shop">
       <div class="shop-copy">
         <h2 id="shop-title" class="type-section">Where to bring your parts</h2>
-        <p class="shop-line">A storefront shop in Boise, serving <EntityFact field="serviceAreas" />. Customers drop their parts off here.</p>
+        <p class="shop-line">Our shop is in Boise, and we serve <EntityFact field="serviceAreas" />.</p>
         <Commitment id="service-pride" as="p" class="shop-pride" />
       </div>
       <div class="shop-reach surface-steel">
@@ -132,7 +131,7 @@ const tiles = [
   <ReviewsBand />
 
   <ClosingCta heading="Have a part that needs a new finish?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="45% 50%" quoteCta>
-    Text a photo, call the shop, or send the details in the quote form.
+    Text a photo, give us a call, or send the details through the quote form.
   </ClosingCta>
 </ShopLayout>
 

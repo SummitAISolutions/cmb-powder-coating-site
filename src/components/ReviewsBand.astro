@@ -38,7 +38,7 @@ const reviews = reviewsById(ids);
             { value: GOOGLE_REVIEW_COUNT, label: 'Google reviews', source: RATING_SOURCE },
           ]}
         />
-        {RATING_AS_OF && <p class="rb-asof">As shown on Google in {RATING_AS_OF}.</p>}
+        {RATING_AS_OF && <p class="rb-asof">On Google, as of {RATING_AS_OF}.</p>}
       </div>
       <div class="cmb-actions rb-actions">
         <a href="/reviews/" class="cmb-solid-light">Read all {GOOGLE_REVIEW_COUNT} reviews</a>

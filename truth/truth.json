@@ -4,7 +4,7 @@
   "status": "client",
   "source": {
     "facts": "facts.md",
-    "factsSha256": "sha256:acb7ce8fce8119f55fe8632d3fc7e3f9bca3bd94c546e686ba03073d220c15a2"
+    "factsSha256": "sha256:e298e7f6ee11b9f6b1d418d9e6fd0b55cae7fd0482411a32bb4d281251b7b553"
   },
   "identity": {
     "legalName": "CMB Group LLC",
@@ -18,7 +18,7 @@
     "primaryEmail": "cmbpowdercoating@cmbgroup.us",
     "mailingAddress": null,
     "hours": null,
-    "preferredContact": "Text, with a photo of the part, its size and the colour you want"
+    "preferredContact": "Text, with a photo of the part, its size and the color you want"
   },
   "geography": {
     "operatingBase": "Boise, Idaho",
@@ -51,10 +51,10 @@
     {
       "id": "turnaround",
       "kind": "commitment",
-      "statement": "Typical turnaround is about a week, sometimes faster depending on workload and colour.",
+      "statement": "Typical turnaround is about a week. It can be faster, depending on workload and color.",
       "visibility": "public",
       "wording": null,
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
@@ -64,17 +64,17 @@
       "statement": "Rush jobs are available.",
       "visibility": "public",
       "wording": null,
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
     {
       "id": "colours",
       "kind": "commitment",
-      "statement": "A wide variety of colours.",
+      "statement": "Choose from a wide variety of colors.",
       "visibility": "public",
       "wording": null,
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
@@ -84,27 +84,27 @@
       "statement": "Quick turnaround times.",
       "visibility": "public",
       "wording": null,
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
     {
       "id": "text-quotes",
       "kind": "policy",
-      "statement": "Quotes by text: send a photo of the part with its size and the colour you want.",
+      "statement": "For a quote, text a photo of the part with its size and the color you want.",
       "visibility": "public",
       "wording": null,
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
     {
       "id": "hours",
       "kind": "policy",
-      "statement": "Flexible hours: available most of the day by appointment or with a heads-up.",
+      "statement": "Hours are flexible. We're available all day by appointment or with a heads-up.",
       "visibility": "public",
       "wording": null,
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
@@ -121,10 +121,10 @@
     {
       "id": "customers",
       "kind": "commitment",
-      "statement": "Works with both individual customers and businesses.",
+      "statement": "We work with individual customers and businesses.",
       "visibility": "public",
       "wording": null,
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
@@ -133,8 +133,8 @@
       "kind": "commitment",
       "statement": "Proud of the speed and quality of the work, great customer service, and customers who are happy with the final result.",
       "visibility": "public-constrained",
-      "wording": "We take pride in fast, quality work and great customer service, and in seeing customers happy with the final result.",
-      "source": "Owner answers relayed by Samuel, 2026-10-07",
+      "wording": "We're proud of the speed and quality of our work, and of seeing customers happy with the final result.",
+      "source": "Owner answers relayed by Samuel, 2026-10-07; US-English copy edit 2026-10-07",
       "support": "exact",
       "status": "confirmed"
     },
@@ -219,7 +219,7 @@
     "nonPublishablePrices": null,
     "testimonials": "Nine Google reviews, transcribed verbatim from Samuel's screenshots of the Google Business Profile (2026-10-07); display authorised by the owner. See the table below.",
     "reviewLinks": "Google Business Profile: https://www.google.com/maps?cid=8908024561109658504",
-    "ratings": "Google rating 5.0 from 9 reviews (as observed 2026-09-22; display authorised by the owner 2026-10-07)"
+    "ratings": "Google rating 5.0 from 9 reviews (as observed 2026-10-07 in Samuel's screenshots of the Google Business Profile; display authorised by the owner 2026-10-07)"
   },
   "openQuestions": [
     "Where should quote-form submissions be delivered (the owner prefers text; the form currently goes to the preview test sink only)?",

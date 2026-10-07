@@ -36,9 +36,9 @@ const closing = work('light-blue-pair-2');
   <Opener image={opening.src} alt={opening.alt} slotId="work-photos" focal="50% 45%">
     <Breadcrumbs slot="crumbs" routeId="our-work" />
     <h1 class="type-hero">{route.heading}</h1>
-    <p class="type-lede">Real parts from the shop: wheels and rims, brake calipers, frames, equipment and more.</p>
+    <p class="type-lede">Parts we've coated: wheels and rims, brake calipers, frames, equipment, and more.</p>
     <Fragment slot="actions">
-      <PhoneAction kind="sms" cta="text" label="Text a photo of your part" class="cmb-pill is-large" />
+      <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large" />
       <EntityFact field="primaryPhone" cta="call" class="cmb-outline cmb-pill--call is-large" />
     </Fragment>
   </Opener>
@@ -53,7 +53,7 @@ const closing = work('light-blue-pair-2');
     <div class="shell gallery">
       <div class="cmb-head">
         <h2 id="wheels-title" class="type-section">{name('wheels')}</h2>
-        <p>Gloss black, gloss red, white, silver, gunmetal, light blue, bronze, copper metal flake and a dark textured metallic.</p>
+        <p>Gloss black, gloss red, white, silver, gunmetal, light blue, bronze, copper metal flake, and a dark textured metallic.</p>
       </div>
       <ul class="masonry" role="list" data-slot="work-photos" data-visual="editorial">
         {wheels.map((photo) => (
@@ -86,7 +86,7 @@ const closing = work('light-blue-pair-2');
     <div class="shell equip">
       <div class="cmb-head equip-head">
         <h2 id="equipment-title" class="type-section">{name('equipment')}</h2>
-        <Commitment id="customers" as="p" />
+        <p>We coat equipment attachments and commercial parts, too.</p>
         <PhoneAction kind="sms" cta="text" label="Text a photo for a quote" class="cmb-pill is-large equip-cta" />
       </div>
       <div class="equip-photos">
@@ -102,7 +102,9 @@ const closing = work('light-blue-pair-2');
 
   <ReviewsBand reviews={['review-edward', 'review-daniil', 'review-ben', 'review-brentech']} />
 
-  <ClosingCta heading="Want your part to look like this?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" quoteCta />
+  <ClosingCta heading="Want your part to look like this?" image={closing.src} alt={closing.alt} slotId="work-photos" focal="50% 50%" quoteCta>
+    Text a photo of your part, and we'll quote it.
+  </ClosingCta>
 </ShopLayout>
 
 <style>
